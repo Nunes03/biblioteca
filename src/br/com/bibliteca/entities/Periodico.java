@@ -5,23 +5,23 @@ import java.util.List;
 
 public class Periodico extends Acervo {
 
-	private String regeiao;
+	private String regiao;
 
 	public Periodico(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
 			List<Autor> autores, String regeiao) {
 		super(id, nome, dataLancamento, paginas, editora, autores);
-		this.regeiao = regeiao;
+		this.regiao = regeiao;
 	}
 
 	public Periodico() {
 	}
 
-	public String getRegeiao() {
-		return regeiao;
+	public String getRegiao() {
+		return regiao;
 	}
 
-	public void setRegeiao(String regeiao) {
-		this.regeiao = regeiao;
+	public void setRegiao(String regeiao) {
+		this.regiao = regeiao;
 	}
 
 }

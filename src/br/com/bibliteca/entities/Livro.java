@@ -1,5 +1,8 @@
 package br.com.bibliteca.entities;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import br.com.bibliteca.enums.GeneroEnum;
 
 public class Livro extends Acervo{
@@ -8,11 +11,15 @@ public class Livro extends Acervo{
 	private boolean capaDura;
 	private GeneroEnum genero;
 
-	public Livro(String descricao, boolean capaDura, GeneroEnum genero) {
+
+	public Livro(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
+			List<Autor> autores, String descricao, boolean capaDura, GeneroEnum genero) {
+		super(id, nome, dataLancamento, paginas, editora, autores);
 		this.descricao = descricao;
 		this.capaDura = capaDura;
 		this.genero = genero;
 	}
+
 
 	public Livro() {
 	}
