@@ -8,9 +8,9 @@ public class Periodico extends Acervo {
 	private String regiao;
 
 	public Periodico(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
-			List<Autor> autores, String regeiao) {
+			List<Autor> autores, String regiao) {
 		super(id, nome, dataLancamento, paginas, editora, autores);
-		this.regiao = regeiao;
+		this.regiao = regiao;
 	}
 
 	public Periodico() {

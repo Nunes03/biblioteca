@@ -8,12 +8,12 @@ import br.com.bibliteca.enums.GeneroEnum;
 public class Livro extends Acervo{
 
 	private String descricao;
-	private boolean capaDura;
+	private Boolean capaDura;
 	private GeneroEnum genero;
 
 
 	public Livro(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
-			List<Autor> autores, String descricao, boolean capaDura, GeneroEnum genero) {
+			List<Autor> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
 		super(id, nome, dataLancamento, paginas, editora, autores);
 		this.descricao = descricao;
 		this.capaDura = capaDura;
@@ -36,7 +36,7 @@ public class Livro extends Acervo{
 		return capaDura;
 	}
 
-	public void setCapaDura(boolean capaDura) {
+	public void setCapaDura(Boolean capaDura) {
 		this.capaDura = capaDura;
 	}
 

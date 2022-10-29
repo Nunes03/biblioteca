@@ -8,15 +8,15 @@ public class Compra {
 	private Integer id;
 	private Date data;
 	private Double total;
-	private List<ItensCompra> intesDeCompra;
+	private List<ItensCompra> itensDeCompra;
 	private Cliente cliente;
 
-	public Compra(Integer id, Date data, Double total, List<ItensCompra> intesDeCompra, Cliente cliente) {
+	public Compra(Integer id, Date data, Double total, List<ItensCompra> itensDeCompra, Cliente cliente) {
 		super();
 		this.id = id;
 		this.data = data;
 		this.total = total;
-		this.intesDeCompra = intesDeCompra;
+		this.itensDeCompra = itensDeCompra;
 		this.cliente = cliente;
 	}
 
@@ -47,12 +47,12 @@ public class Compra {
 		this.total = total;
 	}
 
-	public List<ItensCompra> getIntesDeCompra() {
-		return intesDeCompra;
+	public List<ItensCompra> getItensDeCompra() {
+		return itensDeCompra;
 	}
 
-	public void setIntesDeCompra(List<ItensCompra> intesDeCompra) {
-		this.intesDeCompra = intesDeCompra;
+	public void setItensDeCompra(List<ItensCompra> ItensDeCompra) {
+		this.itensDeCompra = ItensDeCompra;
 	}
 
 	public Cliente getCliente() {
