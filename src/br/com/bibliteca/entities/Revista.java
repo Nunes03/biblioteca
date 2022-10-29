@@ -1,10 +1,15 @@
 package br.com.bibliteca.entities;
 
-public class Revista extends Acervo{
+import java.time.LocalDate;
+import java.util.List;
+
+public class Revista extends Acervo {
 
 	private Integer edicao;
 
-	public Revista(Integer edicao) {
+	public Revista(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
+			List<Autor> autores, Integer edicao) {
+		super(id, nome, dataLancamento, paginas, editora, autores);
 		this.edicao = edicao;
 	}
 
