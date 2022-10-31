@@ -2,31 +2,31 @@ package br.com.bibliteca.repositories;
 
 import java.util.List;
 
-import br.com.bibliteca.entities.Cliente;
+import br.com.bibliteca.entities.ClienteEntity;
 import br.com.bibliteca.repositories.interfaces.ClienteRepositoryInterface;
 
 public class ClienteRepository implements ClienteRepositoryInterface{
 
 	@Override
-	public Cliente criar(Cliente entity) {
+	public ClienteEntity criar(ClienteEntity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Cliente atualizar(Cliente entity) {
+	public ClienteEntity atualizar(ClienteEntity entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Cliente buscarPorId(Integer id) {
+	public ClienteEntity buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Cliente> buscarTodos() {
+	public List<ClienteEntity> buscarTodos() {
 		// TODO Auto-generated method stub
 		return null;
 	}

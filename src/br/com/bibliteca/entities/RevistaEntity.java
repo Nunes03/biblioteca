@@ -3,15 +3,15 @@ package br.com.bibliteca.entities;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Revista extends Acervo {
+public class RevistaEntity extends AcervoEntity {
 
 	private Integer edicao;
 
-	public Revista() {
+	public RevistaEntity() {
 	}
 
-	public Revista(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
-			List<Autor> autores, Integer edicao) {
+	public RevistaEntity(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
+			List<AutorEntity> autores, Integer edicao) {
 		super(id, nome, dataLancamento, paginas, editora, autores);
 		this.edicao = edicao;
 	}

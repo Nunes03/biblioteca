@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente {
+public class ClienteEntity {
 
 	private Integer id;
 
@@ -16,13 +16,13 @@ public class Cliente {
 
 	private String telefone;
 
-	private List<Compra> compras = new ArrayList<>();
+	private List<CompraEntity> compras = new ArrayList<>();
 
-	public Cliente() {
+	public ClienteEntity() {
 	}
 
-	public Cliente(Integer id, String nomeCompleto, LocalDate dataNascimento, String cpf, String telefone,
-			List<Compra> compras) {
+	public ClienteEntity(Integer id, String nomeCompleto, LocalDate dataNascimento, String cpf, String telefone,
+			List<CompraEntity> compras) {
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
 		this.dataNascimento = dataNascimento;
@@ -71,11 +71,11 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public List<Compra> getCompras() {
+	public List<CompraEntity> getCompras() {
 		return compras;
 	}
 
-	public void setCompras(List<Compra> compras) {
+	public void setCompras(List<CompraEntity> compras) {
 		this.compras = compras;
 	}
 }

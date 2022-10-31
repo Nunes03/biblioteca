@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.bibliteca.enums.GeneroEnum;
 
-public class Livro extends Acervo {
+public class LivroEntity extends AcervoEntity {
 
 	private String descricao;
 
@@ -13,11 +13,11 @@ public class Livro extends Acervo {
 
 	private GeneroEnum genero;
 
-	public Livro() {
+	public LivroEntity() {
 	}
 
-	public Livro(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
-			List<Autor> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
+	public LivroEntity(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
+			List<AutorEntity> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
 		super(id, nome, dataLancamento, paginas, editora, autores);
 		this.descricao = descricao;
 		this.capaDura = capaDura;

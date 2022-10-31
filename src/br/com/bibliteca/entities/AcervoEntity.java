@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Acervo {
+public class AcervoEntity {
 
 	private Integer id;
 	
@@ -16,12 +16,12 @@ public class Acervo {
 	
 	private String editora;
 	
-	private List<Autor> autores = new ArrayList<>();
+	private List<AutorEntity> autores = new ArrayList<>();
 	
-	public Acervo() {
+	public AcervoEntity() {
 	}
 	
-	public Acervo(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora, List<Autor> autores) {
+	public AcervoEntity(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora, List<AutorEntity> autores) {
 		this.id = id;
 		this.nome = nome;
 		this.dataLancamento = dataLancamento;
@@ -70,11 +70,11 @@ public class Acervo {
 		this.editora = editora;
 	}
 
-	public List<Autor> getAutores() {
+	public List<AutorEntity> getAutores() {
 		return autores;
 	}
 
-	public void setAutores(List<Autor> autores) {
+	public void setAutores(List<AutorEntity> autores) {
 		this.autores = autores;
 	}
 }

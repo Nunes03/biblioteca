@@ -3,20 +3,20 @@ package br.com.bibliteca.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItensCompra {
+public class ItensCompraEntity {
 
 	private Integer id;
 
 	private Integer quantidade;
 
-	private List<Acervo> acervos = new ArrayList<>();
+	private List<AcervoEntity> acervos = new ArrayList<>();
 
-	private Compra compra;
+	private CompraEntity compra;
 
-	public ItensCompra() {
+	public ItensCompraEntity() {
 	}
 
-	public ItensCompra(Integer id, Integer quantidade, List<Acervo> acervos, Compra compra) {
+	public ItensCompraEntity(Integer id, Integer quantidade, List<AcervoEntity> acervos, CompraEntity compra) {
 		this.id = id;
 		this.quantidade = quantidade;
 		this.acervos = acervos;
@@ -39,19 +39,19 @@ public class ItensCompra {
 		this.quantidade = quantidade;
 	}
 
-	public List<Acervo> getAcervos() {
+	public List<AcervoEntity> getAcervos() {
 		return acervos;
 	}
 
-	public void setAcervos(List<Acervo> acervos) {
+	public void setAcervos(List<AcervoEntity> acervos) {
 		this.acervos = acervos;
 	}
 
-	public Compra getCompra() {
+	public CompraEntity getCompra() {
 		return compra;
 	}
 
-	public void setCompra(Compra compra) {
+	public void setCompra(CompraEntity compra) {
 		this.compra = compra;
 	}
 }

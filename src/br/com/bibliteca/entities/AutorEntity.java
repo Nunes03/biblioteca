@@ -3,18 +3,18 @@ package br.com.bibliteca.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Autor {
+public class AutorEntity {
 
 	private Integer id;
 	
 	private String nome;
 	
-	private List<Acervo> acervos = new ArrayList<>();
+	private List<AcervoEntity> acervos = new ArrayList<>();
 
-	public Autor() {
+	public AutorEntity() {
 	}
 	
-	public Autor(Integer id, String nome, List<Acervo> acervos) {
+	public AutorEntity(Integer id, String nome, List<AcervoEntity> acervos) {
 		this.id = id;
 		this.nome = nome;
 		this.acervos = acervos;
@@ -36,11 +36,11 @@ public class Autor {
 		this.nome = nome;
 	}
 
-	public List<Acervo> getAcervos() {
+	public List<AcervoEntity> getAcervos() {
 		return acervos;
 	}
 
-	public void setAcervos(List<Acervo> acervos) {
+	public void setAcervos(List<AcervoEntity> acervos) {
 		this.acervos = acervos;
 	}
 }

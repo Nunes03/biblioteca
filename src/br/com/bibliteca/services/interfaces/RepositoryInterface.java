@@ -1,4 +1,4 @@
-package br.com.bibliteca.repositories.interfaces;
+package br.com.bibliteca.services.interfaces;
 
 import java.util.List;
 
