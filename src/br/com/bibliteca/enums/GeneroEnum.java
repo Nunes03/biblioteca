@@ -5,6 +5,5 @@ public enum GeneroEnum {
 	ROMANCE,
 	TERROR,
 	ACAO,
-	SUSPENSE;
-	
+	SUSPENSE;	
 }

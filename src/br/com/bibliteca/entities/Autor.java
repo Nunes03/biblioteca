@@ -1,20 +1,23 @@
 package br.com.bibliteca.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Autor {
 
 	private Integer id;
+	
 	private String nome;
-	private List<Acervo> acervos;
+	
+	private List<Acervo> acervos = new ArrayList<>();
 
+	public Autor() {
+	}
+	
 	public Autor(Integer id, String nome, List<Acervo> acervos) {
 		this.id = id;
 		this.nome = nome;
 		this.acervos = acervos;
-	}
-
-	public Autor() {
 	}
 
 	public Integer getId() {
@@ -40,5 +43,4 @@ public class Autor {
 	public void setAcervos(List<Acervo> acervos) {
 		this.acervos = acervos;
 	}
-
 }

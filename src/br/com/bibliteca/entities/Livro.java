@@ -5,12 +5,16 @@ import java.util.List;
 
 import br.com.bibliteca.enums.GeneroEnum;
 
-public class Livro extends Acervo{
+public class Livro extends Acervo {
 
 	private String descricao;
+
 	private Boolean capaDura;
+
 	private GeneroEnum genero;
 
+	public Livro() {
+	}
 
 	public Livro(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
 			List<Autor> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
@@ -18,10 +22,6 @@ public class Livro extends Acervo{
 		this.descricao = descricao;
 		this.capaDura = capaDura;
 		this.genero = genero;
-	}
-
-
-	public Livro() {
 	}
 
 	public String getDescricao() {
@@ -47,5 +47,4 @@ public class Livro extends Acervo{
 	public void setGenero(GeneroEnum genero) {
 		this.genero = genero;
 	}
-
 }

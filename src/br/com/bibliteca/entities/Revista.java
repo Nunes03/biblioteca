@@ -7,13 +7,13 @@ public class Revista extends Acervo {
 
 	private Integer edicao;
 
+	public Revista() {
+	}
+
 	public Revista(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
 			List<Autor> autores, Integer edicao) {
 		super(id, nome, dataLancamento, paginas, editora, autores);
 		this.edicao = edicao;
-	}
-
-	public Revista() {
 	}
 
 	public Integer getEdicao() {
@@ -23,5 +23,4 @@ public class Revista extends Acervo {
 	public void setEdicao(Integer edicao) {
 		this.edicao = edicao;
 	}
-
 }

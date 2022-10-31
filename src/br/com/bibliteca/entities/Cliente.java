@@ -1,16 +1,25 @@
 package br.com.bibliteca.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
 
 	private Integer id;
+
 	private String nomeCompleto;
+
 	private LocalDate dataNascimento;
+
 	private String cpf;
+
 	private String telefone;
-	private List<Compra> compras;
+
+	private List<Compra> compras = new ArrayList<>();
+
+	public Cliente() {
+	}
 
 	public Cliente(Integer id, String nomeCompleto, LocalDate dataNascimento, String cpf, String telefone,
 			List<Compra> compras) {
@@ -20,9 +29,6 @@ public class Cliente {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.compras = compras;
-	}
-
-	public Cliente() {
 	}
 
 	public Integer getId() {
@@ -72,5 +78,4 @@ public class Cliente {
 	public void setCompras(List<Compra> compras) {
 		this.compras = compras;
 	}
-
 }

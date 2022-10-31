@@ -7,13 +7,13 @@ public class Periodico extends Acervo {
 
 	private String regiao;
 
+	public Periodico() {
+	}
+
 	public Periodico(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
 			List<Autor> autores, String regiao) {
 		super(id, nome, dataLancamento, paginas, editora, autores);
 		this.regiao = regiao;
-	}
-
-	public Periodico() {
 	}
 
 	public String getRegiao() {
@@ -23,5 +23,4 @@ public class Periodico extends Acervo {
 	public void setRegiao(String regeiao) {
 		this.regiao = regeiao;
 	}
-
 }

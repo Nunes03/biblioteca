@@ -1,18 +1,26 @@
 package br.com.bibliteca.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Acervo {
 
 	private Integer id;
-	private String nome;
-	private LocalDate dataLancamento;
-	private Integer paginas;
-	private String editora;
-	private List<Autor> autores;
 	
-
+	private String nome;
+	
+	private LocalDate dataLancamento;
+	
+	private Integer paginas;
+	
+	private String editora;
+	
+	private List<Autor> autores = new ArrayList<>();
+	
+	public Acervo() {
+	}
+	
 	public Acervo(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora, List<Autor> autores) {
 		this.id = id;
 		this.nome = nome;
@@ -20,9 +28,6 @@ public class Acervo {
 		this.paginas = paginas;
 		this.editora = editora;
 		this.autores = autores;
-	}
-
-	public Acervo() {
 	}
 
 	public Integer getId() {
@@ -72,7 +77,4 @@ public class Acervo {
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
-	
-	
-
 }

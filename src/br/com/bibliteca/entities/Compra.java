@@ -1,15 +1,23 @@
 package br.com.bibliteca.entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Compra {
 
 	private Integer id;
+
 	private Date data;
+
 	private Double total;
-	private List<ItensCompra> itensDeCompra;
+
+	private List<ItensCompra> itensDeCompra = new ArrayList<>();
+
 	private Cliente cliente;
+
+	public Compra() {
+	}
 
 	public Compra(Integer id, Date data, Double total, List<ItensCompra> itensDeCompra, Cliente cliente) {
 		super();
@@ -18,9 +26,6 @@ public class Compra {
 		this.total = total;
 		this.itensDeCompra = itensDeCompra;
 		this.cliente = cliente;
-	}
-
-	public Compra() {
 	}
 
 	public Integer getId() {
@@ -62,5 +67,4 @@ public class Compra {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
 }
