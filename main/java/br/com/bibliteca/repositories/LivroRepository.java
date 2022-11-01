@@ -37,4 +37,10 @@ public class LivroRepository implements LivroRepositoryInterface{
 		return null;
 	}
 
+	@Override
+	public Boolean deletarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

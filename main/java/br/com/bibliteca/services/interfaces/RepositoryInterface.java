@@ -12,5 +12,7 @@ public interface RepositoryInterface<E> {
 	
 	List<E> buscarTodos();
 	
+	Boolean deletarTodos();
+	
 	Boolean deletarPorId(Integer id);
 }

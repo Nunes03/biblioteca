@@ -36,4 +36,10 @@ public class ClienteRepository implements ClienteRepositoryInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Boolean deletarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
