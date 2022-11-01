@@ -14,7 +14,17 @@ public class AutorQuery implements AutorQueryInterface {
 			+ "SET "
 			+ "nome = '%s' "
 			+ "WHERE autor.id = %d";
-
+	
+	private final String DELETE_TODOS_QUERY = "DELETE FROM biblioteca.autor;";
+	
+	private final String DELETE_POR_ID_QUERY = "DELETE FROM biblioteca.autor autor "
+			+ "WHERE autor.id = %d;";
+	
+	private final String BUSCAR_TODOS_QERY = "SELECT * FROM biblioteca.autor;";
+	
+	private final String BUSCAR_POR_ID_QUERY = "SELECT * FROM biblioteca.cliente autor "
+			+ "WHERE autor.id = %d;";
+	
 	@Override
 	public String criar(AutorEntity entity) {
 		return String.format(
@@ -34,25 +44,27 @@ public class AutorQuery implements AutorQueryInterface {
 
 	@Override
 	public String buscarPorId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(
+			BUSCAR_POR_ID_QUERY,
+			id
+		);
 	}
 
 	@Override
 	public String buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return BUSCAR_TODOS_QERY;
 	}
 
 	@Override
 	public String deletarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return DELETE_TODOS_QUERY;
 	}
 
 	@Override
 	public String deletarPorId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(
+			DELETE_POR_ID_QUERY,
+			id
+		);
 	}
 }

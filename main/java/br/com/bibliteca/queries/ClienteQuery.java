@@ -23,39 +23,45 @@ public class ClienteQuery implements ClienteQueryInterface {
 	private final String DELETE_POR_ID_QUERY = "DELETE FROM biblioteca.cliente cliente "
 			+ "WHERE cliente.id = %d;";
 	
+	private final String BUSCAR_TODOS_QERY = "SELECT * FROM biblioteca.cliente;";
+	
+	private final String BUSCAR_POR_ID_QUERY = "SELECT * FROM biblioteca.cliente cliente "
+			+ "WHERE cliente.id = %d;";
+	
 	@Override
 	public String criar(ClienteEntity entity) {
 		return String.format(
-				CREATE_QUERY,
-				entity.getNomeCompleto(),
-				entity.getDataNascimento(),
-				entity.getCpf(),
-				entity.getTelefone()
+			CREATE_QUERY,
+			entity.getNomeCompleto(),
+			entity.getDataNascimento(),
+			entity.getCpf(),
+			entity.getTelefone()
 		);
 	}
 
 	@Override
 	public String atualizar(ClienteEntity entity) {
 		return String.format(
-				UPDATE_QUERY,
-				entity.getNomeCompleto(),
-				entity.getDataNascimento(),
-				entity.getCpf(),
-				entity.getTelefone(),
-				entity.getId()
+			UPDATE_QUERY,
+			entity.getNomeCompleto(),
+			entity.getDataNascimento(),
+			entity.getCpf(),
+			entity.getTelefone(),
+			entity.getId()
 		);
 	}
 
 	@Override
 	public String buscarPorId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(
+			BUSCAR_POR_ID_QUERY,
+			id
+		);
 	}
 
 	@Override
 	public String buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return BUSCAR_TODOS_QERY;
 	}
 
 	@Override
@@ -66,8 +72,8 @@ public class ClienteQuery implements ClienteQueryInterface {
 	@Override
 	public String deletarPorId(Integer id) {
 		return String.format(
-				DELETE_POR_ID_QUERY,
-				id
+			DELETE_POR_ID_QUERY,
+			id
 		);
 	}
 }
