@@ -1,9 +1,9 @@
 package br.com.bibliteca.queries;
 
-import br.com.bibliteca.entities.ClienteEntity;
-import br.com.bibliteca.queries.interfaces.ClienteQueryInterface;
+import br.com.bibliteca.entities.AutorEntity;
+import br.com.bibliteca.queries.interfaces.AutorQueryInterface;
 
-public class ClienteQuery implements ClienteQueryInterface {
+public class AutorQuery implements AutorQueryInterface {
 	
 	private final String CREATE_QUERY = "INSERT INTO biblioteca.cliente"
 			+ "(nome_completo, data_nascimento, cpf, telefone)"
@@ -17,28 +17,17 @@ public class ClienteQuery implements ClienteQueryInterface {
 			+ "cpf = '%s',"
 			+ "telefone = '%s' "
 			+ "WHERE cliente.id = %d";
-	
+
 	@Override
-	public String criar(ClienteEntity entity) {
-		return String.format(
-				CREATE_QUERY,
-				entity.getNomeCompleto(),
-				entity.getDataNascimento(),
-				entity.getCpf(),
-				entity.getTelefone()
-		);
+	public String criar(AutorEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public String atualizar(ClienteEntity entity) {
-		return String.format(
-				UPDATE_QUERY,
-				entity.getNomeCompleto(),
-				entity.getDataNascimento(),
-				entity.getCpf(),
-				entity.getTelefone(),
-				entity.getId()
-		);
+	public String atualizar(AutorEntity entity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

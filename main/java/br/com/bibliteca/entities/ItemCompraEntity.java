@@ -3,7 +3,7 @@ package br.com.bibliteca.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItensCompraEntity {
+public class ItemCompraEntity {
 
 	private Integer id;
 
@@ -13,10 +13,10 @@ public class ItensCompraEntity {
 
 	private CompraEntity compra;
 
-	public ItensCompraEntity() {
+	public ItemCompraEntity() {
 	}
 
-	public ItensCompraEntity(Integer id, Integer quantidade, List<AcervoEntity> acervos, CompraEntity compra) {
+	public ItemCompraEntity(Integer id, Integer quantidade, List<AcervoEntity> acervos, CompraEntity compra) {
 		this.id = id;
 		this.quantidade = quantidade;
 		this.acervos = acervos;
