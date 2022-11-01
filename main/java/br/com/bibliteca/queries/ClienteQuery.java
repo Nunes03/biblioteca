@@ -16,7 +16,12 @@ public class ClienteQuery implements ClienteQueryInterface {
 			+ "data_nascimento = '%s',"
 			+ "cpf = '%s',"
 			+ "telefone = '%s' "
-			+ "WHERE cliente.id = %d";
+			+ "WHERE cliente.id = %d;";
+	
+	private final String DELETE_TODOS_QUERY = "DELETE FROM biblioteca.cliente;";
+	
+	private final String DELETE_POR_ID_QUERY = "DELETE FROM biblioteca.cliente cliente "
+			+ "WHERE cliente.id = %d;";
 	
 	@Override
 	public String criar(ClienteEntity entity) {
@@ -55,13 +60,14 @@ public class ClienteQuery implements ClienteQueryInterface {
 
 	@Override
 	public String deletarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return DELETE_TODOS_QUERY;
 	}
 
 	@Override
 	public String deletarPorId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(
+				DELETE_POR_ID_QUERY,
+				id
+		);
 	}
 }

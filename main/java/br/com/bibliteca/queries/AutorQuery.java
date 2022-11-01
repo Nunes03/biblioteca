@@ -5,29 +5,31 @@ import br.com.bibliteca.queries.interfaces.AutorQueryInterface;
 
 public class AutorQuery implements AutorQueryInterface {
 	
-	private final String CREATE_QUERY = "INSERT INTO biblioteca.cliente"
-			+ "(nome_completo, data_nascimento, cpf, telefone)"
+	private final String CREATE_QUERY = "INSERT INTO biblioteca.autor"
+			+ "(nome)"
 			+ " VALUES "
-			+ "('%s', '%s', '%s', '%s');";
+			+ "('%s');";
 	
-	private final String UPDATE_QUERY = "UPDATE biblioteca.cliente cliente "
+	private final String UPDATE_QUERY = "UPDATE biblioteca.autor autor "
 			+ "SET "
-			+ "nome_completo = '%s',"
-			+ "data_nascimento = '%s',"
-			+ "cpf = '%s',"
-			+ "telefone = '%s' "
-			+ "WHERE cliente.id = %d";
+			+ "nome = '%s' "
+			+ "WHERE autor.id = %d";
 
 	@Override
 	public String criar(AutorEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(
+				CREATE_QUERY,
+				entity.getNome()
+		);
 	}
 
 	@Override
 	public String atualizar(AutorEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format(
+				UPDATE_QUERY,
+				entity.getNome(),
+				entity.getId()
+		);
 	}
 
 	@Override
