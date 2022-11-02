@@ -30,10 +30,13 @@ public class ClienteQuery implements ClienteQueryInterface {
 	
 	@Override
 	public String criar(ClienteEntity entity) {
+		String dataNascimento = entity.getDataNascimento().toInstant().toString();
+		dataNascimento = dataNascimento.replace('T', ' ').replace("Z", "");
+		
 		return String.format(
 			CREATE_QUERY,
 			entity.getNomeCompleto(),
-			entity.getDataNascimento(),
+			dataNascimento,
 			entity.getCpf(),
 			entity.getTelefone()
 		);

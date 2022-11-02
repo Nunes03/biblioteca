@@ -1,7 +1,7 @@
 package br.com.bibliteca.entities;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ClienteEntity {
@@ -10,7 +10,7 @@ public class ClienteEntity {
 
 	private String nomeCompleto;
 
-	private LocalDate dataNascimento;
+	private Date dataNascimento;
 
 	private String cpf;
 
@@ -21,7 +21,7 @@ public class ClienteEntity {
 	public ClienteEntity() {
 	}
 
-	public ClienteEntity(Integer id, String nomeCompleto, LocalDate dataNascimento, String cpf, String telefone,
+	public ClienteEntity(Integer id, String nomeCompleto, Date dataNascimento, String cpf, String telefone,
 			List<CompraEntity> compras) {
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
@@ -47,11 +47,11 @@ public class ClienteEntity {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public LocalDate getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

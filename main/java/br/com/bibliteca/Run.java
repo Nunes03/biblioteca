@@ -1,9 +1,10 @@
 package br.com.bibliteca;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import br.com.bibliteca.entities.ClienteEntity;
-import br.com.bibliteca.queries.ClienteQuery;
+import br.com.bibliteca.repositories.ClienteRepository;
+import br.com.bibliteca.repositories.interfaces.ClienteRepositoryInterface;
 
 public class Run {
 
@@ -11,14 +12,13 @@ public class Run {
 		ClienteEntity clienteEntity = new ClienteEntity(
 			1,
 			"Lucas Nunes",
-			LocalDate.now(),
+			new Date(),
 			"1546",
 			"7845",
 			null
 		);
 		
-		ClienteQuery clienteQuery = new ClienteQuery();
-		
-		System.err.println(clienteQuery.criar(clienteEntity));
+		ClienteRepositoryInterface clienteRepositoryInterface = new ClienteRepository();
+		clienteRepositoryInterface.criar(clienteEntity);
 	}
 }
