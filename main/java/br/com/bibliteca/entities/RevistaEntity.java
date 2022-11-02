@@ -10,9 +10,9 @@ public class RevistaEntity extends AcervoEntity {
 	public RevistaEntity() {
 	}
 
-	public RevistaEntity(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
-			List<AutorEntity> autores, Integer edicao) {
-		super(id, nome, dataLancamento, paginas, editora, autores);
+	public RevistaEntity(Integer id, String nome, Double valor, LocalDate dataLancamento, Integer paginas,
+			String editora, List<AutorEntity> autores, Integer edicao) {
+		super(id, nome, valor, dataLancamento, paginas, editora, autores);
 		this.edicao = edicao;
 	}
 

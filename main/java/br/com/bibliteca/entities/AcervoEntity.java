@@ -10,6 +10,8 @@ public class AcervoEntity {
 	
 	private String nome;
 	
+	private Double valor;
+	
 	private LocalDate dataLancamento;
 	
 	private Integer paginas;
@@ -21,9 +23,10 @@ public class AcervoEntity {
 	public AcervoEntity() {
 	}
 	
-	public AcervoEntity(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora, List<AutorEntity> autores) {
+	public AcervoEntity(Integer id, String nome, Double valor, LocalDate dataLancamento, Integer paginas, String editora, List<AutorEntity> autores) {
 		this.id = id;
 		this.nome = nome;
+		this.valor = valor;
 		this.dataLancamento = dataLancamento;
 		this.paginas = paginas;
 		this.editora = editora;
@@ -44,6 +47,14 @@ public class AcervoEntity {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 	public LocalDate getDataLancamento() {

@@ -10,9 +10,9 @@ public class PeriodicoEntity extends AcervoEntity {
 	public PeriodicoEntity() {
 	}
 
-	public PeriodicoEntity(Integer id, String nome, LocalDate dataLancamento, Integer paginas, String editora,
+	public PeriodicoEntity(Integer id, String nome, Double valor, LocalDate dataLancamento, Integer paginas, String editora,
 			List<AutorEntity> autores, String regiao) {
-		super(id, nome, dataLancamento, paginas, editora, autores);
+		super(id, nome, valor, dataLancamento, paginas, editora, autores);
 		this.regiao = regiao;
 	}
 

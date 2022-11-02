@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS biblioteca.acervo (
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nome VARCHAR(255) NOT NULL,
 	descricao VARCHAR(500),
+	valor DOUBLE NOT NULL,
 	data_lancamento DATE NOT NULL,
 	paginas INT NOT NULL,
 	editora VARCHAR(100) NOT NULL,
@@ -34,7 +35,6 @@ CREATE TABLE IF NOT EXISTS biblioteca.acervo (
 
 CREATE TABLE IF NOT EXISTS biblioteca.item_compra (
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-	quantidade INT NOT NULL,
 	compra_id INT NOT NULL,
 	acervo_id INT NOT NULL,
 	FOREIGN KEY (compra_id) 
