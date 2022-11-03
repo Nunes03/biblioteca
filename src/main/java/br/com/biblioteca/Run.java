@@ -1,16 +1,16 @@
 package main.java.br.com.biblioteca;
 
 
-import main.java.br.com.biblioteca.entities.ClienteEntity;
-import main.java.br.com.biblioteca.repositories.ClienteRepository;
-import main.java.br.com.biblioteca.repositories.interfaces.ClienteRepositoryInterface;
+import main.java.br.com.biblioteca.entidades.ClienteEntidade;
+import main.java.br.com.biblioteca.repositorios.ClienteRepositorio;
+import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
 
 import java.util.Date;
 
 public class Run {
 
 	public static void main(String[] args) {
-		ClienteEntity clienteEntity = new ClienteEntity(
+		ClienteEntidade clienteEntity = new ClienteEntidade(
 			1,
 			"Lucas Nunes",
 			new Date(),
@@ -19,7 +19,7 @@ public class Run {
 			null
 		);
 		
-		ClienteRepositoryInterface clienteRepositoryInterface = new ClienteRepository();
+		ClienteRepositorioInterface clienteRepositoryInterface = new ClienteRepositorio();
 		clienteRepositoryInterface.criar(clienteEntity);
 	}
 }
