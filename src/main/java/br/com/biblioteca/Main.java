@@ -7,7 +7,7 @@ import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInt
 
 import java.util.Date;
 
-public class Run {
+public class Main {
 
 	public static void main(String[] args) {
 		ClienteEntidade clienteEntity = new ClienteEntidade(
@@ -20,6 +20,8 @@ public class Run {
 		);
 		
 		ClienteRepositorioInterface clienteRepositoryInterface = new ClienteRepositorio();
-		clienteRepositoryInterface.criar(clienteEntity);
+		//clienteRepositoryInterface.criar(clienteEntity);
+
+		System.err.println(clienteRepositoryInterface.buscarPorId(2));
 	}
 }

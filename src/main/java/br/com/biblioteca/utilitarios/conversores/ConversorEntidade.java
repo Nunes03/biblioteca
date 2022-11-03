@@ -22,7 +22,7 @@ public class ConversorEntidade {
 				null
 			);
 		} catch (Exception exception) {
-			JOptionPane.showMessageDialog(null, "Erro ao converter Cliente.", "Erro", 1);
+			JOptionPane.showMessageDialog(null, "Erro ao converter Cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
 			throw new RuntimeException(exception);
 		}
 	}
