@@ -1,10 +1,11 @@
-package br.com.bibliteca;
+package main.java.br.com.biblioteca;
+
+
+import main.java.br.com.biblioteca.entities.ClienteEntity;
+import main.java.br.com.biblioteca.repositories.ClienteRepository;
+import main.java.br.com.biblioteca.repositories.interfaces.ClienteRepositoryInterface;
 
 import java.util.Date;
-
-import br.com.bibliteca.entities.ClienteEntity;
-import br.com.bibliteca.repositories.ClienteRepository;
-import br.com.bibliteca.repositories.interfaces.ClienteRepositoryInterface;
 
 public class Run {
 
