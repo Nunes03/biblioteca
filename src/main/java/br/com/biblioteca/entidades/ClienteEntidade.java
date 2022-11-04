@@ -78,4 +78,16 @@ public class ClienteEntidade {
 	public void setCompras(List<CompraEntidade> compras) {
 		this.compras = compras;
 	}
+
+	@Override
+	public String toString() {
+		return "ClienteEntidade{" +
+			"id=" + id +
+			", nomeCompleto='" + nomeCompleto + '\'' +
+			", dataNascimento=" + dataNascimento +
+			", cpf='" + cpf + '\'' +
+			", telefone='" + telefone + '\'' +
+			", compras=" + compras +
+			'}';
+	}
 }

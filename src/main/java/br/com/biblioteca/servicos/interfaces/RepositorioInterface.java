@@ -1,6 +1,7 @@
 package main.java.br.com.biblioteca.servicos.interfaces;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RepositorioInterface<E> {
 	
@@ -8,7 +9,7 @@ public interface RepositorioInterface<E> {
 
 	Boolean atualizar(E entity);
 	
-	E buscarPorId(Integer id);
+	Optional<E> buscarPorId(Integer id);
 	
 	List<E> buscarTodos();
 	

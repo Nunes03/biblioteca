@@ -1,6 +1,7 @@
 package main.java.br.com.biblioteca.repositorios;
 
 import java.util.List;
+import java.util.Optional;
 
 import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
 import main.java.br.com.biblioteca.repositorios.interfaces.PeriodicoRepositorioInterface;
@@ -20,7 +21,7 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
 	}
 
 	@Override
-	public PeriodicoEntidade buscarPorId(Integer id) {
+	public Optional<PeriodicoEntidade> buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

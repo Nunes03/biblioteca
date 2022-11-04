@@ -1,6 +1,7 @@
 package main.java.br.com.biblioteca.repositorios;
 
 import java.util.List;
+import java.util.Optional;
 
 import main.java.br.com.biblioteca.entidades.ItemCompraEntidade;
 import main.java.br.com.biblioteca.repositorios.interfaces.ItensCompraRepositorioInterface;
@@ -20,7 +21,7 @@ public class ItensCompraRepositorio implements ItensCompraRepositorioInterface {
 	}
 
 	@Override
-	public ItemCompraEntidade buscarPorId(Integer id) {
+	public Optional<ItemCompraEntidade> buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

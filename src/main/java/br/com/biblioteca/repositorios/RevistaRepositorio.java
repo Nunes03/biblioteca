@@ -1,6 +1,7 @@
 package main.java.br.com.biblioteca.repositorios;
 
 import java.util.List;
+import java.util.Optional;
 
 import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.repositorios.interfaces.RevistaRepositorioInterface;
@@ -20,7 +21,7 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
 	}
 
 	@Override
-	public RevistaEntidade buscarPorId(Integer id) {
+	public Optional<RevistaEntidade> buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

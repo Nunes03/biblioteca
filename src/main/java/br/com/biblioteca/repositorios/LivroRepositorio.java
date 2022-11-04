@@ -1,6 +1,7 @@
 package main.java.br.com.biblioteca.repositorios;
 
 import java.util.List;
+import java.util.Optional;
 
 import main.java.br.com.biblioteca.entidades.LivroEntidade;
 import main.java.br.com.biblioteca.repositorios.interfaces.LivroRepositorioInterface;
@@ -20,7 +21,7 @@ public class LivroRepositorio implements LivroRepositorioInterface {
 	}
 
 	@Override
-	public LivroEntidade buscarPorId(Integer id) {
+	public Optional<LivroEntidade> buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

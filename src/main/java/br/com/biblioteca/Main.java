@@ -21,7 +21,6 @@ public class Main {
 		
 		ClienteRepositorioInterface clienteRepositoryInterface = new ClienteRepositorio();
 		//clienteRepositoryInterface.criar(clienteEntity);
-
-		System.err.println(clienteRepositoryInterface.buscarPorId(2));
+		System.err.println(clienteRepositoryInterface.buscarTodos());
 	}
 }
