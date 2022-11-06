@@ -1,40 +1,15 @@
 package main.java.br.com.biblioteca.utilitarios.construtores.consultas;
 
 import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
+import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
 import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.PeriodicoQueryInterface;
 
 public class PeriodicoQuery implements PeriodicoQueryInterface {
 	
-	private final String CREATE_QUERY = "INSERT INTO biblioteca.acervo acervo "
-			+ "(acervo.nome, acervo.valor, "
-			+ "acervo.data_lancamento, acervo.paginas, acervo.regiao, acervo.editora) "
-			+ "VALUES "
-			+ "('%s', %f, '%s', %d, '%s', '%s');";
-	
-	private final String UPDATE_QUERY = "UPDATE biblioteca.acervo acervo "
-			+ "SET "
-			+ "acervo.nome = '%s', "
-			+ "acervo.valor = %f, "
-			+ "acervo.data_lancamento = '%s', "
-			+ "acervo.paginas = %d, "
-			+ "acervo.editora = '%s', "
-			+ "acervo.regiao = '%s' "
-			+ "WHERE acervo.id = %d;";
-	
-	private final String DELETE_TODOS_QUERY = "DELETE FROM biblioteca.acervo;";
-	
-	private final String DELETE_POR_ID_QUERY = "DELETE FROM biblioteca.acervo acervo "
-			+ "WHERE acervo.id = %d;";
-	
-	private final String BUSCAR_TODOS_QUERY = "SELECT * FROM biblioteca.acervo;";
-	
-	private final String BUSCAR_POR_ID_QUERY = "SELECT * FROM biblioteca.acervo acervo "
-			+ "WHERE acervo.id = %d;";
-	
 	@Override
 	public String criar(PeriodicoEntidade entity) {
 		return String.format(
-			CREATE_QUERY,
+			ConsultasConstante.Periodico.CRIAR,
 			entity.getNome(),
 			entity.getValor(),
 			entity.getDataLancamento(),
@@ -47,7 +22,7 @@ public class PeriodicoQuery implements PeriodicoQueryInterface {
 	@Override
 	public String atualizar(PeriodicoEntidade entity) {
 		return String.format(
-			UPDATE_QUERY,
+			ConsultasConstante.Periodico.ATUALIZAR,
 			entity.getNome(),
 			entity.getValor(),
 			entity.getDataLancamento(),
@@ -61,25 +36,25 @@ public class PeriodicoQuery implements PeriodicoQueryInterface {
 	@Override
 	public String buscarPorId(Integer id) {
 		return String.format(
-			BUSCAR_POR_ID_QUERY,
+			ConsultasConstante.Periodico.BUSCAR_POR_ID,
 			id
 		);
 	}
 
 	@Override
-	public String buscarTodos() {
-		return BUSCAR_TODOS_QUERY;
+	public String buscar() {
+		return ConsultasConstante.Periodico.BUSCAR;
 	}
 
 	@Override
-	public String deletarTodos() {
-		return DELETE_TODOS_QUERY;
+	public String deletar() {
+		return ConsultasConstante.Periodico.DELETAR;
 	}
 
 	@Override
 	public String deletarPorId(Integer id) {
 		return String.format(
-			DELETE_POR_ID_QUERY,
+			ConsultasConstante.Periodico.DELETAR_POR_ID,
 			id
 		);
 	}

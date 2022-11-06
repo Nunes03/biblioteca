@@ -8,9 +8,9 @@ public interface QueryInterface<E> {
 	
 	String buscarPorId(Integer id);
 	
-	String buscarTodos();
+	String buscar();
 	
-	String deletarTodos();
+	String deletar();
 	
 	String deletarPorId(Integer id);
 }

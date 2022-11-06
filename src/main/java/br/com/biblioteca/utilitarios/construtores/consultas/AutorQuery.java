@@ -1,70 +1,51 @@
 package main.java.br.com.biblioteca.utilitarios.construtores.consultas;
 
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
+import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
 import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.AutorQueryInterface;
 
 public class AutorQuery implements AutorQueryInterface {
-	
-	private final String CREATE_QUERY = "INSERT INTO biblioteca.autor"
-			+ "(nome)"
-			+ " VALUES "
-			+ "('%s');";
-	
-	private final String UPDATE_QUERY = "UPDATE biblioteca.autor autor "
-			+ "SET "
-			+ "nome = '%s' "
-			+ "WHERE autor.id = %d";
-	
-	private final String DELETE_TODOS_QUERY = "DELETE FROM biblioteca.autor;";
-	
-	private final String DELETE_POR_ID_QUERY = "DELETE FROM biblioteca.autor autor "
-			+ "WHERE autor.id = %d;";
-	
-	private final String BUSCAR_TODOS_QERY = "SELECT * FROM biblioteca.autor;";
-	
-	private final String BUSCAR_POR_ID_QUERY = "SELECT * FROM biblioteca.cliente autor "
-			+ "WHERE autor.id = %d;";
-	
-	@Override
-	public String criar(AutorEntidade entity) {
-		return String.format(
-				CREATE_QUERY,
-				entity.getNome()
-		);
-	}
 
-	@Override
-	public String atualizar(AutorEntidade entity) {
-		return String.format(
-				UPDATE_QUERY,
-				entity.getNome(),
-				entity.getId()
-		);
-	}
+    @Override
+    public String criar(AutorEntidade entity) {
+        return String.format(
+            ConsultasConstante.Autor.CRIAR,
+            entity.getNome()
+        );
+    }
 
-	@Override
-	public String buscarPorId(Integer id) {
-		return String.format(
-			BUSCAR_POR_ID_QUERY,
-			id
-		);
-	}
+    @Override
+    public String atualizar(AutorEntidade entity) {
+        return String.format(
+            ConsultasConstante.Autor.ATUALIZAR,
+            entity.getNome(),
+            entity.getId()
+        );
+    }
 
-	@Override
-	public String buscarTodos() {
-		return BUSCAR_TODOS_QERY;
-	}
+    @Override
+    public String buscarPorId(Integer id) {
+        return String.format(
+            ConsultasConstante.Autor.BUSCAR_POR_ID,
+            id
+        );
+    }
 
-	@Override
-	public String deletarTodos() {
-		return DELETE_TODOS_QUERY;
-	}
+    @Override
+    public String buscar() {
+        return ConsultasConstante.Autor.BUSCAR;
+    }
 
-	@Override
-	public String deletarPorId(Integer id) {
-		return String.format(
-			DELETE_POR_ID_QUERY,
-			id
-		);
-	}
+    @Override
+    public String deletar() {
+        return ConsultasConstante.Autor.DELETAR;
+    }
+
+    @Override
+    public String deletarPorId(Integer id) {
+        return String.format(
+            ConsultasConstante.Autor.DELETAR_POR_ID,
+            id
+        );
+    }
 }

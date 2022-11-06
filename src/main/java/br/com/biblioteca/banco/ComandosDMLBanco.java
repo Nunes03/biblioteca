@@ -45,7 +45,7 @@ public class ComandosDMLBanco {
     public static <E> ResultSet executarConsultaBuscandoTudo(QueryInterface<E> queryInterface) {
         try {
             Connection connection = ConexaoBanco.pegarConexao();
-            PreparedStatement preparedStatement = connection.prepareStatement(queryInterface.buscarTodos());
+            PreparedStatement preparedStatement = connection.prepareStatement(queryInterface.buscar());
             return preparedStatement.executeQuery();
         } catch (Exception exception) {
             throw new ConexaoBancoExcecao("Erro ao consultar na base de dados.", exception);
