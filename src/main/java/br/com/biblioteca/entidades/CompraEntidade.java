@@ -19,8 +19,11 @@ public class CompraEntidade {
 	public CompraEntidade() {
 	}
 
+	public CompraEntidade(Integer id) {
+		this.id = id;
+	}
+
 	public CompraEntidade(Integer id, Date data, Double total, List<ItemCompraEntidade> itensDeCompra, ClienteEntidade cliente) {
-		super();
 		this.id = id;
 		this.data = data;
 		this.total = total;

@@ -8,26 +8,31 @@ import java.sql.DriverManager;
 
 public class ConexaoBanco {
 
-    private static Connection connection = null;
+    private static Connection conexao = null;
 
     private ConexaoBanco() {
     }
 
     public static Connection pegarConexao() throws ConexaoBancoExcecao {
         try {
-            if (connection == null || connection.isClosed()) {
-                String serverName = "localhost";
-                String databaseName = "biblioteca";
-                String url = "jdbc:mysql://" + serverName + "/" + databaseName;
-                String username = "root";
-                String password = "";
+            if (conexao == null || conexao.isClosed()) {
+                String nomeServidor = "localhost";
+                String nomeBanco = "biblioteca";
+                String url = "jdbc:mysql://" + nomeServidor + "/" + nomeBanco;
+                String usuario = "root";
+                String senha = "";
 
-                return DriverManager.getConnection(url, username, password);
+                return DriverManager.getConnection(url, usuario, senha);
             }
-            return connection;
+            return conexao;
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o banco. Verifique as configurações.", "Erro", 1);
-            throw new ConexaoBancoExcecao(exception);
+            JOptionPane.showMessageDialog(//
+                null,//
+                "Erro ao conectar com o banco. Verifique as configurações.",//
+                "Erro",//
+                JOptionPane.ERROR_MESSAGE//
+            );//
+            throw new ConexaoBancoExcecao(exception);//
         }
     }
 }

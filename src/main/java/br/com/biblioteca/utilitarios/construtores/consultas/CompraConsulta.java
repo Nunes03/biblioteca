@@ -2,9 +2,9 @@ package main.java.br.com.biblioteca.utilitarios.construtores.consultas;
 
 import main.java.br.com.biblioteca.entidades.CompraEntidade;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.CompraQueryInterface;
+import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.CompraConsultaInterface;
 
-public class CompraQuery implements CompraQueryInterface{
+public class CompraConsulta implements CompraConsultaInterface {
 	
 	@Override
 	public String criar(CompraEntidade entity) {

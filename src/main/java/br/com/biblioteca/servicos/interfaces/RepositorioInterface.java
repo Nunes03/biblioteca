@@ -5,14 +5,14 @@ import java.util.Optional;
 
 public interface RepositorioInterface<E> {
 	
-	Boolean criar(E entity);
+	Boolean criar(E entidade);
 
-	Boolean atualizar(E entity);
-	
-	Optional<E> buscarPorId(Integer id);
-	
+	Boolean atualizar(E entidade);
+
 	List<E> buscarTodos();
-	
+
+	Optional<E> buscarPorId(Integer id);
+
 	Boolean deletarTodos();
 	
 	Boolean deletarPorId(Integer id);

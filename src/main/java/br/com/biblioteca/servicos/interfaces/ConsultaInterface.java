@@ -1,6 +1,6 @@
 package main.java.br.com.biblioteca.servicos.interfaces;
 
-public interface QueryInterface<E> {
+public interface ConsultaInterface<E> {
 	
 	String criar(E entity);
 

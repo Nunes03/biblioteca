@@ -1,6 +1,7 @@
 package main.java.br.com.biblioteca.entidades;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import main.java.br.com.biblioteca.enums.GeneroEnum;
@@ -16,7 +17,7 @@ public class LivroEntidade extends AcervoEntidade {
 	public LivroEntidade() {
 	}
 
-	public LivroEntidade(Integer id, String nome, Double valor, LocalDate dataLancamento, Integer paginas, String editora,
+	public LivroEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
 						 List<AutorEntidade> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
 		super(id, nome, valor, dataLancamento, paginas, editora, autores);
 		this.descricao = descricao;

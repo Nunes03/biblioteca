@@ -2,9 +2,9 @@ package main.java.br.com.biblioteca.utilitarios.construtores.consultas;
 
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.AutorQueryInterface;
+import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.AutorConsultaInterface;
 
-public class AutorQuery implements AutorQueryInterface {
+public class AutorConsulta implements AutorConsultaInterface {
 
     @Override
     public String criar(AutorEntidade entity) {

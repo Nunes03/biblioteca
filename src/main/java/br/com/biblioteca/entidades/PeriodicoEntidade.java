@@ -1,6 +1,7 @@
 package main.java.br.com.biblioteca.entidades;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class PeriodicoEntidade extends AcervoEntidade {
@@ -10,7 +11,7 @@ public class PeriodicoEntidade extends AcervoEntidade {
 	public PeriodicoEntidade() {
 	}
 
-	public PeriodicoEntidade(Integer id, String nome, Double valor, LocalDate dataLancamento, Integer paginas, String editora,
+	public PeriodicoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
 							 List<AutorEntidade> autores, String regiao) {
 		super(id, nome, valor, dataLancamento, paginas, editora, autores);
 		this.regiao = regiao;

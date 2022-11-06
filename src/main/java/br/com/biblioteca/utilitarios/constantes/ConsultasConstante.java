@@ -5,7 +5,7 @@ public class ConsultasConstante {
     private ConsultasConstante() {
     }
 
-    public static class Autor {
+    public class Autor {
         public static final String CRIAR = "INSERT INTO biblioteca.autor"
             + "(nome)"
             + " VALUES "
@@ -27,7 +27,7 @@ public class ConsultasConstante {
             + "WHERE autor.id = %d;";
     }
 
-    public static class Cliente {
+    public class Cliente {
         public static final String CRIAR = "INSERT INTO biblioteca.cliente"
             + "(nome_completo, data_nascimento, cpf, telefone)"
             + " VALUES "
@@ -52,7 +52,7 @@ public class ConsultasConstante {
             + "WHERE cliente.id = %d;";
     }
 
-    public static class Compra {
+    public class Compra {
         public static final String CRIAR = "INSERT INTO biblioteca.compra"
             + "(compra.data, compra.total, compra.cliente_id)"
             + " VALUES "
@@ -76,7 +76,7 @@ public class ConsultasConstante {
             + "WHERE compra.id = %d;";
     }
 
-    public static class ItemCompra {
+    public class ItemCompra {
         public static final String CRIAR = "INSERT INTO biblioteca.item_compra item_compra"
             + "(item_compra.compra_id, item_compra.acervo_id)"
             + " VALUES "
@@ -99,7 +99,7 @@ public class ConsultasConstante {
             + "WHERE item_compra.id = %d;";
     }
 
-    public static class Livro {
+    public class Livro {
         public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
             + "(acervo.nome, acervo.descricao, acervo.valor, "
             + "acervo.data_lancamento, acervo.paginas, acervo.editora, "
@@ -130,7 +130,7 @@ public class ConsultasConstante {
             + "WHERE acervo.id = %d;";
     }
 
-    public static class Periodico {
+    public class Periodico {
         public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
             + "(acervo.nome, acervo.valor, "
             + "acervo.data_lancamento, acervo.paginas, acervo.regiao, acervo.editora) "
@@ -158,7 +158,7 @@ public class ConsultasConstante {
             + "WHERE acervo.id = %d;";
     }
 
-    public static class Revista {
+    public class Revista {
         public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
             + "(acervo.nome, acervo.valor, "
             + "acervo.data_lancamento, acervo.paginas, "

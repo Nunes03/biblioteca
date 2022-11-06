@@ -1,34 +1,38 @@
 package main.java.br.com.biblioteca.utilitarios.construtores.consultas;
 
-import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
+import main.java.br.com.biblioteca.entidades.LivroEntidade;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.PeriodicoQueryInterface;
+import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.LivroConsultaInterface;
 
-public class PeriodicoQuery implements PeriodicoQueryInterface {
+public class LivroConsulta implements LivroConsultaInterface {
 	
 	@Override
-	public String criar(PeriodicoEntidade entity) {
+	public String criar(LivroEntidade entity) {
 		return String.format(
-			ConsultasConstante.Periodico.CRIAR,
+			ConsultasConstante.Livro.CRIAR,
 			entity.getNome(),
+			entity.getDescricao(),
 			entity.getValor(),
 			entity.getDataLancamento(),
 			entity.getPaginas(),
-			entity.getRegiao(),
-			entity.getEditora()
+			entity.getEditora(),
+			entity.getCapaDura(),
+			entity.getGenero()
 		);
 	}
 
 	@Override
-	public String atualizar(PeriodicoEntidade entity) {
+	public String atualizar(LivroEntidade entity) {
 		return String.format(
-			ConsultasConstante.Periodico.ATUALIZAR,
+			ConsultasConstante.Livro.ATUALIZAR,
 			entity.getNome(),
+			entity.getDescricao(),
 			entity.getValor(),
 			entity.getDataLancamento(),
 			entity.getPaginas(),
-			entity.getRegiao(),
 			entity.getEditora(),
+			entity.getCapaDura(),
+			entity.getGenero(),
 			entity.getId()
 		);
 	}
@@ -36,25 +40,25 @@ public class PeriodicoQuery implements PeriodicoQueryInterface {
 	@Override
 	public String buscarPorId(Integer id) {
 		return String.format(
-			ConsultasConstante.Periodico.BUSCAR_POR_ID,
+			ConsultasConstante.Livro.DELETAR_POR_ID,
 			id
 		);
 	}
 
 	@Override
 	public String buscar() {
-		return ConsultasConstante.Periodico.BUSCAR;
+		return ConsultasConstante.Livro.BUSCAR;
 	}
 
 	@Override
 	public String deletar() {
-		return ConsultasConstante.Periodico.DELETAR;
+		return ConsultasConstante.Livro.DELETAR;
 	}
 
 	@Override
 	public String deletarPorId(Integer id) {
 		return String.format(
-			ConsultasConstante.Periodico.DELETAR_POR_ID,
+			ConsultasConstante.Livro.DELETAR_POR_ID,
 			id
 		);
 	}

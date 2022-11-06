@@ -21,6 +21,10 @@ public class ClienteEntidade {
 	public ClienteEntidade() {
 	}
 
+	public ClienteEntidade(Integer id) {
+		this.id = id;
+	}
+
 	public ClienteEntidade(Integer id, String nomeCompleto, Date dataNascimento, String cpf, String telefone,
 						   List<CompraEntidade> compras) {
 		this.id = id;

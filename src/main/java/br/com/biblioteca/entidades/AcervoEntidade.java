@@ -2,6 +2,7 @@ package main.java.br.com.biblioteca.entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AcervoEntidade {
@@ -12,7 +13,7 @@ public class AcervoEntidade {
 	
 	private Double valor;
 	
-	private LocalDate dataLancamento;
+	private Date dataLancamento;
 	
 	private Integer paginas;
 	
@@ -22,8 +23,12 @@ public class AcervoEntidade {
 	
 	public AcervoEntidade() {
 	}
+
+	public AcervoEntidade(Integer id) {
+		this.id = id;
+	}
 	
-	public AcervoEntidade(Integer id, String nome, Double valor, LocalDate dataLancamento, Integer paginas, String editora, List<AutorEntidade> autores) {
+	public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, List<AutorEntidade> autores) {
 		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
@@ -57,11 +62,11 @@ public class AcervoEntidade {
 		this.valor = valor;
 	}
 
-	public LocalDate getDataLancamento() {
+	public Date getDataLancamento() {
 		return dataLancamento;
 	}
 
-	public void setDataLancamento(LocalDate dataLancamento) {
+	public void setDataLancamento(Date dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
 

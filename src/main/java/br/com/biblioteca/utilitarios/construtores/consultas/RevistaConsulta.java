@@ -2,9 +2,9 @@ package main.java.br.com.biblioteca.utilitarios.construtores.consultas;
 
 import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.RevistaQueryInterface;
+import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.RevistaConsultaInterface;
 
-public class RevistaQuery implements RevistaQueryInterface {
+public class RevistaConsulta implements RevistaConsultaInterface {
 
     @Override
     public String criar(RevistaEntidade entity) {
