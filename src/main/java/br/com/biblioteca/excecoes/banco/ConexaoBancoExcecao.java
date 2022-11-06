@@ -2,7 +2,9 @@ package main.java.br.com.biblioteca.excecoes.banco;
 
 public class ConexaoBancoExcecao extends RuntimeException{
 
-    public ConexaoBancoExcecao(String message){
+	private static final long serialVersionUID = -1251693500504422151L;
+
+	public ConexaoBancoExcecao(String message){
         super(message);
     }
 
