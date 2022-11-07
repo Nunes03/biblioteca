@@ -3,8 +3,6 @@ package main.java.br.com.biblioteca.telas;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,48 +41,44 @@ public class Principal extends JFrame {
 
 		setContentPane(contentPanel);
 		contentPanel.setLayout(null);
-		
-		JPanel barraLateralPanel = new JPanel();
-		barraLateralPanel.setBackground(new Color(255, 0, 128));
-		barraLateralPanel.setBounds(0, 0, 53, 367);
-		contentPanel.add(barraLateralPanel);
-		
-		JPanel principalPanel = new JPanel();
-		principalPanel.setBounds(55, 0, 571, 367);
-		contentPanel.add(principalPanel);
-		principalPanel.setLayout(new CardLayout(0, 0));
-		
-		JPanel livroPanel = new JPanel();
-		livroPanel.setBackground(Color.RED);
-		principalPanel.add(livroPanel, "name_254914035815600");
-		livroPanel.setLayout(null);
-		livroPanel.setName("livroCard");
-		System.err.println(livroPanel.getName());
-		
-		JPanel autorPanel = new JPanel();
-		autorPanel.setBackground(Color.CYAN);
-		principalPanel.add(autorPanel, "name_254954077023300");
-		autorPanel.setLayout(null);
-		autorPanel.setName("autorCard");
-		System.err.println(autorPanel.getName());
-		
-		JButton livroMenu = new JButton("Livro");
-		livroMenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cardLayout = (CardLayout) principalPanel.getLayout();
-				cardLayout.show(principalPanel, livroMenu.getName());
-			}
-		});
-		
-		JButton btnNewButton = new JButton("Autor");
-		btnNewButton.addActionListener(
-			actionEvent -> {
-				CardLayout cardLayout = (CardLayout) principalPanel.getLayout();
-				cardLayout.show(principalPanel, autorPanel.getName());
+
+		JPanel painelBarraLateral = new JPanel();
+		painelBarraLateral.setBackground(new Color(255, 0, 128));
+		painelBarraLateral.setBounds(0, 0, 53, 367);
+		contentPanel.add(painelBarraLateral);
+
+		JPanel painelPrincipal = new JPanel();
+		painelPrincipal.setBounds(55, 0, 571, 367);
+		contentPanel.add(painelPrincipal);
+		painelPrincipal.setLayout(new CardLayout(0, 0));
+
+		JPanel livroPainel = new JPanel();
+		livroPainel.setBackground(Color.RED);
+		painelPrincipal.add(livroPainel, "livroPainelCard");
+		livroPainel.setLayout(null);
+
+		JPanel autorPainel = new JPanel();
+		autorPainel.setBackground(Color.CYAN);
+		painelPrincipal.add(autorPainel, "autorPainelCard");
+		autorPainel.setLayout(null);
+
+		JButton livroMenuBotao = new JButton("Livro");
+		livroMenuBotao.addActionListener(
+			actionListener -> {
+				CardLayout cardLayout = (CardLayout) painelPrincipal.getLayout();
+				cardLayout.show(painelPrincipal, "livroPainelCard");
 			}
 		);
 
-		barraLateralPanel.add(btnNewButton);
-		barraLateralPanel.add(livroMenu);
+		JButton autorMenuBotao = new JButton("Autor");
+		autorMenuBotao.addActionListener(
+			actionListener -> {
+				CardLayout cardLayout = (CardLayout) painelPrincipal.getLayout();
+				cardLayout.show(painelPrincipal, "autorPainelCard");
+			}
+		);
+
+		painelBarraLateral.add(autorMenuBotao);
+		painelBarraLateral.add(livroMenuBotao);
 	}
 }
