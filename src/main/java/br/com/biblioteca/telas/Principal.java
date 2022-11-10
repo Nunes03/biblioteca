@@ -49,11 +49,18 @@ public class Principal extends javax.swing.JFrame {
         cadastrarAutorBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         statusAutorLbl = new javax.swing.JLabel();
+        atualizarAutorBtn = new javax.swing.JButton();
         listagemAutorPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         autorListagemTbl = new javax.swing.JTable();
-        atualizarAutorBtn = new javax.swing.JButton();
         clientePanel = new javax.swing.JPanel();
+        cadastroClientePanel = new javax.swing.JPanel();
+        atualizarClienteBtn = new javax.swing.JButton();
+        cadastrarClienteBtn = new javax.swing.JButton();
+        nomeAutorTxt1 = new javax.swing.JTextField();
+        listagemClientePanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        clienteListagemTbl = new javax.swing.JTable();
         compraPanel = new javax.swing.JPanel();
         revistaPanel = new javax.swing.JPanel();
         periodicoPanel = new javax.swing.JPanel();
@@ -159,6 +166,9 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setText("NOME");
 
+        atualizarAutorBtn.setText("Atualizar");
+        atualizarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
         javax.swing.GroupLayout cadastroAutorPanelLayout = new javax.swing.GroupLayout(cadastroAutorPanel);
         cadastroAutorPanel.setLayout(cadastroAutorPanelLayout);
         cadastroAutorPanelLayout.setHorizontalGroup(
@@ -172,7 +182,9 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
                         .addGap(352, 352, 352)
                         .addComponent(statusAutorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                        .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
@@ -189,7 +201,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(statusAutorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -225,25 +239,20 @@ public class Principal extends javax.swing.JFrame {
             autorListagemTbl.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        atualizarAutorBtn.setText("Atualizar");
-        atualizarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
         javax.swing.GroupLayout listagemAutorPanelLayout = new javax.swing.GroupLayout(listagemAutorPanel);
         listagemAutorPanel.setLayout(listagemAutorPanelLayout);
         listagemAutorPanelLayout.setHorizontalGroup(
             listagemAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listagemAutorPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(listagemAutorPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         listagemAutorPanelLayout.setVerticalGroup(
             listagemAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listagemAutorPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -264,21 +273,127 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(cadastroAutorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(listagemAutorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(listagemAutorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
         );
 
         paiPanel.add(autorPanel, "autorCartao");
+
+        clientePanel.setPreferredSize(new java.awt.Dimension(1135, 710));
+
+        cadastroClientePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Cadastro"));
+        cadastroClientePanel.setPreferredSize(new java.awt.Dimension(1115, 320));
+
+        atualizarClienteBtn.setText("Atualizar");
+        atualizarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        cadastrarClienteBtn.setText("Cadastrar");
+        cadastrarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cadastrarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarClienteBtnActionPerformed(evt);
+            }
+        });
+
+        nomeAutorTxt1.setBackground(new java.awt.Color(240, 240, 240));
+        nomeAutorTxt1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nomeAutorTxt1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        javax.swing.GroupLayout cadastroClientePanelLayout = new javax.swing.GroupLayout(cadastroClientePanel);
+        cadastroClientePanel.setLayout(cadastroClientePanelLayout);
+        cadastroClientePanelLayout.setHorizontalGroup(
+            cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(nomeAutorTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        cadastroClientePanelLayout.setVerticalGroup(
+            cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(nomeAutorTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        listagemClientePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Listagem"));
+        listagemClientePanel.setPreferredSize(new java.awt.Dimension(464, 350));
+
+        clienteListagemTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nome", "Data de Nascimento", "CPF", "Telefone"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        clienteListagemTbl.setPreferredSize(new java.awt.Dimension(150, 0));
+        jScrollPane2.setViewportView(clienteListagemTbl);
+        if (clienteListagemTbl.getColumnModel().getColumnCount() > 0) {
+            clienteListagemTbl.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        javax.swing.GroupLayout listagemClientePanelLayout = new javax.swing.GroupLayout(listagemClientePanel);
+        listagemClientePanel.setLayout(listagemClientePanelLayout);
+        listagemClientePanelLayout.setHorizontalGroup(
+            listagemClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listagemClientePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        listagemClientePanelLayout.setVerticalGroup(
+            listagemClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listagemClientePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout clientePanelLayout = new javax.swing.GroupLayout(clientePanel);
         clientePanel.setLayout(clientePanelLayout);
         clientePanelLayout.setHorizontalGroup(
             clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(clientePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cadastroClientePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listagemClientePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1115, Short.MAX_VALUE))
+                .addContainerGap())
         );
         clientePanelLayout.setVerticalGroup(
             clientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGroup(clientePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cadastroClientePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(listagemClientePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         paiPanel.add(clientePanel, "clienteCartao");
@@ -291,7 +406,7 @@ public class Principal extends javax.swing.JFrame {
         );
         compraPanelLayout.setVerticalGroup(
             compraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
         );
 
         paiPanel.add(compraPanel, "compraCartao");
@@ -304,7 +419,7 @@ public class Principal extends javax.swing.JFrame {
         );
         revistaPanelLayout.setVerticalGroup(
             revistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
         );
 
         paiPanel.add(revistaPanel, "revistaCartao");
@@ -317,7 +432,7 @@ public class Principal extends javax.swing.JFrame {
         );
         periodicoPanelLayout.setVerticalGroup(
             periodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
         );
 
         paiPanel.add(periodicoPanel, "periodicoCartao");
@@ -330,7 +445,7 @@ public class Principal extends javax.swing.JFrame {
         );
         livroPanelLayout.setVerticalGroup(
             livroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 681, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
         );
 
         paiPanel.add(livroPanel, "livroCartao");
@@ -347,7 +462,7 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(barraLateralPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(paiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+            .addComponent(paiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -404,6 +519,10 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
 
+    private void cadastrarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastrarClienteBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -442,22 +561,29 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizarAutorBtn;
+    private javax.swing.JButton atualizarClienteBtn;
     private javax.swing.JButton autorBarraLateralBtn;
     private javax.swing.JTable autorListagemTbl;
     private javax.swing.JPanel autorPanel;
     private javax.swing.JPanel barraLateralPanel;
     private javax.swing.JButton cadastrarAutorBtn;
+    private javax.swing.JButton cadastrarClienteBtn;
     private javax.swing.JPanel cadastroAutorPanel;
+    private javax.swing.JPanel cadastroClientePanel;
     private javax.swing.JButton clienteBarraLateralBtn;
+    private javax.swing.JTable clienteListagemTbl;
     private javax.swing.JPanel clientePanel;
     private javax.swing.JButton compraBarraLateralBtn;
     private javax.swing.JPanel compraPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel listagemAutorPanel;
+    private javax.swing.JPanel listagemClientePanel;
     private javax.swing.JButton livroBarraLateralBtn;
     private javax.swing.JPanel livroPanel;
     private javax.swing.JTextField nomeAutorTxt;
+    private javax.swing.JTextField nomeAutorTxt1;
     private javax.swing.JPanel paiPanel;
     private javax.swing.JButton periodicoBarraLateralBtn;
     private javax.swing.JPanel periodicoPanel;
