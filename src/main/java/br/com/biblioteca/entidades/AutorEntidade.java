@@ -14,8 +14,13 @@ public class AutorEntidade {
 	public AutorEntidade() {
 	}
 	
-	public AutorEntidade(Integer id, String nome, List<AcervoEntidade> acervos) {
+        public AutorEntidade(Integer id, String nome, List<AcervoEntidade> acervos) {
 		this.id = id;
+		this.nome = nome;
+		this.acervos = acervos;
+	}
+        
+	public AutorEntidade(String nome, List<AcervoEntidade> acervos) {
 		this.nome = nome;
 		this.acervos = acervos;
 	}
