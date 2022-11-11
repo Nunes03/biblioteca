@@ -33,4 +33,15 @@ public class AutorTabela {
             }
         );
     }
+    
+    public static AutorEntidade convertParaAutorEntidade(JTable jTable) {
+        int linhaSelecionada = jTable.getSelectedRow();
+        
+        Integer id = Integer.ap jTable.getValueAt(linhaSelecionada, 0).toString();
+        
+        return new AutorEntidade(
+            jTable.getValueAt(linhaSelecionada, 0),
+            
+        );
+    }
 }

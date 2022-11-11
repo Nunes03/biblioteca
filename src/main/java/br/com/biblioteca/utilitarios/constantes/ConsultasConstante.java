@@ -25,6 +25,9 @@ public class ConsultasConstante {
 
         public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.autor autor "
             + "WHERE autor.id = %d;";
+        
+        public static final String ACERVO_VINCULADO = "SELECT COUNT(*) FROM biblioteca.autor_acervo vinculo "
+            + "WHERE vinculo.autor_id = %d;";
     }
 
     public class Cliente {

@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class AutorRepositorio implements AutorRepositorioInterface {
-
+    
+    AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
+    
     @Override
     public Boolean criar(AutorEntidade entidade) {
         try {
-            AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
             ComandosDMLBanco.executarInsercao(autorConsultaInterface, entidade);
             return Boolean.TRUE;
         } catch (Exception exception) {
@@ -29,7 +30,6 @@ public class AutorRepositorio implements AutorRepositorioInterface {
     @Override
     public Boolean atualizar(AutorEntidade entidade) {
         try {
-            AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
             ComandosDMLBanco.executarAtualizacao(autorConsultaInterface, entidade);
             return Boolean.TRUE;
         } catch (Exception exception) {
@@ -42,7 +42,6 @@ public class AutorRepositorio implements AutorRepositorioInterface {
     public List<AutorEntidade> buscarTodos() {
         List<AutorEntidade> autorEntidades = new ArrayList<>();
         try {
-            AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
             ResultSet resultSet = ComandosDMLBanco.executarConsultaBuscandoTudo(autorConsultaInterface);
             while (resultSet.next()) {
                 autorEntidades.add(
@@ -59,7 +58,6 @@ public class AutorRepositorio implements AutorRepositorioInterface {
     @Override
     public Optional<AutorEntidade> buscarPorId(Integer id) {
         try {
-            AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
             ResultSet resultSet = ComandosDMLBanco.executarConsultaPorId(autorConsultaInterface, id);
             if (resultSet.next()) {
                 return Optional.of(ConversorEntidade.resultSetParaAutor(resultSet));
@@ -74,7 +72,6 @@ public class AutorRepositorio implements AutorRepositorioInterface {
     @Override
     public Boolean deletarTodos() {
         try {
-            AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
             ComandosDMLBanco.executarExclusao(autorConsultaInterface);
             return Boolean.TRUE;
         } catch (Exception exception) {
@@ -86,9 +83,22 @@ public class AutorRepositorio implements AutorRepositorioInterface {
     @Override
     public Boolean deletarPorId(Integer id) {
         try {
-            AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
             ComandosDMLBanco.executarExclusaoPorId(autorConsultaInterface, id);
             return Boolean.TRUE;
+        } catch (Exception exception) {
+            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
+            return Boolean.FALSE;
+        }
+    }
+
+    @Override
+    public Boolean acervoVinculado(AutorEntidade autorEntidade) {
+        try {
+            ResultSet resultSet = ComandosDMLBanco.executarConsulta(
+                autorConsultaInterface.acervoVinculado(autorEntidade)
+            );
+            
+            return resultSet.next();
         } catch (Exception exception) {
             exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
             return Boolean.FALSE;

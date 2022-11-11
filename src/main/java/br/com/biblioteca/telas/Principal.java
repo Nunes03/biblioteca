@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.repositorios.AutorRepositorio;
 import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
@@ -30,7 +31,9 @@ import main.java.br.com.biblioteca.telas.autor.AutorTabela;
  * @author lucas
  */
 public class Principal extends javax.swing.JFrame {
-
+    
+    AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
+    
     /**
      * Creates new form Teste
      */
@@ -63,6 +66,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         statusAutorLbl = new javax.swing.JLabel();
         atualizarAutorBtn = new javax.swing.JButton();
+        deletarAutorBtn = new javax.swing.JButton();
         listagemAutorPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         autorListagemTbl = new javax.swing.JTable();
@@ -191,28 +195,39 @@ public class Principal extends javax.swing.JFrame {
         atualizarAutorBtn.setText("Atualizar");
         atualizarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        deletarAutorBtn.setText("Deletar");
+        deletarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        deletarAutorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletarAutorBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout cadastroAutorPanelLayout = new javax.swing.GroupLayout(cadastroAutorPanel);
         cadastroAutorPanel.setLayout(cadastroAutorPanelLayout);
         cadastroAutorPanelLayout.setHorizontalGroup(
             cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
                         .addGap(352, 352, 352)
                         .addComponent(statusAutorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                        .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(deletarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
+                        .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cadastroAutorPanelLayout.setVerticalGroup(
             cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,8 +239,9 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(deletarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(statusAutorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -244,7 +260,7 @@ public class Principal extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -446,7 +462,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Data de Nascimento", "CPF", "Telefone"
+                "Id", "Nome Completo", "Data de Nascimento", "CPF", "Telefone"
             }
         ) {
             Class[] types = new Class [] {
@@ -624,7 +640,6 @@ public class Principal extends javax.swing.JFrame {
                     null
             );
 
-            AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
             autorRepositorioInterface.criar(autorEntidade);
 
             AutorTabela.atualizarTabela(autorListagemTbl);
@@ -673,6 +688,20 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_selecionarFotoClienteBtnActionPerformed
+
+    private void deletarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarAutorBtnActionPerformed
+        int linha = autorListagemTbl.getSelectedRow();
+        
+        if (linha != -1) {
+            autorListagemTbl.getValueAt(linha, 0).toString();
+            
+            autorRepositorioInterface.acervoVinculado(autorEntidade);
+            
+            DefaultTableModel defaultTableModel = (DefaultTableModel) autorListagemTbl.getModel();
+            defaultTableModel.removeRow(linha);
+            statusAutorLbl.setText("Autor excluido com sucesso");
+        }
+    }//GEN-LAST:event_deletarAutorBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -728,6 +757,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel compraPanel;
     private javax.swing.JFormattedTextField cpfClienteTxt;
     private javax.swing.JFormattedTextField dataNascimentoClienteTxt;
+    private javax.swing.JButton deletarAutorBtn;
     private javax.swing.JLabel fotoClienteLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

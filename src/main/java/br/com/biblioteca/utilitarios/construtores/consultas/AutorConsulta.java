@@ -48,4 +48,12 @@ public class AutorConsulta implements AutorConsultaInterface {
             id
         );
     }
+
+    @Override
+    public String acervoVinculado(AutorEntidade autorEntidade) {
+        return String.format(
+            ConsultasConstante.Autor.ACERVO_VINCULADO,
+            autorEntidade.getId()
+        );
+    }
 }

@@ -71,4 +71,14 @@ public class ComandosDMLBanco {
             throw new ConexaoBancoExcecao("Erro ao atualizar na base de dados.", exception);
         }
     }
+    
+    public static ResultSet executarConsulta(String query) {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            return preparedStatement.executeQuery();
+        } catch (Exception exception) {
+            throw new ConexaoBancoExcecao("Erro ao consultar na base de dados.", exception);
+        }
+    }
 }
