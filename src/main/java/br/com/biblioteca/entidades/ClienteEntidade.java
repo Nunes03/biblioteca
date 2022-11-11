@@ -16,6 +16,8 @@ public class ClienteEntidade {
 
 	private String telefone;
 
+        private byte[] foto;
+        
 	private List<CompraEntidade> compras = new ArrayList<>();
 
 	public ClienteEntidade() {
@@ -26,12 +28,13 @@ public class ClienteEntidade {
 	}
 
 	public ClienteEntidade(Integer id, String nomeCompleto, Date dataNascimento, String cpf, String telefone,
-						   List<CompraEntidade> compras) {
+						   byte[] foto, List<CompraEntidade> compras) {
 		this.id = id;
 		this.nomeCompleto = nomeCompleto;
 		this.dataNascimento = dataNascimento;
 		this.cpf = cpf;
 		this.telefone = telefone;
+                this.foto = foto;
 		this.compras = compras;
 	}
 
@@ -74,7 +77,15 @@ public class ClienteEntidade {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
+        
+        public void setFoto(byte[] foto) {
+            this.foto = foto;
+        }
+        
+        public byte[] getFoto() {
+            return this.foto;
+        }
+        
 	public List<CompraEntidade> getCompras() {
 		return compras;
 	}

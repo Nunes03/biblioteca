@@ -11,8 +11,8 @@ public class RevistaEntidade extends AcervoEntidade {
 	}
 
 	public RevistaEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas,
-						   String editora, List<AutorEntidade> autores, Integer edicao) {
-		super(id, nome, valor, dataLancamento, paginas, editora, autores);
+						   String editora, byte[] foto, List<AutorEntidade> autores, Integer edicao) {
+		super(id, nome, valor, dataLancamento, paginas, editora, foto, autores);
 		this.edicao = edicao;
 	}
 

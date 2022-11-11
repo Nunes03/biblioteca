@@ -7,6 +7,19 @@ package main.java.br.com.biblioteca.telas;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.repositorios.AutorRepositorio;
 import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
@@ -17,7 +30,7 @@ import main.java.br.com.biblioteca.telas.autor.AutorTabela;
  * @author lucas
  */
 public class Principal extends javax.swing.JFrame {
-      
+
     /**
      * Creates new form Teste
      */
@@ -57,7 +70,16 @@ public class Principal extends javax.swing.JFrame {
         cadastroClientePanel = new javax.swing.JPanel();
         atualizarClienteBtn = new javax.swing.JButton();
         cadastrarClienteBtn = new javax.swing.JButton();
-        nomeAutorTxt1 = new javax.swing.JTextField();
+        nomeClienteTxt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fotoClienteLbl = new javax.swing.JLabel();
+        selecionarFotoClienteBtn = new javax.swing.JButton();
+        cpfClienteTxt = new javax.swing.JFormattedTextField();
+        dataNascimentoClienteTxt = new javax.swing.JFormattedTextField();
+        telefoneClienteTxt = new javax.swing.JFormattedTextField();
         listagemClientePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         clienteListagemTbl = new javax.swing.JTable();
@@ -164,7 +186,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("NOME");
+        jLabel1.setText("Nome");
 
         atualizarAutorBtn.setText("Atualizar");
         atualizarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -295,35 +317,125 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        nomeAutorTxt1.setBackground(new java.awt.Color(240, 240, 240));
-        nomeAutorTxt1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        nomeAutorTxt1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        nomeClienteTxt.setBackground(new java.awt.Color(240, 240, 240));
+        nomeClienteTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nomeClienteTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel2.setText("Nome Completo");
+
+        jLabel3.setText("CPF");
+
+        jLabel4.setText("Data de Nascimento");
+
+        jLabel5.setText("Telefone");
+
+        fotoClienteLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fotoClienteLbl.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        selecionarFotoClienteBtn.setText("Selecionar");
+        selecionarFotoClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        selecionarFotoClienteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecionarFotoClienteBtnActionPerformed(evt);
+            }
+        });
+
+        cpfClienteTxt.setBackground(new java.awt.Color(240, 240, 240));
+        cpfClienteTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        try {
+            cpfClienteTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        cpfClienteTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        dataNascimentoClienteTxt.setBackground(new java.awt.Color(240, 240, 240));
+        dataNascimentoClienteTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        try {
+            dataNascimentoClienteTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        dataNascimentoClienteTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        telefoneClienteTxt.setBackground(new java.awt.Color(240, 240, 240));
+        telefoneClienteTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        try {
+            telefoneClienteTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        telefoneClienteTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        telefoneClienteTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefoneClienteTxtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cadastroClientePanelLayout = new javax.swing.GroupLayout(cadastroClientePanel);
         cadastroClientePanel.setLayout(cadastroClientePanelLayout);
         cadastroClientePanelLayout.setHorizontalGroup(
             cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(cadastroClientePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nomeAutorTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(telefoneClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(cpfClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fotoClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(selecionarFotoClienteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         cadastroClientePanelLayout.setVerticalGroup(
             cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(nomeAutorTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
-                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                        .addComponent(fotoClienteLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selecionarFotoClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpfClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telefoneClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(21, Short.MAX_VALUE))))
         );
 
         listagemClientePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Listagem"));
@@ -506,15 +618,15 @@ public class Principal extends javax.swing.JFrame {
         } else {
             statusAutorLbl.setForeground(Color.black);
             statusAutorLbl.setText("Autor cadastrado com sucesso.");
-            
+
             AutorEntidade autorEntidade = new AutorEntidade(
-                texto,
-                null
+                    texto,
+                    null
             );
-            
+
             AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
             autorRepositorioInterface.criar(autorEntidade);
-            
+
             AutorTabela.atualizarTabela(autorListagemTbl);
         }
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
@@ -522,6 +634,45 @@ public class Principal extends javax.swing.JFrame {
     private void cadastrarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cadastrarClienteBtnActionPerformed
+
+    private void telefoneClienteTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneClienteTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefoneClienteTxtActionPerformed
+
+    private void selecionarFotoClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarFotoClienteBtnActionPerformed
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Imagens", "png", "jpg");
+
+        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser.setDialogTitle("Procurar imagem");
+        jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        jFileChooser.setFileFilter(fileNameExtensionFilter);
+
+        Integer abriu = jFileChooser.showOpenDialog(this);
+
+        if (abriu.equals(JFileChooser.APPROVE_OPTION)) {
+            File file = jFileChooser.getSelectedFile();
+
+            try {
+                BufferedImage imagem;
+                Icon icone;
+                
+                int largura = 150, altura = 150;
+                imagem = ImageIO.read(file);
+                icone = new ImageIcon(
+                    imagem.getScaledInstance(
+                        largura,
+                        altura,
+                        java.awt.Image.SCALE_SMOOTH
+                    )
+                );
+                
+                fotoClienteLbl.setIcon(icone);
+            } catch (Exception exception) {
+                JOptionPane.showMessageDialog(null, "Erro ao selecionar imagem", "Erro", JOptionPane.ERROR);
+                exception.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_selecionarFotoClienteBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -553,9 +704,9 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(
-            () -> {   
-                new Principal().setVisible(true);
-            }
+                () -> {
+                    new Principal().setVisible(true);
+                }
         );
     }
 
@@ -575,7 +726,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel clientePanel;
     private javax.swing.JButton compraBarraLateralBtn;
     private javax.swing.JPanel compraPanel;
+    private javax.swing.JFormattedTextField cpfClienteTxt;
+    private javax.swing.JFormattedTextField dataNascimentoClienteTxt;
+    private javax.swing.JLabel fotoClienteLbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel listagemAutorPanel;
@@ -583,12 +741,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton livroBarraLateralBtn;
     private javax.swing.JPanel livroPanel;
     private javax.swing.JTextField nomeAutorTxt;
-    private javax.swing.JTextField nomeAutorTxt1;
+    private javax.swing.JTextField nomeClienteTxt;
     private javax.swing.JPanel paiPanel;
     private javax.swing.JButton periodicoBarraLateralBtn;
     private javax.swing.JPanel periodicoPanel;
     private javax.swing.JButton revistaBarraLateralBtn;
     private javax.swing.JPanel revistaPanel;
+    private javax.swing.JButton selecionarFotoClienteBtn;
     private javax.swing.JLabel statusAutorLbl;
+    private javax.swing.JFormattedTextField telefoneClienteTxt;
     // End of variables declaration//GEN-END:variables
 }

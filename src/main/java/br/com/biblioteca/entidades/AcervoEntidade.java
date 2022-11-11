@@ -6,90 +6,101 @@ import java.util.List;
 
 public class AcervoEntidade {
 
-	private Integer id;
-	
-	private String nome;
-	
-	private Double valor;
-	
-	private Date dataLancamento;
-	
-	private Integer paginas;
-	
-	private String editora;
-	
-	private List<AutorEntidade> autores = new ArrayList<>();
-	
-	public AcervoEntidade() {
-	}
+    private Integer id;
 
-	public AcervoEntidade(Integer id) {
-		this.id = id;
-	}
-	
-	public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, List<AutorEntidade> autores) {
-		this.id = id;
-		this.nome = nome;
-		this.valor = valor;
-		this.dataLancamento = dataLancamento;
-		this.paginas = paginas;
-		this.editora = editora;
-		this.autores = autores;
-	}
+    private String nome;
 
-	public Integer getId() {
-		return id;
-	}
+    private Double valor;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    private Date dataLancamento;
 
-	public String getNome() {
-		return nome;
-	}
+    private Integer paginas;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public Double getValor() {
-		return valor;
-	}
+    private String editora;
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+    private byte[] foto;
 
-	public Date getDataLancamento() {
-		return dataLancamento;
-	}
+    private List<AutorEntidade> autores = new ArrayList<>();
 
-	public void setDataLancamento(Date dataLancamento) {
-		this.dataLancamento = dataLancamento;
-	}
+    public AcervoEntidade() {
+    }
 
-	public Integer getPaginas() {
-		return paginas;
-	}
+    public AcervoEntidade(Integer id) {
+        this.id = id;
+    }
 
-	public void setPaginas(Integer paginas) {
-		this.paginas = paginas;
-	}
+    public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto, List<AutorEntidade> autores) {
+        this.id = id;
+        this.nome = nome;
+        this.valor = valor;
+        this.dataLancamento = dataLancamento;
+        this.paginas = paginas;
+        this.editora = editora;
+        this.foto = foto;
+        this.autores = autores;
+    }
 
-	public String getEditora() {
-		return editora;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setEditora(String editora) {
-		this.editora = editora;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public List<AutorEntidade> getAutores() {
-		return autores;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setAutores(List<AutorEntidade> autores) {
-		this.autores = autores;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Date getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(Date dataLancamento) {
+        this.dataLancamento = dataLancamento;
+    }
+
+    public Integer getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(Integer paginas) {
+        this.paginas = paginas;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public List<AutorEntidade> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<AutorEntidade> autores) {
+        this.autores = autores;
+    }
 }

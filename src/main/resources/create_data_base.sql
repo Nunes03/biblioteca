@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS biblioteca.cliente (
 	data_nascimento DATE NOT NULL,
 	cpf VARCHAR(11) NOT NULL,
 	telefone VARCHAR(12) NOT NULL,
+        foto LONGBLOB NOT NULL,
 	UNIQUE (cpf)
 );
 
@@ -27,6 +28,7 @@ CREATE TABLE IF NOT EXISTS biblioteca.acervo (
 	data_lancamento DATE NOT NULL,
 	paginas INT NOT NULL,
 	editora VARCHAR(100) NOT NULL,
+        foto LONGBLOB NOT NULL,
 	capa_dura BOOLEAN,
 	genero VARCHAR(50),
 	regiao VARCHAR(100),

@@ -39,6 +39,7 @@ public class ConversorEntidade {
 				resultSet.getDate("data_nascimento"),
 				resultSet.getString("cpf"),
 				resultSet.getString("telefone"),
+                                resultSet.getBytes("foto"),
 				new ArrayList<>()
 			);
 		} catch (Exception exception) {
@@ -98,6 +99,7 @@ public class ConversorEntidade {
 				resultSet.getDate("data_lancamento"),//
 				resultSet.getInt("paginas"),//
 				resultSet.getString("editora"),//
+                                resultSet.getBytes("foto"),//
 				new ArrayList<>(),//
 				resultSet.getString("descriao"),//
 				resultSet.getBoolean("capa_dura"),//
@@ -123,6 +125,7 @@ public class ConversorEntidade {
 				resultSet.getDate("data_lancamento"),//
 				resultSet.getInt("paginas"),//
 				resultSet.getString("editora"),//
+                                resultSet.getBytes("foto"),//
 				new ArrayList<>(),//
 				resultSet.getString("regiao")//
 			);//
@@ -146,6 +149,7 @@ public class ConversorEntidade {
 				resultSet.getDate("data_lancamento"),//
 				resultSet.getInt("paginas"),//
 				resultSet.getString("editora"),//
+                                resultSet.getBytes("foto"),//
 				new ArrayList<>(),//
 				resultSet.getInt("edicao")//
 			);//

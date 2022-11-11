@@ -17,8 +17,8 @@ public class LivroEntidade extends AcervoEntidade {
 	}
 
 	public LivroEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
-						 List<AutorEntidade> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
-		super(id, nome, valor, dataLancamento, paginas, editora, autores);
+						 byte[] foto, List<AutorEntidade> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
+		super(id, nome, valor, dataLancamento, paginas, editora, foto, autores);
 		this.descricao = descricao;
 		this.capaDura = capaDura;
 		this.genero = genero;
