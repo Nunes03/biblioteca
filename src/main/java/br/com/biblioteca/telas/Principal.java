@@ -7,39 +7,38 @@ package main.java.br.com.biblioteca.telas;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.repositorios.AutorRepositorio;
 import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
-import main.java.br.com.biblioteca.telas.autor.AutorTabela;
+import main.java.br.com.biblioteca.telas.geral.TabelaGeral;
+import main.java.br.com.biblioteca.telas.geral.TelasGeral;
+import main.java.br.com.biblioteca.telas.geral.ValidarGeral;
 
 /**
  *
  * @author lucas
  */
 public class Principal extends javax.swing.JFrame {
-    
-    AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
-    
+
+    private static final Integer LARGURA_IMAGEM = 150;
+    private static final Integer ALTURA_IMAGEM = 150;
+
+    private AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
+
+    private static final Logger LOGGER = Logger.getLogger(Principal.class.getName());
+
     /**
      * Creates new form Teste
      */
     public Principal() {
         initComponents();
-        AutorTabela.atualizarTabela(autorListagemTbl);
+        TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
     }
 
     /**
@@ -84,6 +83,8 @@ public class Principal extends javax.swing.JFrame {
         cpfClienteTxt = new javax.swing.JFormattedTextField();
         dataNascimentoClienteTxt = new javax.swing.JFormattedTextField();
         telefoneClienteTxt = new javax.swing.JFormattedTextField();
+        deletarClienteBtn = new javax.swing.JButton();
+        statusClienteLbl = new javax.swing.JLabel();
         listagemClientePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         clienteListagemTbl = new javax.swing.JTable();
@@ -192,8 +193,15 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setText("Nome");
 
+        statusAutorLbl.setBackground(new java.awt.Color(255, 255, 255));
+
         atualizarAutorBtn.setText("Atualizar");
         atualizarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        atualizarAutorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarAutorBtnActionPerformed(evt);
+            }
+        });
 
         deletarAutorBtn.setText("Deletar");
         deletarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -208,11 +216,11 @@ public class Principal extends javax.swing.JFrame {
         cadastroAutorPanelLayout.setHorizontalGroup(
             cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                        .addGap(352, 352, 352)
-                        .addComponent(statusAutorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                        .addComponent(statusAutorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,12 +228,8 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(deletarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
                         .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1)))
+                            .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -238,11 +242,11 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(deletarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(statusAutorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statusAutorLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -271,6 +275,12 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        autorListagemTbl.getTableHeader().setReorderingAllowed(false);
+        autorListagemTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                autorListagemTblMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(autorListagemTbl);
         if (autorListagemTbl.getColumnModel().getColumnCount() > 0) {
             autorListagemTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -283,7 +293,7 @@ public class Principal extends javax.swing.JFrame {
             listagemAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listagemAutorPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
                 .addContainerGap())
         );
         listagemAutorPanelLayout.setVerticalGroup(
@@ -388,6 +398,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        deletarClienteBtn.setText("Deletar");
+        deletarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
         javax.swing.GroupLayout cadastroClientePanelLayout = new javax.swing.GroupLayout(cadastroClientePanel);
         cadastroClientePanel.setLayout(cadastroClientePanelLayout);
         cadastroClientePanelLayout.setHorizontalGroup(
@@ -395,26 +408,35 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(cadastroClientePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
-                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(telefoneClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
                         .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(cpfClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(cpfClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                                .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fotoClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(selecionarFotoClienteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(selecionarFotoClienteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                        .addComponent(telefoneClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(statusClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deletarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         cadastroClientePanelLayout.setVerticalGroup(
@@ -441,17 +463,20 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cadastroClientePanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(cadastroClientePanelLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telefoneClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(21, Short.MAX_VALUE))))
+                        .addContainerGap(21, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(deletarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(statusClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
 
         listagemClientePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Listagem"));
@@ -469,7 +494,7 @@ public class Principal extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -482,9 +507,6 @@ public class Principal extends javax.swing.JFrame {
         });
         clienteListagemTbl.setPreferredSize(new java.awt.Dimension(150, 0));
         jScrollPane2.setViewportView(clienteListagemTbl);
-        if (clienteListagemTbl.getColumnModel().getColumnCount() > 0) {
-            clienteListagemTbl.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         javax.swing.GroupLayout listagemClientePanelLayout = new javax.swing.GroupLayout(listagemClientePanel);
         listagemClientePanel.setLayout(listagemClientePanelLayout);
@@ -604,6 +626,7 @@ public class Principal extends javax.swing.JFrame {
     private void autorBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorBarraLateralBtnActionPerformed
         CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
         principalCardLayout.show(paiPanel, "autorCartao");
+        TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
     }//GEN-LAST:event_autorBarraLateralBtnActionPerformed
 
     private void clienteBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteBarraLateralBtnActionPerformed
@@ -627,22 +650,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_periodicoBarraLateralBtnActionPerformed
 
     private void cadastrarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarAutorBtnActionPerformed
-        String texto = nomeAutorTxt.getText();
-        if (texto.isEmpty()) {
-            statusAutorLbl.setText("Um nome deve ser informada para se cadastrar um autor.");
-            statusAutorLbl.setForeground(Color.red);
-        } else {
-            statusAutorLbl.setForeground(Color.black);
-            statusAutorLbl.setText("Autor cadastrado com sucesso.");
-
+        if (ValidarGeral.autorValido(nomeAutorTxt, statusAutorLbl)) {
             AutorEntidade autorEntidade = new AutorEntidade(
-                    texto,
+                    nomeAutorTxt.getText(),
                     null
             );
 
             autorRepositorioInterface.criar(autorEntidade);
-
-            AutorTabela.atualizarTabela(autorListagemTbl);
+            TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
         }
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
 
@@ -655,63 +670,62 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_telefoneClienteTxtActionPerformed
 
     private void selecionarFotoClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarFotoClienteBtnActionPerformed
-        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Imagens", "png", "jpg");
-
-        JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setDialogTitle("Procurar imagem");
-        jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        jFileChooser.setFileFilter(fileNameExtensionFilter);
+        JFileChooser jFileChooser = TelasGeral.seletorDeImagem();
 
         Integer abriu = jFileChooser.showOpenDialog(this);
 
         if (abriu.equals(JFileChooser.APPROVE_OPTION)) {
             File file = jFileChooser.getSelectedFile();
+            Icon icon = TelasGeral.redimensionarImagem(file, LARGURA_IMAGEM, LARGURA_IMAGEM);
 
-            try {
-                BufferedImage imagem;
-                Icon icone;
-                
-                int largura = 150, altura = 150;
-                imagem = ImageIO.read(file);
-                icone = new ImageIcon(
-                    imagem.getScaledInstance(
-                        largura,
-                        altura,
-                        java.awt.Image.SCALE_SMOOTH
-                    )
-                );
-                
-                fotoClienteLbl.setIcon(icone);
-            } catch (Exception exception) {
-                JOptionPane.showMessageDialog(null, "Erro ao selecionar imagem", "Erro", JOptionPane.ERROR);
-                exception.printStackTrace();
-            }
+            fotoClienteLbl.setIcon(icon);
         }
     }//GEN-LAST:event_selecionarFotoClienteBtnActionPerformed
 
     private void deletarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarAutorBtnActionPerformed
-        int linha = autorListagemTbl.getSelectedRow();
-        
-        if (linha != -1) {
-            autorListagemTbl.getValueAt(linha, 0).toString();
-            
-            autorRepositorioInterface.acervoVinculado(autorEntidade);
-            
-            DefaultTableModel defaultTableModel = (DefaultTableModel) autorListagemTbl.getModel();
-            defaultTableModel.removeRow(linha);
-            statusAutorLbl.setText("Autor excluido com sucesso");
+        if (TabelaGeral.linhaValida(autorListagemTbl)) {
+            AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
+            Boolean acervoCinculado = autorRepositorioInterface.acervoVinculado(autorEntidade);
+
+            if (!acervoCinculado) {
+                autorRepositorioInterface.deletarPorId(autorEntidade.getId());
+                DefaultTableModel defaultTableModel = (DefaultTableModel) autorListagemTbl.getModel();
+                defaultTableModel.removeRow(TabelaGeral.pegarLinhaSelecionada(autorListagemTbl));
+
+                statusAutorLbl.setForeground(Color.BLACK);
+                statusAutorLbl.setText("Autor excluido com sucesso");
+            } else {
+                statusAutorLbl.setText(
+                        "Não foi possível excluir, pois existem Livros, "
+                        + "Revista ou Periódicos vinculados a esse autor!"
+                );
+            }
         }
     }//GEN-LAST:event_deletarAutorBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void autorListagemTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_autorListagemTblMouseClicked
+        if (TabelaGeral.linhaValida(autorListagemTbl)) {
+            AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
+            nomeAutorTxt.setText(autorEntidade.getNome());
+        }
+    }//GEN-LAST:event_autorListagemTblMouseClicked
+
+    private void atualizarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarAutorBtnActionPerformed
+        if (TabelaGeral.linhaValida(autorListagemTbl)) {
+            if (ValidarGeral.autorValido(nomeAutorTxt, statusAutorLbl)) {
+                AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
+                autorEntidade.setNome(nomeAutorTxt.getText());
+                autorRepositorioInterface.atualizar(autorEntidade);
+
+                TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+            }
+        } else {
+            statusAutorLbl.setForeground(Color.red);
+            statusAutorLbl.setText("Um registro deve estar selecionado para autalizar.");
+        }
+    }//GEN-LAST:event_atualizarAutorBtnActionPerformed
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -719,19 +733,14 @@ public class Principal extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
+            LOGGER.log(
+                    java.util.logging.Level.SEVERE,
+                    null,
+                    ex
+            );
         }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(
                 () -> {
                     new Principal().setVisible(true);
@@ -758,6 +767,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField cpfClienteTxt;
     private javax.swing.JFormattedTextField dataNascimentoClienteTxt;
     private javax.swing.JButton deletarAutorBtn;
+    private javax.swing.JButton deletarClienteBtn;
     private javax.swing.JLabel fotoClienteLbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -779,6 +789,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel revistaPanel;
     private javax.swing.JButton selecionarFotoClienteBtn;
     private javax.swing.JLabel statusAutorLbl;
+    private javax.swing.JLabel statusClienteLbl;
     private javax.swing.JFormattedTextField telefoneClienteTxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -93,12 +93,13 @@ public class AutorRepositorio implements AutorRepositorioInterface {
 
     @Override
     public Boolean acervoVinculado(AutorEntidade autorEntidade) {
-        try {
+        try {            
             ResultSet resultSet = ComandosDMLBanco.executarConsulta(
                 autorConsultaInterface.acervoVinculado(autorEntidade)
             );
             
-            return resultSet.next();
+            resultSet.next();
+            return resultSet.getInt("COUNT(*)") != 0;
         } catch (Exception exception) {
             exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
             return Boolean.FALSE;
