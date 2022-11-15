@@ -8,17 +8,24 @@ package main.java.br.com.biblioteca.telas;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
+import main.java.br.com.biblioteca.entidades.ClienteEntidade;
 import main.java.br.com.biblioteca.repositorios.AutorRepositorio;
+import main.java.br.com.biblioteca.repositorios.ClienteRepositorio;
 import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
+import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
 import main.java.br.com.biblioteca.telas.geral.TabelaGeral;
 import main.java.br.com.biblioteca.telas.geral.TelasGeral;
 import main.java.br.com.biblioteca.telas.geral.ValidarGeral;
+import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
 
 /**
  *
@@ -30,6 +37,7 @@ public class Principal extends javax.swing.JFrame {
     private static final Integer ALTURA_IMAGEM = 150;
 
     private AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
+    private ClienteRepositorioInterface clienteRepositorioInterface = new ClienteRepositorio();
 
     private static final Logger LOGGER = Logger.getLogger(Principal.class.getName());
 
@@ -662,7 +670,34 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
 
     private void cadastrarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteBtnActionPerformed
-        // TODO add your handling code here:
+        Boolean valido = ValidarGeral.clienteValido(
+                nomeClienteTxt,
+                cpfClienteTxt,
+                dataNascimentoClienteTxt,
+                telefoneClienteTxt,
+                fotoClienteLbl,
+                statusClienteLbl
+        );
+
+        if (valido.equals(Boolean.TRUE)) {
+            String nome = nomeClienteTxt.getText();
+            String cpf = cpfClienteTxt.getText();
+            Date dataNascimento = ConversorTipos.stringParaDate(dataNascimentoClienteTxt.getText());
+            String telefone = telefoneClienteTxt.getText();
+            ImageIcon foto = new ImageIcon();
+            
+            
+            ClienteEntidade clienteEntidade = new ClienteEntidade(
+                    nome,
+                    dataNascimento,
+                    cpf,
+                    telefone,
+                    new byte[10],
+                    new ArrayList<>()
+            );
+
+            clienteRepositorioInterface.criar(clienteEntidade);
+        }
     }//GEN-LAST:event_cadastrarClienteBtnActionPerformed
 
     private void telefoneClienteTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneClienteTxtActionPerformed

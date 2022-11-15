@@ -37,7 +37,17 @@ public class ClienteEntidade {
                 this.foto = foto;
 		this.compras = compras;
 	}
-
+        
+        public ClienteEntidade(String nomeCompleto, Date dataNascimento, String cpf, String telefone,
+						   byte[] foto, List<CompraEntidade> compras) {
+		this.nomeCompleto = nomeCompleto;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.telefone = telefone;
+                this.foto = foto;
+		this.compras = compras;
+	}
+        
 	public Integer getId() {
 		return id;
 	}
