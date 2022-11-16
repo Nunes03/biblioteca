@@ -5,8 +5,14 @@
  */
 package main.java.br.com.biblioteca.utilitarios.conversores;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,8 +25,38 @@ public class ConversorTipos {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
             return simpleDateFormat.parse(data);
-        } catch (Exception exception) {
+        } catch (ParseException exception) {
             throw new RuntimeException(exception);
         }
+    }
+    
+    public static String dateParaString(Date data) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(data);
+    }
+
+    public static byte[] iconParaByteArray(Icon icone) {
+        int size = icone.getIconHeight() * icone.getIconWidth();
+        int[] imgRgbData = new int[size];
+        byte[] imageData = null;
+
+        try (ByteArrayOutputStream byteOutput = new ByteArrayOutputStream()) {
+
+            try (DataOutputStream dataOutput = new DataOutputStream(byteOutput)) {
+                for (int i = 0; i < imgRgbData.length; i++) {
+                    dataOutput.writeByte(imgRgbData[i]);
+                }
+                imageData = byteOutput.toByteArray();
+            }
+
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return imageData;
+    }
+
+    public static Icon byteArrayParaIcon(byte[] foto) {
+        return new ImageIcon(foto);
     }
 }

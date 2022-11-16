@@ -16,7 +16,8 @@ public class ClienteConsulta implements ClienteConsultaInterface {
             entity.getNomeCompleto(),
             dataNascimento,
             entity.getCpf(),
-            entity.getTelefone()
+            entity.getTelefone(),
+            new String(entity.getFoto())
         );
     }
 
@@ -28,6 +29,7 @@ public class ClienteConsulta implements ClienteConsultaInterface {
             entity.getDataNascimento(),
             entity.getCpf(),
             entity.getTelefone(),
+            new String(entity.getFoto()),
             entity.getId()
         );
     }
@@ -55,6 +57,14 @@ public class ClienteConsulta implements ClienteConsultaInterface {
         return String.format(
             ConsultasConstante.Cliente.DELETAR_POR_ID,
             id
+        );
+    }
+
+    @Override
+    public String buscarPorCpf(String cpf) {
+        return String.format(
+            ConsultasConstante.Cliente.BUSCAR_POR_CPF,
+            cpf
         );
     }
 }

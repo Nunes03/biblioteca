@@ -33,8 +33,7 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             ComandosDMLBanco.executarAtualizacao(clienteQueryInterface, entidade);
             return Boolean.TRUE;
         } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            throw new RuntimeException(exception);
         }
     }
 
@@ -51,8 +50,7 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             }
             return clienteEntidades;
         } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return clienteEntidades;
+            throw new RuntimeException(exception);
         }
     }
 
@@ -66,8 +64,7 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             }
             return Optional.empty();
         } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Optional.empty();
+            throw new RuntimeException(exception);
         }
     }
 
@@ -78,8 +75,7 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             ComandosDMLBanco.executarExclusaoPorId(clienteQueryInterface, id);
             return Boolean.TRUE;
         } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            throw new RuntimeException(exception);
         }
     }
 
@@ -90,8 +86,22 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             ComandosDMLBanco.executarExclusao(clienteQueryInterface);
             return Boolean.TRUE;
         } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public Optional<ClienteEntidade> buscarPorCpf(String cpf) {
+        try {
+            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
+            String query = clienteQueryInterface.buscarPorCpf(cpf);
+            ResultSet resultSet = ComandosDMLBanco.executarConsulta(query);
+            if (resultSet.next()) {
+                return Optional.of(ConversorEntidade.resultSetParaCliente(resultSet));
+            }
+            return Optional.empty();
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
         }
     }
 }

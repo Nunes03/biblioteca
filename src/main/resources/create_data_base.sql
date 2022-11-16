@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS biblioteca.cliente (
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nome_completo VARCHAR(150) NOT NULL,
 	data_nascimento DATE NOT NULL,
-	cpf VARCHAR(11) NOT NULL,
-	telefone VARCHAR(12) NOT NULL,
+	cpf VARCHAR(14) NOT NULL,
+	telefone VARCHAR(15) NOT NULL,
         foto LONGBLOB NOT NULL,
 	UNIQUE (cpf)
 );

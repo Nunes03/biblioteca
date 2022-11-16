@@ -6,113 +6,101 @@ import java.util.List;
 
 public class ClienteEntidade {
 
-	private Integer id;
+    private Integer id;
 
-	private String nomeCompleto;
+    private String nomeCompleto;
 
-	private Date dataNascimento;
+    private Date dataNascimento;
 
-	private String cpf;
+    private String cpf;
 
-	private String telefone;
+    private String telefone;
 
-        private byte[] foto;
-        
-	private List<CompraEntidade> compras = new ArrayList<>();
+    private byte[] foto;
 
-	public ClienteEntidade() {
-	}
+    private List<CompraEntidade> compras = new ArrayList<>();
 
-	public ClienteEntidade(Integer id) {
-		this.id = id;
-	}
+    public ClienteEntidade() {
+    }
 
-	public ClienteEntidade(Integer id, String nomeCompleto, Date dataNascimento, String cpf, String telefone,
-						   byte[] foto, List<CompraEntidade> compras) {
-		this.id = id;
-		this.nomeCompleto = nomeCompleto;
-		this.dataNascimento = dataNascimento;
-		this.cpf = cpf;
-		this.telefone = telefone;
-                this.foto = foto;
-		this.compras = compras;
-	}
-        
-        public ClienteEntidade(String nomeCompleto, Date dataNascimento, String cpf, String telefone,
-						   byte[] foto, List<CompraEntidade> compras) {
-		this.nomeCompleto = nomeCompleto;
-		this.dataNascimento = dataNascimento;
-		this.cpf = cpf;
-		this.telefone = telefone;
-                this.foto = foto;
-		this.compras = compras;
-	}
-        
-	public Integer getId() {
-		return id;
-	}
+    public ClienteEntidade(Integer id) {
+        this.id = id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public ClienteEntidade(Integer id, String nomeCompleto, Date dataNascimento, String cpf, String telefone,
+        byte[] foto, List<CompraEntidade> compras) {
+        this.id = id;
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.foto = foto;
+        this.compras = compras;
+    }
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
-	}
+    public ClienteEntidade(String nomeCompleto, Date dataNascimento, String cpf, String telefone,
+        byte[] foto, List<CompraEntidade> compras) {
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.foto = foto;
+        this.compras = compras;
+    }
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-        
-        public void setFoto(byte[] foto) {
-            this.foto = foto;
-        }
-        
-        public byte[] getFoto() {
-            return this.foto;
-        }
-        
-	public List<CompraEntidade> getCompras() {
-		return compras;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public void setCompras(List<CompraEntidade> compras) {
-		this.compras = compras;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	@Override
-	public String toString() {
-		return "ClienteEntidade{" +
-			"id=" + id +
-			", nomeCompleto='" + nomeCompleto + '\'' +
-			", dataNascimento=" + dataNascimento +
-			", cpf='" + cpf + '\'' +
-			", telefone='" + telefone + '\'' +
-			", compras=" + compras +
-			'}';
-	}
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public byte[] getFoto() {
+        return this.foto;
+    }
+
+    public List<CompraEntidade> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<CompraEntidade> compras) {
+        this.compras = compras;
+    }
 }

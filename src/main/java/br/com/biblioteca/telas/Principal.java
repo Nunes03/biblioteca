@@ -7,9 +7,11 @@ package main.java.br.com.biblioteca.telas;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -36,8 +38,8 @@ public class Principal extends javax.swing.JFrame {
     private static final Integer LARGURA_IMAGEM = 150;
     private static final Integer ALTURA_IMAGEM = 150;
 
-    private AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
-    private ClienteRepositorioInterface clienteRepositorioInterface = new ClienteRepositorio();
+    private final AutorRepositorioInterface AUTOR_REPOSITORIO_INTERFACE = new AutorRepositorio();
+    private final ClienteRepositorioInterface CLIENTE_REPOSITORIO_INTERFACE = new ClienteRepositorio();
 
     private static final Logger LOGGER = Logger.getLogger(Principal.class.getName());
 
@@ -408,6 +410,11 @@ public class Principal extends javax.swing.JFrame {
 
         deletarClienteBtn.setText("Deletar");
         deletarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        deletarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletarClienteBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cadastroClientePanelLayout = new javax.swing.GroupLayout(cadastroClientePanel);
         cadastroClientePanel.setLayout(cadastroClientePanelLayout);
@@ -418,17 +425,13 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
                         .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(cadastroClientePanelLayout.createSequentialGroup()
-                                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(cpfClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(cadastroClientePanelLayout.createSequentialGroup()
-                                .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(cpfClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fotoClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(selecionarFotoClienteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -438,7 +441,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(cadastroClientePanelLayout.createSequentialGroup()
                         .addComponent(telefoneClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(statusClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(statusClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -513,8 +516,14 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        clienteListagemTbl.setPreferredSize(new java.awt.Dimension(150, 0));
         jScrollPane2.setViewportView(clienteListagemTbl);
+        if (clienteListagemTbl.getColumnModel().getColumnCount() > 0) {
+            clienteListagemTbl.getColumnModel().getColumn(0).setResizable(false);
+            clienteListagemTbl.getColumnModel().getColumn(1).setResizable(false);
+            clienteListagemTbl.getColumnModel().getColumn(2).setResizable(false);
+            clienteListagemTbl.getColumnModel().getColumn(3).setResizable(false);
+            clienteListagemTbl.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout listagemClientePanelLayout = new javax.swing.GroupLayout(listagemClientePanel);
         listagemClientePanel.setLayout(listagemClientePanelLayout);
@@ -522,12 +531,12 @@ public class Principal extends javax.swing.JFrame {
             listagemClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(listagemClientePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         listagemClientePanelLayout.setVerticalGroup(
             listagemClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listagemClientePanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listagemClientePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addContainerGap())
@@ -640,6 +649,7 @@ public class Principal extends javax.swing.JFrame {
     private void clienteBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteBarraLateralBtnActionPerformed
         CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
         principalCardLayout.show(paiPanel, "clienteCartao");
+        TabelaGeral.atualizarTabelaCliente(clienteListagemTbl);
     }//GEN-LAST:event_clienteBarraLateralBtnActionPerformed
 
     private void compraBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraBarraLateralBtnActionPerformed
@@ -660,43 +670,54 @@ public class Principal extends javax.swing.JFrame {
     private void cadastrarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarAutorBtnActionPerformed
         if (ValidarGeral.autorValido(nomeAutorTxt, statusAutorLbl)) {
             AutorEntidade autorEntidade = new AutorEntidade(
-                    nomeAutorTxt.getText(),
-                    null
+                nomeAutorTxt.getText(),
+                null
             );
 
-            autorRepositorioInterface.criar(autorEntidade);
+            AUTOR_REPOSITORIO_INTERFACE.criar(autorEntidade);
             TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
         }
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
 
     private void cadastrarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteBtnActionPerformed
         Boolean valido = ValidarGeral.clienteValido(
-                nomeClienteTxt,
-                cpfClienteTxt,
-                dataNascimentoClienteTxt,
-                telefoneClienteTxt,
-                fotoClienteLbl,
-                statusClienteLbl
+            nomeClienteTxt,
+            cpfClienteTxt,
+            dataNascimentoClienteTxt,
+            telefoneClienteTxt,
+            fotoClienteLbl,
+            statusClienteLbl
         );
 
         if (valido.equals(Boolean.TRUE)) {
-            String nome = nomeClienteTxt.getText();
-            String cpf = cpfClienteTxt.getText();
-            Date dataNascimento = ConversorTipos.stringParaDate(dataNascimentoClienteTxt.getText());
-            String telefone = telefoneClienteTxt.getText();
-            ImageIcon foto = new ImageIcon();
-            
-            
-            ClienteEntidade clienteEntidade = new ClienteEntidade(
+
+            Optional<ClienteEntidade> clienteEntidadeOptional = CLIENTE_REPOSITORIO_INTERFACE.buscarPorCpf(
+                cpfClienteTxt.getText()
+            );
+
+            if (!clienteEntidadeOptional.isPresent()) {
+                String nome = nomeClienteTxt.getText();
+                String cpf = cpfClienteTxt.getText();
+                Date dataNascimento = ConversorTipos.stringParaDate(dataNascimentoClienteTxt.getText());
+                String telefone = telefoneClienteTxt.getText();
+                Icon foto = fotoClienteLbl.getIcon();
+
+                ClienteEntidade clienteEntidade = new ClienteEntidade(
                     nome,
                     dataNascimento,
                     cpf,
                     telefone,
-                    new byte[10],
+                    ConversorTipos.iconParaByteArray(foto),
                     new ArrayList<>()
-            );
+                );
 
-            clienteRepositorioInterface.criar(clienteEntidade);
+                CLIENTE_REPOSITORIO_INTERFACE.criar(clienteEntidade);
+
+                TabelaGeral.atualizarTabelaCliente(clienteListagemTbl);
+            } else {
+                statusClienteLbl.setForeground(Color.RED);
+                statusClienteLbl.setText("Já existe um cliente com esse CPF.");
+            }
         }
     }//GEN-LAST:event_cadastrarClienteBtnActionPerformed
 
@@ -720,10 +741,10 @@ public class Principal extends javax.swing.JFrame {
     private void deletarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarAutorBtnActionPerformed
         if (TabelaGeral.linhaValida(autorListagemTbl)) {
             AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
-            Boolean acervoCinculado = autorRepositorioInterface.acervoVinculado(autorEntidade);
+            Boolean acervoCinculado = AUTOR_REPOSITORIO_INTERFACE.acervoVinculado(autorEntidade);
 
             if (!acervoCinculado) {
-                autorRepositorioInterface.deletarPorId(autorEntidade.getId());
+                AUTOR_REPOSITORIO_INTERFACE.deletarPorId(autorEntidade.getId());
                 DefaultTableModel defaultTableModel = (DefaultTableModel) autorListagemTbl.getModel();
                 defaultTableModel.removeRow(TabelaGeral.pegarLinhaSelecionada(autorListagemTbl));
 
@@ -731,8 +752,8 @@ public class Principal extends javax.swing.JFrame {
                 statusAutorLbl.setText("Autor excluido com sucesso");
             } else {
                 statusAutorLbl.setText(
-                        "Não foi possível excluir, pois existem Livros, "
-                        + "Revista ou Periódicos vinculados a esse autor!"
+                    "Não foi possível excluir, pois existem Livros, "
+                    + "Revista ou Periódicos vinculados a esse autor!"
                 );
             }
         }
@@ -750,7 +771,7 @@ public class Principal extends javax.swing.JFrame {
             if (ValidarGeral.autorValido(nomeAutorTxt, statusAutorLbl)) {
                 AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
                 autorEntidade.setNome(nomeAutorTxt.getText());
-                autorRepositorioInterface.atualizar(autorEntidade);
+                AUTOR_REPOSITORIO_INTERFACE.atualizar(autorEntidade);
 
                 TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
             }
@@ -759,6 +780,10 @@ public class Principal extends javax.swing.JFrame {
             statusAutorLbl.setText("Um registro deve estar selecionado para autalizar.");
         }
     }//GEN-LAST:event_atualizarAutorBtnActionPerformed
+
+    private void deletarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarClienteBtnActionPerformed
+        TabelaGeral.atualizarTabelaCliente(clienteListagemTbl);
+    }//GEN-LAST:event_deletarClienteBtnActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -770,16 +795,16 @@ public class Principal extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException ex) {
             LOGGER.log(
-                    java.util.logging.Level.SEVERE,
-                    null,
-                    ex
+                java.util.logging.Level.SEVERE,
+                null,
+                ex
             );
         }
 
         java.awt.EventQueue.invokeLater(
-                () -> {
-                    new Principal().setVisible(true);
-                }
+            () -> {
+                new Principal().setVisible(true);
+            }
         );
     }
 

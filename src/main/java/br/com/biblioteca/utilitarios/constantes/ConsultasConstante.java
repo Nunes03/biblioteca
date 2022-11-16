@@ -31,22 +31,26 @@ public class ConsultasConstante {
 
     public class Cliente {
         public static final String CRIAR = "INSERT INTO biblioteca.cliente"
-            + "(nome_completo, data_nascimento, cpf, telefone)"
+            + "(nome_completo, data_nascimento, cpf, telefone, foto)"
             + " VALUES "
-            + "('%s', '%s', '%s', '%s');";
+            + "('%s', '%s', '%s', '%s', '%s');";
 
         public static final String ATUALIZAR = "UPDATE biblioteca.cliente cliente "
             + "SET "
-            + "nome_completo = '%s',"
-            + "data_nascimento = '%s',"
-            + "cpf = '%s',"
-            + "telefone = '%s' "
+            + "cliente.nome_completo = '%s',"
+            + "cliente.data_nascimento = '%s',"
+            + "cliente.cpf = '%s',"
+            + "cliente.telefone = '%s',"
+            + "cliente.foto = '%s' "
             + "WHERE cliente.id = %d;";
 
         public static final String BUSCAR = "SELECT * FROM biblioteca.cliente;";
 
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.cliente cliente "
             + "WHERE cliente.id = %d;";
+        
+        public static final String BUSCAR_POR_CPF = "SELECT * FROM biblioteca.cliente cliente "
+            + "WHERE cliente.cpf = '%s';";
 
         public static final String DELETAR = "DELETE FROM biblioteca.cliente;";
 
