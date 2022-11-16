@@ -15,6 +15,8 @@ public class ClienteEntidade {
     private String cpf;
 
     private String telefone;
+    
+    private Boolean ativo;
 
     private byte[] foto;
 
@@ -28,22 +30,24 @@ public class ClienteEntidade {
     }
 
     public ClienteEntidade(Integer id, String nomeCompleto, Date dataNascimento, String cpf, String telefone,
-        byte[] foto, List<CompraEntidade> compras) {
+        Boolean ativo, byte[] foto, List<CompraEntidade> compras) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.ativo = ativo;
         this.foto = foto;
         this.compras = compras;
     }
 
     public ClienteEntidade(String nomeCompleto, Date dataNascimento, String cpf, String telefone,
-        byte[] foto, List<CompraEntidade> compras) {
+        Boolean ativo, byte[] foto, List<CompraEntidade> compras) {
         this.nomeCompleto = nomeCompleto;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.ativo = ativo;
         this.foto = foto;
         this.compras = compras;
     }
@@ -87,7 +91,15 @@ public class ClienteEntidade {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+    
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 
+    public Boolean getAtivo() {
+        return this.ativo;
+    }
+    
     public void setFoto(byte[] foto) {
         this.foto = foto;
     }

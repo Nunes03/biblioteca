@@ -38,7 +38,7 @@ public class TabelaGeral {
         AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);
-        
+
         List<AutorEntidade> autorEntidades = autorRepositorioInterface.buscarTodos();
 
         autorEntidades.forEach(
@@ -62,7 +62,7 @@ public class TabelaGeral {
                 String dataNascimento = ConversorTipos.dateParaString(
                     cliente.getDataNascimento()
                 );
-                
+
                 Object[] dados = {cliente.getId(), cliente.getNomeCompleto(), dataNascimento, cliente.getCpf(), cliente.getTelefone()};
 
                 defaultTableModel.addRow(dados);
@@ -85,7 +85,7 @@ public class TabelaGeral {
             null
         );
     }
-    
+
     public static ClienteEntidade convertParaClienteEntidade(JTable jTable) {
         int linhaSelecionada = jTable.getSelectedRow();
 
@@ -97,13 +97,14 @@ public class TabelaGeral {
         String dataNascimento = jTable.getValueAt(linhaSelecionada, 2).toString();
         String cpf = jTable.getValueAt(linhaSelecionada, 3).toString();
         String telefone = jTable.getValueAt(linhaSelecionada, 4).toString();
-        
+
         return new ClienteEntidade(
             id,
             nome,
             ConversorTipos.stringParaDate(dataNascimento),
             cpf,
             telefone,
+            null,
             null,
             null
         );

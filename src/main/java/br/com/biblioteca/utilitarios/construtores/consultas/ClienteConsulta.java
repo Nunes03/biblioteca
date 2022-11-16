@@ -17,6 +17,7 @@ public class ClienteConsulta implements ClienteConsultaInterface {
             dataNascimento,
             entity.getCpf(),
             entity.getTelefone(),
+            entity.getAtivo(),
             new String(entity.getFoto())
         );
     }
@@ -29,6 +30,7 @@ public class ClienteConsulta implements ClienteConsultaInterface {
             entity.getDataNascimento(),
             entity.getCpf(),
             entity.getTelefone(),
+            entity.getAtivo(),
             new String(entity.getFoto()),
             entity.getId()
         );

@@ -31,9 +31,9 @@ public class ConsultasConstante {
 
     public class Cliente {
         public static final String CRIAR = "INSERT INTO biblioteca.cliente"
-            + "(nome_completo, data_nascimento, cpf, telefone, foto)"
+            + "(nome_completo, data_nascimento, cpf, telefone, ativo, foto)"
             + " VALUES "
-            + "('%s', '%s', '%s', '%s', '%s');";
+            + "('%s', '%s', '%s', '%s', %b, '%s');";
 
         public static final String ATUALIZAR = "UPDATE biblioteca.cliente cliente "
             + "SET "
@@ -41,6 +41,7 @@ public class ConsultasConstante {
             + "cliente.data_nascimento = '%s',"
             + "cliente.cpf = '%s',"
             + "cliente.telefone = '%s',"
+            + "cliente.ativo = %b,"
             + "cliente.foto = '%s' "
             + "WHERE cliente.id = %d;";
 
