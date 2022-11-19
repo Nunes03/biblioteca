@@ -7,14 +7,12 @@ package main.java.br.com.biblioteca.telas;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +46,10 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+        TabelaGeral.atualizarTabelaAutor(
+            autorListagemTbl,
+            AUTOR_REPOSITORIO_INTERFACE.buscarTodos()
+        );
     }
 
     /**
@@ -93,8 +94,11 @@ public class Principal extends javax.swing.JFrame {
         cpfClienteTxt = new javax.swing.JFormattedTextField();
         dataNascimentoClienteTxt = new javax.swing.JFormattedTextField();
         telefoneClienteTxt = new javax.swing.JFormattedTextField();
-        deletarClienteBtn = new javax.swing.JButton();
+        inativarClienteBtn = new javax.swing.JButton();
         statusClienteLbl = new javax.swing.JLabel();
+        mostrarClienteInativoRadio = new javax.swing.JRadioButton();
+        ativoClienteComboBox = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         listagemClientePanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         clienteListagemTbl = new javax.swing.JTable();
@@ -344,6 +348,11 @@ public class Principal extends javax.swing.JFrame {
 
         atualizarClienteBtn.setText("Atualizar");
         atualizarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        atualizarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarClienteBtnActionPerformed(evt);
+            }
+        });
 
         cadastrarClienteBtn.setText("Cadastrar");
         cadastrarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -408,13 +417,24 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        deletarClienteBtn.setText("Deletar");
-        deletarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        deletarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
+        inativarClienteBtn.setText("Inativar");
+        inativarClienteBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        inativarClienteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deletarClienteBtnActionPerformed(evt);
+                inativarClienteBtnActionPerformed(evt);
             }
         });
+
+        mostrarClienteInativoRadio.setText("Mostrar Inativos");
+        mostrarClienteInativoRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarClienteInativoRadioActionPerformed(evt);
+            }
+        });
+
+        ativoClienteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
+
+        jLabel6.setText("Ativo");
 
         javax.swing.GroupLayout cadastroClientePanelLayout = new javax.swing.GroupLayout(cadastroClientePanel);
         cadastroClientePanel.setLayout(cadastroClientePanelLayout);
@@ -425,13 +445,19 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
                         .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(cpfClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dataNascimentoClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(cadastroClientePanelLayout.createSequentialGroup()
+                                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(32, 32, 32)
+                                .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(ativoClienteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 501, Short.MAX_VALUE)
                         .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fotoClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(selecionarFotoClienteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -441,13 +467,15 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(cadastroClientePanelLayout.createSequentialGroup()
                         .addComponent(telefoneClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(statusClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                        .addComponent(statusClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mostrarClienteInativoRadio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(deletarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inativarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         cadastroClientePanelLayout.setVerticalGroup(
@@ -461,9 +489,13 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(14, 14, 14))
                     .addGroup(cadastroClientePanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel2)
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomeClienteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ativoClienteComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(nomeClienteTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                         .addGap(17, 17, 17)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -481,12 +513,13 @@ public class Principal extends javax.swing.JFrame {
                         .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroClientePanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(deletarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(mostrarClienteInativoRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cadastroClientePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(inativarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(atualizarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cadastrarClienteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(statusClienteLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(statusClienteLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
 
@@ -498,7 +531,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome Completo", "Data de Nascimento", "CPF", "Telefone", "Atico"
+                "Id", "Nome Completo", "Data de Nascimento", "CPF", "Telefone", "Ativo"
             }
         ) {
             Class[] types = new Class [] {
@@ -514,6 +547,11 @@ public class Principal extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        clienteListagemTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clienteListagemTblMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(clienteListagemTbl);
@@ -644,13 +682,16 @@ public class Principal extends javax.swing.JFrame {
     private void autorBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorBarraLateralBtnActionPerformed
         CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
         principalCardLayout.show(paiPanel, "autorCartao");
-        TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+        TabelaGeral.atualizarTabelaAutor(
+            autorListagemTbl,
+            AUTOR_REPOSITORIO_INTERFACE.buscarTodos()
+        );
     }//GEN-LAST:event_autorBarraLateralBtnActionPerformed
 
     private void clienteBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteBarraLateralBtnActionPerformed
         CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
         principalCardLayout.show(paiPanel, "clienteCartao");
-        TabelaGeral.atualizarTabelaCliente(clienteListagemTbl);
+        atualizarTabelaCliente();
     }//GEN-LAST:event_clienteBarraLateralBtnActionPerformed
 
     private void compraBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraBarraLateralBtnActionPerformed
@@ -676,7 +717,10 @@ public class Principal extends javax.swing.JFrame {
             );
 
             AUTOR_REPOSITORIO_INTERFACE.criar(autorEntidade);
-            TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+            TabelaGeral.atualizarTabelaAutor(
+                autorListagemTbl,
+                AUTOR_REPOSITORIO_INTERFACE.buscarTodos()
+            );
         }
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
 
@@ -702,20 +746,20 @@ public class Principal extends javax.swing.JFrame {
                 Date dataNascimento = ConversorTipos.stringParaDate(dataNascimentoClienteTxt.getText());
                 String telefone = telefoneClienteTxt.getText();
                 Icon foto = fotoClienteLbl.getIcon();
+                Boolean ativo = ativoClienteComboBox.getSelectedIndex() == 0;
 
                 ClienteEntidade clienteEntidade = new ClienteEntidade(
                     nome,
                     dataNascimento,
                     cpf,
                     telefone,
-                    Boolean.TRUE,
-                    ConversorTipos.iconParaByteArray(foto),
-                    new ArrayList<>()
+                    ativo,
+                    ConversorTipos.iconParaByteArray(foto)
                 );
 
                 CLIENTE_REPOSITORIO_INTERFACE.criar(clienteEntidade);
 
-                TabelaGeral.atualizarTabelaCliente(clienteListagemTbl);
+                atualizarTabelaCliente();
             } else {
                 statusClienteLbl.setForeground(Color.RED);
                 statusClienteLbl.setText("Já existe um cliente com esse CPF.");
@@ -775,7 +819,7 @@ public class Principal extends javax.swing.JFrame {
                 autorEntidade.setNome(nomeAutorTxt.getText());
                 AUTOR_REPOSITORIO_INTERFACE.atualizar(autorEntidade);
 
-                TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+                //TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
             }
         } else {
             statusAutorLbl.setForeground(Color.red);
@@ -783,9 +827,92 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_atualizarAutorBtnActionPerformed
 
-    private void deletarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarClienteBtnActionPerformed
-        TabelaGeral.atualizarTabelaCliente(clienteListagemTbl);
-    }//GEN-LAST:event_deletarClienteBtnActionPerformed
+    private void inativarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inativarClienteBtnActionPerformed
+        if (TabelaGeral.linhaValida(clienteListagemTbl)) {
+            ClienteEntidade clienteEntidade = TabelaGeral.convertParaClienteEntidade(
+                clienteListagemTbl
+            );
+            clienteEntidade.setAtivo(Boolean.FALSE);
+            CLIENTE_REPOSITORIO_INTERFACE.inativar(clienteEntidade.getId());
+
+            atualizarTabelaCliente();
+        } else {
+            statusClienteLbl.setForeground(Color.RED);
+            statusClienteLbl.setText("Selecione uma linha");
+        }
+
+    }//GEN-LAST:event_inativarClienteBtnActionPerformed
+
+    private void mostrarClienteInativoRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarClienteInativoRadioActionPerformed
+        atualizarTabelaCliente();
+    }//GEN-LAST:event_mostrarClienteInativoRadioActionPerformed
+
+    private void atualizarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarClienteBtnActionPerformed
+        if (TabelaGeral.linhaValida(clienteListagemTbl)) {
+            Boolean clienteValido = ValidarGeral.clienteValido(
+                nomeClienteTxt,
+                cpfClienteTxt,
+                dataNascimentoClienteTxt,
+                telefoneClienteTxt,
+                fotoClienteLbl,
+                statusClienteLbl
+            );
+
+            if (clienteValido) {
+                ClienteEntidade clienteEntidade = TabelaGeral.convertParaClienteEntidade(clienteListagemTbl);
+                clienteEntidade.setNomeCompleto(nomeClienteTxt.getText());
+                CLIENTE_REPOSITORIO_INTERFACE.atualizar(clienteEntidade);
+
+                //TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+            }
+        } else {
+            statusAutorLbl.setForeground(Color.red);
+            statusAutorLbl.setText("Um registro deve estar selecionado para autalizar.");
+        }
+    }//GEN-LAST:event_atualizarClienteBtnActionPerformed
+
+    private void clienteListagemTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteListagemTblMouseClicked
+        System.out.println(ativoClienteComboBox.getSelectedIndex());
+        if (TabelaGeral.linhaValida(clienteListagemTbl)) {
+            ClienteEntidade clienteEntidade = TabelaGeral.convertParaClienteEntidade(clienteListagemTbl);
+            Optional<ClienteEntidade> optional = CLIENTE_REPOSITORIO_INTERFACE.buscarPorId(clienteEntidade.getId());
+
+            if (optional.isPresent()) {
+                clienteEntidade = optional.get();
+
+                nomeClienteTxt.setText(clienteEntidade.getNomeCompleto());
+                cpfClienteTxt.setText(clienteEntidade.getCpf());
+                dataNascimentoClienteTxt.setText(
+                    ConversorTipos.dateParaString(
+                        clienteEntidade.getDataNascimento()
+                    )
+                );
+                telefoneClienteTxt.setText(clienteEntidade.getTelefone());
+
+                Integer ativoIndex = clienteEntidade.getAtivo().equals(Boolean.TRUE)
+                    ? 0
+                    : 1;
+                ativoClienteComboBox.setSelectedIndex(ativoIndex);
+                
+                Icon icone = ConversorTipos.byteArrayParaIcon(clienteEntidade.getFoto());
+                fotoClienteLbl.setIcon(icone);
+            }
+        }
+    }//GEN-LAST:event_clienteListagemTblMouseClicked
+
+    private void atualizarTabelaCliente() {
+        if (mostrarClienteInativoRadio.isSelected()) {
+            TabelaGeral.atualizarTabelaCliente(
+                clienteListagemTbl,
+                CLIENTE_REPOSITORIO_INTERFACE.buscarTodos()
+            );
+        } else {
+            TabelaGeral.atualizarTabelaCliente(
+                clienteListagemTbl,
+                CLIENTE_REPOSITORIO_INTERFACE.buscarTodosAtivos()
+            );
+        }
+    }
 
     public static void main(String args[]) {
         try {
@@ -811,6 +938,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ativoClienteComboBox;
     private javax.swing.JButton atualizarAutorBtn;
     private javax.swing.JButton atualizarClienteBtn;
     private javax.swing.JButton autorBarraLateralBtn;
@@ -829,19 +957,21 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField cpfClienteTxt;
     private javax.swing.JFormattedTextField dataNascimentoClienteTxt;
     private javax.swing.JButton deletarAutorBtn;
-    private javax.swing.JButton deletarClienteBtn;
     private javax.swing.JLabel fotoClienteLbl;
+    private javax.swing.JButton inativarClienteBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel listagemAutorPanel;
     private javax.swing.JPanel listagemClientePanel;
     private javax.swing.JButton livroBarraLateralBtn;
     private javax.swing.JPanel livroPanel;
+    private javax.swing.JRadioButton mostrarClienteInativoRadio;
     private javax.swing.JTextField nomeAutorTxt;
     private javax.swing.JTextField nomeClienteTxt;
     private javax.swing.JPanel paiPanel;

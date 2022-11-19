@@ -14,10 +14,11 @@ import java.util.Optional;
 
 public class ClienteRepositorio implements ClienteRepositorioInterface {
 
+    private final ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
+
     @Override
     public Boolean criar(ClienteEntidade entidade) {
         try {
-            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
             ComandosDMLBanco.executarInsercao(clienteQueryInterface, entidade);
             return Boolean.TRUE;
         } catch (Exception exception) {
@@ -29,7 +30,6 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
     @Override
     public Boolean atualizar(ClienteEntidade entidade) {
         try {
-            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
             ComandosDMLBanco.executarAtualizacao(clienteQueryInterface, entidade);
             return Boolean.TRUE;
         } catch (Exception exception) {
@@ -41,7 +41,6 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
     public List<ClienteEntidade> buscarTodos() {
         List<ClienteEntidade> clienteEntidades = new ArrayList<>();
         try {
-            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
             ResultSet resultSet = ComandosDMLBanco.executarConsultaBuscandoTudo(clienteQueryInterface);
             while (resultSet.next()) {
                 clienteEntidades.add(
@@ -57,7 +56,6 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
     @Override
     public Optional<ClienteEntidade> buscarPorId(Integer id) {
         try {
-            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
             ResultSet resultSet = ComandosDMLBanco.executarConsultaPorId(clienteQueryInterface, id);
             if (resultSet.next()) {
                 return Optional.of(ConversorEntidade.resultSetParaCliente(resultSet));
@@ -71,7 +69,6 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
     @Override
     public Boolean deletarPorId(Integer id) {
         try {
-            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
             ComandosDMLBanco.executarExclusaoPorId(clienteQueryInterface, id);
             return Boolean.TRUE;
         } catch (Exception exception) {
@@ -82,7 +79,6 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
     @Override
     public Boolean deletarTodos() {
         try {
-            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
             ComandosDMLBanco.executarExclusao(clienteQueryInterface);
             return Boolean.TRUE;
         } catch (Exception exception) {
@@ -93,13 +89,42 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
     @Override
     public Optional<ClienteEntidade> buscarPorCpf(String cpf) {
         try {
-            ClienteConsultaInterface clienteQueryInterface = new ClienteConsulta();
             String query = clienteQueryInterface.buscarPorCpf(cpf);
             ResultSet resultSet = ComandosDMLBanco.executarConsulta(query);
             if (resultSet.next()) {
                 return Optional.of(ConversorEntidade.resultSetParaCliente(resultSet));
             }
             return Optional.empty();
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public List<ClienteEntidade> buscarTodosAtivos() {
+        List<ClienteEntidade> clienteEntidades = new ArrayList<>();
+        try {
+            String query = clienteQueryInterface.buscarTodosAtivos();
+
+            ResultSet resultSet = ComandosDMLBanco.executarConsulta(query);
+            while (resultSet.next()) {
+                clienteEntidades.add(
+                    ConversorEntidade.resultSetParaCliente(resultSet)
+                );
+            }
+            return clienteEntidades;
+        } catch (Exception exception) {
+            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
+            return clienteEntidades;
+        }
+    }
+
+    @Override
+    public Boolean inativar(Integer id) {
+        try {
+            String query = clienteQueryInterface.inativar(id);
+            ComandosDMLBanco.executar(query);
+            return Boolean.TRUE;
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }

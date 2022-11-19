@@ -20,8 +20,6 @@ public class ClienteEntidade {
 
     private byte[] foto;
 
-    private List<CompraEntidade> compras = new ArrayList<>();
-
     public ClienteEntidade() {
     }
 
@@ -30,7 +28,7 @@ public class ClienteEntidade {
     }
 
     public ClienteEntidade(Integer id, String nomeCompleto, Date dataNascimento, String cpf, String telefone,
-        Boolean ativo, byte[] foto, List<CompraEntidade> compras) {
+        Boolean ativo, byte[] foto) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.dataNascimento = dataNascimento;
@@ -38,18 +36,16 @@ public class ClienteEntidade {
         this.telefone = telefone;
         this.ativo = ativo;
         this.foto = foto;
-        this.compras = compras;
     }
 
     public ClienteEntidade(String nomeCompleto, Date dataNascimento, String cpf, String telefone,
-        Boolean ativo, byte[] foto, List<CompraEntidade> compras) {
+        Boolean ativo, byte[] foto) {
         this.nomeCompleto = nomeCompleto;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.telefone = telefone;
         this.ativo = ativo;
         this.foto = foto;
-        this.compras = compras;
     }
 
     public Integer getId() {
@@ -106,13 +102,5 @@ public class ClienteEntidade {
 
     public byte[] getFoto() {
         return this.foto;
-    }
-
-    public List<CompraEntidade> getCompras() {
-        return compras;
-    }
-
-    public void setCompras(List<CompraEntidade> compras) {
-        this.compras = compras;
     }
 }

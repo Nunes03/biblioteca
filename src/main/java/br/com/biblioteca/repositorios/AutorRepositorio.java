@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class AutorRepositorio implements AutorRepositorioInterface {
-    
+
     AutorConsultaInterface autorConsultaInterface = new AutorConsulta();
-    
+
     @Override
     public Boolean criar(AutorEntidade entidade) {
         try {
@@ -93,11 +93,11 @@ public class AutorRepositorio implements AutorRepositorioInterface {
 
     @Override
     public Boolean acervoVinculado(AutorEntidade autorEntidade) {
-        try {            
+        try {
             ResultSet resultSet = ComandosDMLBanco.executarConsulta(
                 autorConsultaInterface.acervoVinculado(autorEntidade)
             );
-            
+
             resultSet.next();
             return resultSet.getInt("COUNT(*)") != 0;
         } catch (Exception exception) {

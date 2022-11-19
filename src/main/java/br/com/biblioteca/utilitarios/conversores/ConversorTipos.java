@@ -5,12 +5,16 @@
  */
 package main.java.br.com.biblioteca.utilitarios.conversores;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -29,7 +33,7 @@ public class ConversorTipos {
             throw new RuntimeException(exception);
         }
     }
-    
+
     public static String dateParaString(Date data) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return simpleDateFormat.format(data);
@@ -57,6 +61,12 @@ public class ConversorTipos {
     }
 
     public static Icon byteArrayParaIcon(byte[] foto) {
-        return new ImageIcon(foto);
+        try {
+            InputStream inputStream = new ByteArrayInputStream(foto);
+            BufferedImage someImage = ImageIO.read(inputStream);
+            return new ImageIcon(foto);
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
     }
 }

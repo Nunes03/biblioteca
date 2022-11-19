@@ -40,8 +40,7 @@ public class ConversorEntidade {
                 resultSet.getString("cpf"),
                 resultSet.getString("telefone"),
                 resultSet.getBoolean("ativo"),
-                resultSet.getBytes("foto"),
-                new ArrayList<>()
+                resultSet.getBytes("foto")
             );
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null, "Erro ao converter Cliente.", "Erro", JOptionPane.ERROR_MESSAGE);

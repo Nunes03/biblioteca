@@ -6,6 +6,7 @@ public class ConsultasConstante {
     }
 
     public class Autor {
+
         public static final String CRIAR = "INSERT INTO biblioteca.autor"
             + "(nome)"
             + " VALUES "
@@ -24,12 +25,13 @@ public class ConsultasConstante {
         public static final String DELETAR = "DELETE FROM biblioteca.autor;";
 
         public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.autor WHERE id = %d;";
-        
+
         public static final String ACERVO_VINCULADO = "SELECT COUNT(*) FROM biblioteca.autor_acervo vinculo "
             + "WHERE vinculo.autor_id = %d;";
     }
 
     public class Cliente {
+
         public static final String CRIAR = "INSERT INTO biblioteca.cliente"
             + "(nome_completo, data_nascimento, cpf, telefone, ativo, foto)"
             + " VALUES "
@@ -44,12 +46,19 @@ public class ConsultasConstante {
             + "cliente.ativo = %b,"
             + "cliente.foto = '%s' "
             + "WHERE cliente.id = %d;";
+        
+        public static final String INATIVAR = "UPDATE biblioteca.cliente cliente "
+            + "SET "
+            + "cliente.ativo = false "
+            + "WHERE cliente.id = %d;";
 
         public static final String BUSCAR = "SELECT * FROM biblioteca.cliente;";
 
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.cliente cliente "
             + "WHERE cliente.id = %d;";
-        
+
+        public static final String BUSCAR_ATIVOS = "SELECT * FROM biblioteca.cliente cliente WHERE cliente.ativo = true;";
+
         public static final String BUSCAR_POR_CPF = "SELECT * FROM biblioteca.cliente cliente "
             + "WHERE cliente.cpf = '%s';";
 
@@ -60,6 +69,7 @@ public class ConsultasConstante {
     }
 
     public class Compra {
+
         public static final String CRIAR = "INSERT INTO biblioteca.compra"
             + "(compra.data, compra.total, compra.cliente_id)"
             + " VALUES "
@@ -84,6 +94,7 @@ public class ConsultasConstante {
     }
 
     public class ItemCompra {
+
         public static final String CRIAR = "INSERT INTO biblioteca.item_compra item_compra"
             + "(item_compra.compra_id, item_compra.acervo_id)"
             + " VALUES "
@@ -107,6 +118,7 @@ public class ConsultasConstante {
     }
 
     public class Livro {
+
         public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
             + "(acervo.nome, acervo.descricao, acervo.valor, "
             + "acervo.data_lancamento, acervo.paginas, acervo.editora, "
@@ -138,6 +150,7 @@ public class ConsultasConstante {
     }
 
     public class Periodico {
+
         public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
             + "(acervo.nome, acervo.valor, "
             + "acervo.data_lancamento, acervo.paginas, acervo.regiao, acervo.editora) "
@@ -153,7 +166,7 @@ public class ConsultasConstante {
             + "acervo.editora = '%s', "
             + "acervo.regiao = '%s' "
             + "WHERE acervo.id = %d;";
-        
+
         public static final String BUSCAR = "SELECT * FROM biblioteca.acervo;";
 
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
@@ -166,6 +179,7 @@ public class ConsultasConstante {
     }
 
     public class Revista {
+
         public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
             + "(acervo.nome, acervo.valor, "
             + "acervo.data_lancamento, acervo.paginas, "

@@ -69,4 +69,17 @@ public class ClienteConsulta implements ClienteConsultaInterface {
             cpf
         );
     }
+    
+    @Override
+    public String buscarTodosAtivos() {
+        return ConsultasConstante.Cliente.BUSCAR_ATIVOS;
+    }
+
+    @Override
+    public String inativar(Integer id) {
+        return String.format(
+            ConsultasConstante.Cliente.INATIVAR,
+            id
+        );
+    }
 }

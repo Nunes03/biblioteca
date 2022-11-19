@@ -10,10 +10,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.entidades.ClienteEntidade;
-import main.java.br.com.biblioteca.repositorios.AutorRepositorio;
-import main.java.br.com.biblioteca.repositorios.ClienteRepositorio;
-import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
-import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
 
 /**
@@ -34,12 +30,9 @@ public class TabelaGeral {
         return !pegarLinhaSelecionada(jTable).equals(-1);
     }
 
-    public static void atualizarTabelaAutor(JTable jTable) {
-        AutorRepositorioInterface autorRepositorioInterface = new AutorRepositorio();
+    public static void atualizarTabelaAutor(JTable jTable, List<AutorEntidade> autorEntidades) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);
-
-        List<AutorEntidade> autorEntidades = autorRepositorioInterface.buscarTodos();
 
         autorEntidades.forEach(
             autor -> {
@@ -50,12 +43,9 @@ public class TabelaGeral {
         );
     }
 
-    public static void atualizarTabelaCliente(JTable jTable) {
-        ClienteRepositorioInterface clienteRepositorioInterface = new ClienteRepositorio();
+    public static void atualizarTabelaCliente(JTable jTable, List<ClienteEntidade> clienteEntidades) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);
-
-        List<ClienteEntidade> clienteEntidades = clienteRepositorioInterface.buscarTodos();
 
         clienteEntidades.forEach(
             cliente -> {
@@ -63,7 +53,18 @@ public class TabelaGeral {
                     cliente.getDataNascimento()
                 );
 
-                Object[] dados = {cliente.getId(), cliente.getNomeCompleto(), dataNascimento, cliente.getCpf(), cliente.getTelefone()};
+                String ativo = cliente.getAtivo().equals(Boolean.TRUE)
+                ? "Sim"
+                : "Não";
+
+                Object[] dados = {
+                    cliente.getId(),
+                    cliente.getNomeCompleto(),
+                    dataNascimento,
+                    cliente.getCpf(),
+                    cliente.getTelefone(),
+                    ativo
+                };
 
                 defaultTableModel.addRow(dados);
             }
@@ -88,7 +89,7 @@ public class TabelaGeral {
 
     public static ClienteEntidade convertParaClienteEntidade(JTable jTable) {
         int linhaSelecionada = jTable.getSelectedRow();
-
+                
         Integer id = Integer.parseInt(
             jTable.getValueAt(linhaSelecionada, 0).toString()
         );
@@ -97,6 +98,9 @@ public class TabelaGeral {
         String dataNascimento = jTable.getValueAt(linhaSelecionada, 2).toString();
         String cpf = jTable.getValueAt(linhaSelecionada, 3).toString();
         String telefone = jTable.getValueAt(linhaSelecionada, 4).toString();
+        Boolean ativo = jTable.getValueAt(linhaSelecionada, 5)
+            .toString()
+            .equals("Sim");
 
         return new ClienteEntidade(
             id,
@@ -104,8 +108,7 @@ public class TabelaGeral {
             ConversorTipos.stringParaDate(dataNascimento),
             cpf,
             telefone,
-            null,
-            null,
+            ativo,
             null
         );
     }
