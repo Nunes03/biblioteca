@@ -144,7 +144,7 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Optional.of(
+                return Optional.of(
                     ConversorEntidade.resultSetParaCliente(resultSet)
                 );
             }

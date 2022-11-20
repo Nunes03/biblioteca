@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -39,9 +40,9 @@ public class Principal extends javax.swing.JFrame {
     private final ClienteRepositorioInterface CLIENTE_REPOSITORIO_INTERFACE = new ClienteRepositorio();
 
     private static final Logger LOGGER = Logger.getLogger(Principal.class.getName());
-    
+
     private File arquivoAtual = null;
-    
+
     /**
      * Creates new form Teste
      */
@@ -760,6 +761,7 @@ public class Principal extends javax.swing.JFrame {
                 CLIENTE_REPOSITORIO_INTERFACE.criar(clienteEntidade);
 
                 atualizarTabelaCliente();
+                limparCamposCliente();
             } else {
                 statusClienteLbl.setForeground(Color.RED);
                 statusClienteLbl.setText("Já existe um cliente com esse CPF.");
@@ -779,9 +781,13 @@ public class Principal extends javax.swing.JFrame {
         if (abriu.equals(JFileChooser.APPROVE_OPTION)) {
             File file = jFileChooser.getSelectedFile();
             arquivoAtual = file;
-            Icon icon = TelasGeral.redimensionarImagem(file, LARGURA_IMAGEM, LARGURA_IMAGEM);
+            ImageIcon imageIcon = TelasGeral.redimensionarImagem(
+                file,
+                LARGURA_IMAGEM,
+                LARGURA_IMAGEM
+            );
 
-            fotoClienteLbl.setIcon(icon);
+            fotoClienteLbl.setIcon(imageIcon);
         }
     }//GEN-LAST:event_selecionarFotoClienteBtnActionPerformed
 
@@ -837,6 +843,7 @@ public class Principal extends javax.swing.JFrame {
             CLIENTE_REPOSITORIO_INTERFACE.inativar(clienteEntidade.getId());
 
             atualizarTabelaCliente();
+            limparCamposCliente();
         } else {
             statusClienteLbl.setForeground(Color.RED);
             statusClienteLbl.setText("Selecione uma linha");
@@ -860,11 +867,27 @@ public class Principal extends javax.swing.JFrame {
             );
 
             if (clienteValido) {
+                String nome = nomeClienteTxt.getText();
+                String cpf = cpfClienteTxt.getText();
+                Date dataNascimento = ConversorTipos.stringParaDate(dataNascimentoClienteTxt.getText());
+                String telefone = telefoneClienteTxt.getText();
+                Boolean ativo = ativoClienteComboBox.getSelectedIndex() == 0;
+                byte[] foto = ConversorTipos.iconParaByteArray(
+                    fotoClienteLbl.getIcon()
+                );
+                
                 ClienteEntidade clienteEntidade = TabelaGeral.convertParaClienteEntidade(clienteListagemTbl);
-                clienteEntidade.setNomeCompleto(nomeClienteTxt.getText());
+                clienteEntidade.setNomeCompleto(nome);
+                clienteEntidade.setCpf(cpf);
+                clienteEntidade.setDataNascimento(dataNascimento);
+                clienteEntidade.setTelefone(telefone);
+                clienteEntidade.setAtivo(ativo);
+                clienteEntidade.setFoto(foto);
+
                 CLIENTE_REPOSITORIO_INTERFACE.atualizar(clienteEntidade);
 
-                //TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+                atualizarTabelaCliente();
+                limparCamposCliente();
             }
         } else {
             statusAutorLbl.setForeground(Color.red);
@@ -893,7 +916,7 @@ public class Principal extends javax.swing.JFrame {
                     ? 0
                     : 1;
                 ativoClienteComboBox.setSelectedIndex(ativoIndex);
-                
+
                 Icon icone = ConversorTipos.byteArrayParaIcon(clienteEntidade.getFoto());
                 fotoClienteLbl.setIcon(icone);
             }
@@ -912,6 +935,15 @@ public class Principal extends javax.swing.JFrame {
                 CLIENTE_REPOSITORIO_INTERFACE.buscarAtivos()
             );
         }
+    }
+    
+    private void limparCamposCliente() {
+        nomeClienteTxt.setText(null);
+        cpfClienteTxt.setText(null);
+        dataNascimentoClienteTxt.setText(null);
+        telefoneClienteTxt.setText(null);
+        ativoClienteComboBox.setSelectedIndex(0);
+        fotoClienteLbl.setIcon(null);
     }
 
     public static void main(String args[]) {

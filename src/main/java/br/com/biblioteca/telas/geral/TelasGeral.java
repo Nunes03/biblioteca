@@ -22,7 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class TelasGeral {
     
     public static JFileChooser seletorDeImagem() {
-        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Imagens", "png", "jpg");
+        FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Imagens", "png");
 
         JFileChooser jFileChooser = new JFileChooser();
         jFileChooser.setDialogTitle("Procurar imagem");
@@ -32,13 +32,12 @@ public class TelasGeral {
         return jFileChooser;
     }
     
-    public static Icon redimensionarImagem(File file, Integer largura, Integer altura) {
+    public static ImageIcon redimensionarImagem(File file, Integer largura, Integer altura) {
         try {
             BufferedImage imagem;
-            Icon icone;
 
             imagem = ImageIO.read(file);
-            icone = new ImageIcon(
+            ImageIcon icone = new ImageIcon(
                 imagem.getScaledInstance(
                     largura,
                     altura,
