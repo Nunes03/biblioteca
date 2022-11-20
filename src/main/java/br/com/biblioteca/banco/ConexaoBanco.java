@@ -5,27 +5,31 @@ import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConexaoBanco {
 
-    private static Connection conexao = null;
+    private static final Connection CONEXAO = null;
 
     private ConexaoBanco() {
     }
 
     public static Connection pegarConexao() throws ConexaoBancoExcecao {
         try {
-            if (conexao == null || conexao.isClosed()) {
+            if (CONEXAO == null || CONEXAO.isClosed()) {
                 String nomeServidor = "localhost";
                 String nomeBanco = "biblioteca";
-                String url = "jdbc:mysql://" + nomeServidor + "/" + nomeBanco;
+                String url = "jdbc:mysql://"
+                    .concat(nomeServidor)
+                    .concat("/")
+                    .concat(nomeBanco);
                 String usuario = "root";
                 String senha = "";
 
                 return DriverManager.getConnection(url, usuario, senha);
             }
-            return conexao;
-        } catch (Exception exception) {
+            return CONEXAO;
+        } catch (SQLException exception) {
             JOptionPane.showMessageDialog(//
                 null,//
                 "Erro ao conectar com o banco. Verifique as configurações.",//

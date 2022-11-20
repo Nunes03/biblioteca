@@ -8,7 +8,6 @@ package main.java.br.com.biblioteca.telas;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -33,14 +32,16 @@ import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
  */
 public class Principal extends javax.swing.JFrame {
 
-    private static final Integer LARGURA_IMAGEM = 150;
-    private static final Integer ALTURA_IMAGEM = 150;
+    public static final Integer LARGURA_IMAGEM = 150;
+    public static final Integer ALTURA_IMAGEM = 150;
 
     private final AutorRepositorioInterface AUTOR_REPOSITORIO_INTERFACE = new AutorRepositorio();
     private final ClienteRepositorioInterface CLIENTE_REPOSITORIO_INTERFACE = new ClienteRepositorio();
 
     private static final Logger LOGGER = Logger.getLogger(Principal.class.getName());
-
+    
+    private File arquivoAtual = null;
+    
     /**
      * Creates new form Teste
      */
@@ -745,7 +746,6 @@ public class Principal extends javax.swing.JFrame {
                 String cpf = cpfClienteTxt.getText();
                 Date dataNascimento = ConversorTipos.stringParaDate(dataNascimentoClienteTxt.getText());
                 String telefone = telefoneClienteTxt.getText();
-                Icon foto = fotoClienteLbl.getIcon();
                 Boolean ativo = ativoClienteComboBox.getSelectedIndex() == 0;
 
                 ClienteEntidade clienteEntidade = new ClienteEntidade(
@@ -754,7 +754,7 @@ public class Principal extends javax.swing.JFrame {
                     cpf,
                     telefone,
                     ativo,
-                    ConversorTipos.iconParaByteArray(foto)
+                    ConversorTipos.fileParaByteArray(arquivoAtual)
                 );
 
                 CLIENTE_REPOSITORIO_INTERFACE.criar(clienteEntidade);
@@ -778,6 +778,7 @@ public class Principal extends javax.swing.JFrame {
 
         if (abriu.equals(JFileChooser.APPROVE_OPTION)) {
             File file = jFileChooser.getSelectedFile();
+            arquivoAtual = file;
             Icon icon = TelasGeral.redimensionarImagem(file, LARGURA_IMAGEM, LARGURA_IMAGEM);
 
             fotoClienteLbl.setIcon(icon);
@@ -872,7 +873,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_atualizarClienteBtnActionPerformed
 
     private void clienteListagemTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteListagemTblMouseClicked
-        System.out.println(ativoClienteComboBox.getSelectedIndex());
         if (TabelaGeral.linhaValida(clienteListagemTbl)) {
             ClienteEntidade clienteEntidade = TabelaGeral.convertParaClienteEntidade(clienteListagemTbl);
             Optional<ClienteEntidade> optional = CLIENTE_REPOSITORIO_INTERFACE.buscarPorId(clienteEntidade.getId());

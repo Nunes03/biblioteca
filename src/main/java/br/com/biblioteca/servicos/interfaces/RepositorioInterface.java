@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RepositorioInterface<E> {
-	
-	Boolean criar(E entidade);
 
-	Boolean atualizar(E entidade);
+    Boolean criar(E entidade);
 
-	List<E> buscarTodos();
+    Boolean atualizar(E entidade);
 
-	Optional<E> buscarPorId(Integer id);
+    List<E> buscar();
 
-	Boolean deletarTodos();
-	
-	Boolean deletarPorId(Integer id);
+    Optional<E> buscarPorId(Integer id);
+
+    Boolean deletar();
+
+    Boolean deletarPorId(Integer id);
 }

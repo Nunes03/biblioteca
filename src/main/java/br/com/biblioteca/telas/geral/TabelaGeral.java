@@ -31,7 +31,7 @@ public class TabelaGeral {
     }
 
     public static void atualizarTabelaAutor(JTable jTable, List<AutorEntidade> autorEntidades) {
-        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
+        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();           
         limparTabela(defaultTableModel);
 
         autorEntidades.forEach(

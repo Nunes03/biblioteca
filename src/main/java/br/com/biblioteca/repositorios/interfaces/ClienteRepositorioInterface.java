@@ -9,7 +9,7 @@ public interface ClienteRepositorioInterface extends RepositorioInterface<Client
 
     Optional<ClienteEntidade> buscarPorCpf(String cpf);
 
-    List<ClienteEntidade> buscarTodosAtivos();
+    List<ClienteEntidade> buscarAtivos();
     
     Boolean inativar(Integer id);
 }
