@@ -85,13 +85,13 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             Connection connection = ConexaoBanco.pegarConexao();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                ConsultasConstante.Cliente.BUSCAR
+                ConsultasConstante.Cliente.BUSCAR_POR_ID
             );
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Optional.of(
+                return Optional.of(
                     ConversorEntidade.resultSetParaCliente(resultSet)
                 );
             }

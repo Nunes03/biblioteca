@@ -1,9 +1,8 @@
 package main.java.br.com.biblioteca.utilitarios.conversores;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
 
 import main.java.br.com.biblioteca.entidades.*;
 import main.java.br.com.biblioteca.enums.GeneroEnum;
@@ -20,13 +19,7 @@ public class ConversorEntidade {
                 resultSet.getString("nome"),//
                 new ArrayList<>()//
             );//
-        } catch (Exception exception) {//
-            JOptionPane.showMessageDialog(//
-                null,//
-                "Erro ao converter Cliente.",//
-                "Erro",//
-                JOptionPane.ERROR_MESSAGE//
-            );//
+        } catch (SQLException exception) {//
             throw new RuntimeException(exception);//
         }//
     }
@@ -42,8 +35,7 @@ public class ConversorEntidade {
                 resultSet.getBoolean("ativo"),
                 resultSet.getBytes("foto")
             );
-        } catch (Exception exception) {
-            JOptionPane.showMessageDialog(null, "Erro ao converter Cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
     }
@@ -57,13 +49,7 @@ public class ConversorEntidade {
                 new ArrayList<>(),//
                 new ClienteEntidade(resultSet.getInt("cliente_id"))//
             );//
-        } catch (Exception exception) {//
-            JOptionPane.showMessageDialog(//
-                null,//
-                "Erro ao converter Cliente.",//
-                "Erro",//
-                JOptionPane.ERROR_MESSAGE//
-            );//
+        } catch (SQLException exception) {//
             throw new RuntimeException(exception);//
         }//
     }
@@ -79,13 +65,7 @@ public class ConversorEntidade {
                     resultSet.getInt("acervo_id")//
                 )//
             );//
-        } catch (Exception exception) {//
-            JOptionPane.showMessageDialog(//
-                null,//
-                "Erro ao converter Cliente.",//
-                "Erro",//
-                JOptionPane.ERROR_MESSAGE//
-            );//
+        } catch (SQLException exception) {//
             throw new RuntimeException(exception);//
         }//
     }
@@ -105,13 +85,7 @@ public class ConversorEntidade {
                 resultSet.getBoolean("capa_dura"),//
                 GeneroEnum.valueOf(resultSet.getString("genero"))//
             );//
-        } catch (Exception exception) {//
-            JOptionPane.showMessageDialog(//
-                null,//
-                "Erro ao converter Cliente.",//
-                "Erro",//
-                JOptionPane.ERROR_MESSAGE//
-            );//
+        } catch (SQLException exception) {//
             throw new RuntimeException(exception);//
         }//
     }
@@ -129,13 +103,7 @@ public class ConversorEntidade {
                 new ArrayList<>(),//
                 resultSet.getString("regiao")//
             );//
-        } catch (Exception exception) {//
-            JOptionPane.showMessageDialog(//
-                null,//
-                "Erro ao converter Cliente.",//
-                "Erro",//
-                JOptionPane.ERROR_MESSAGE//
-            );//
+        } catch (SQLException exception) {//
             throw new RuntimeException(exception);//
         }//
     }
@@ -153,13 +121,7 @@ public class ConversorEntidade {
                 new ArrayList<>(),//
                 resultSet.getInt("edicao")//
             );//
-        } catch (Exception exception) {//
-            JOptionPane.showMessageDialog(//
-                null,//
-                "Erro ao converter Cliente.",//
-                "Erro",//
-                JOptionPane.ERROR_MESSAGE//
-            );//
+        } catch (SQLException exception) {//
             throw new RuntimeException(exception);//
         }//
     }

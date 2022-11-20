@@ -1,97 +1,129 @@
 package main.java.br.com.biblioteca.repositorios;
 
-import main.java.br.com.biblioteca.banco.ComandosDMLBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import main.java.br.com.biblioteca.entidades.ItemCompraEntidade;
 import main.java.br.com.biblioteca.repositorios.interfaces.ItensCompraRepositorioInterface;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.ItemCompraConsulta;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.ItemCompraConsultaInterface;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorEntidade;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import main.java.br.com.biblioteca.banco.ConexaoBanco;
+import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
+import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
 
 public class ItensCompraRepositorio implements ItensCompraRepositorioInterface {
 
     @Override
     public Boolean criar(ItemCompraEntidade entidade) {
         try {
-            ItemCompraConsultaInterface itemCompraConsultaInterface = new ItemCompraConsulta();
-            ComandosDMLBanco.executarInsercao(itemCompraConsultaInterface, entidade);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.CRIAR
+            );
+            preparedStatement.setInt(1, entidade.getCompra().getId());
+            preparedStatement.setInt(2, entidade.getAcervo().getId());
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new ConexaoBancoExcecao("Erro ao inserir na base de dados.", exception);
         }
     }
 
     @Override
     public Boolean atualizar(ItemCompraEntidade entidade) {
         try {
-            ItemCompraConsultaInterface itemCompraConsultaInterface = new ItemCompraConsulta();
-            ComandosDMLBanco.executarAtualizacao(itemCompraConsultaInterface, entidade);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.ATUALIZAR
+            );
+            preparedStatement.setInt(1, entidade.getCompra().getId());
+            preparedStatement.setInt(2, entidade.getAcervo().getId());
+            preparedStatement.setInt(3, entidade.getId());
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new ConexaoBancoExcecao("Erro ao inserir na base de dados.", exception);
         }
     }
 
     @Override
-    public List<ItemCompraEntidade> buscarTodos() {
-        List<ItemCompraEntidade> itemCompraEntidades = new ArrayList<>();
+    public List<ItemCompraEntidade> buscar() {
+        List<ItemCompraEntidade> itensCompra = new ArrayList<>();
         try {
-            ItemCompraConsultaInterface itemCompraConsultaInterface = new ItemCompraConsulta();
-            ResultSet resultSet = ComandosDMLBanco.executarConsultaBuscandoTudo(itemCompraConsultaInterface);
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.BUSCAR
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                itemCompraEntidades.add(
+                itensCompra.add(
                     ConversorEntidade.resultSetParaItemCompra(resultSet)
                 );
             }
-            return itemCompraEntidades;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return itemCompraEntidades;
+            return itensCompra;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 
     @Override
     public Optional<ItemCompraEntidade> buscarPorId(Integer id) {
         try {
-            ItemCompraConsultaInterface itemCompraConsultaInterface = new ItemCompraConsulta();
-            ResultSet resultSet = ComandosDMLBanco.executarConsultaPorId(itemCompraConsultaInterface, id);
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.BUSCAR_POR_ID
+            );
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return Optional.of(ConversorEntidade.resultSetParaItemCompra(resultSet));
+                return Optional.of(
+                    ConversorEntidade.resultSetParaItemCompra(resultSet)
+                );
             }
             return Optional.empty();
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Optional.empty();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 
     @Override
-    public Boolean deletarTodos() {
+    public Boolean deletar() {
         try {
-            ItemCompraConsultaInterface itemCompraConsultaInterface = new ItemCompraConsulta();
-            ComandosDMLBanco.executarExclusao(itemCompraConsultaInterface);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.DELETAR
+            );
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 
     @Override
     public Boolean deletarPorId(Integer id) {
         try {
-            ItemCompraConsultaInterface itemCompraConsultaInterface = new ItemCompraConsulta();
-            ComandosDMLBanco.executarExclusaoPorId(itemCompraConsultaInterface, id);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.DELETAR_POR_ID
+            );
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 }

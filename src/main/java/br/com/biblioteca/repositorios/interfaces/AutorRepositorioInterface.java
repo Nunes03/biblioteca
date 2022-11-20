@@ -5,5 +5,5 @@ import main.java.br.com.biblioteca.servicos.interfaces.RepositorioInterface;
 
 public interface AutorRepositorioInterface extends RepositorioInterface<AutorEntidade> {
 
-    Boolean acervoVinculado(AutorEntidade autorEntidade);
+    Boolean acervoVinculado(Integer id);
 }

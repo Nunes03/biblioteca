@@ -49,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         TabelaGeral.atualizarTabelaAutor(
             autorListagemTbl,
-            AUTOR_REPOSITORIO_INTERFACE.buscarTodos()
+            AUTOR_REPOSITORIO_INTERFACE.buscar()
         );
     }
 
@@ -685,7 +685,7 @@ public class Principal extends javax.swing.JFrame {
         principalCardLayout.show(paiPanel, "autorCartao");
         TabelaGeral.atualizarTabelaAutor(
             autorListagemTbl,
-            AUTOR_REPOSITORIO_INTERFACE.buscarTodos()
+            AUTOR_REPOSITORIO_INTERFACE.buscar()
         );
     }//GEN-LAST:event_autorBarraLateralBtnActionPerformed
 
@@ -720,7 +720,7 @@ public class Principal extends javax.swing.JFrame {
             AUTOR_REPOSITORIO_INTERFACE.criar(autorEntidade);
             TabelaGeral.atualizarTabelaAutor(
                 autorListagemTbl,
-                AUTOR_REPOSITORIO_INTERFACE.buscarTodos()
+                AUTOR_REPOSITORIO_INTERFACE.buscar()
             );
         }
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
@@ -788,7 +788,7 @@ public class Principal extends javax.swing.JFrame {
     private void deletarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarAutorBtnActionPerformed
         if (TabelaGeral.linhaValida(autorListagemTbl)) {
             AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
-            Boolean acervoCinculado = AUTOR_REPOSITORIO_INTERFACE.acervoVinculado(autorEntidade);
+            Boolean acervoCinculado = AUTOR_REPOSITORIO_INTERFACE.acervoVinculado(autorEntidade.getId());
 
             if (!acervoCinculado) {
                 AUTOR_REPOSITORIO_INTERFACE.deletarPorId(autorEntidade.getId());
@@ -904,12 +904,12 @@ public class Principal extends javax.swing.JFrame {
         if (mostrarClienteInativoRadio.isSelected()) {
             TabelaGeral.atualizarTabelaCliente(
                 clienteListagemTbl,
-                CLIENTE_REPOSITORIO_INTERFACE.buscarTodos()
+                CLIENTE_REPOSITORIO_INTERFACE.buscar()
             );
         } else {
             TabelaGeral.atualizarTabelaCliente(
                 clienteListagemTbl,
-                CLIENTE_REPOSITORIO_INTERFACE.buscarTodosAtivos()
+                CLIENTE_REPOSITORIO_INTERFACE.buscarAtivos()
             );
         }
     }

@@ -1,97 +1,138 @@
 package main.java.br.com.biblioteca.repositorios;
 
-import main.java.br.com.biblioteca.banco.ComandosDMLBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
 import main.java.br.com.biblioteca.repositorios.interfaces.PeriodicoRepositorioInterface;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.PeriodicoConsulta;
-import main.java.br.com.biblioteca.utilitarios.construtores.consultas.interfaces.PeriodicoConsultaInterface;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorEntidade;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import main.java.br.com.biblioteca.banco.ConexaoBanco;
+import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
+import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
+import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
 
 public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
 
     @Override
     public Boolean criar(PeriodicoEntidade entidade) {
         try {
-            PeriodicoConsultaInterface periodicoConsultaInterface = new PeriodicoConsulta();
-            ComandosDMLBanco.executarInsercao(periodicoConsultaInterface, entidade);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.CRIAR
+            );
+            preparedStatement.setString(1, entidade.getNome());
+            preparedStatement.setDouble(2, entidade.getValor());
+            preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
+            preparedStatement.setInt(4, entidade.getPaginas());
+            preparedStatement.setString(5, entidade.getRegiao());
+            preparedStatement.setString(6, entidade.getEditora());
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new ConexaoBancoExcecao("Erro ao inserir na base de dados.", exception);
         }
     }
 
     @Override
     public Boolean atualizar(PeriodicoEntidade entidade) {
         try {
-            PeriodicoConsultaInterface periodicoConsultaInterface = new PeriodicoConsulta();
-            ComandosDMLBanco.executarAtualizacao(periodicoConsultaInterface, entidade);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.ATUALIZAR
+            );
+            preparedStatement.setString(1, entidade.getNome());
+            preparedStatement.setDouble(2, entidade.getValor());
+            preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
+            preparedStatement.setInt(4, entidade.getPaginas());
+            preparedStatement.setString(5, entidade.getRegiao());
+            preparedStatement.setString(6, entidade.getEditora());
+            preparedStatement.setInt(7, entidade.getId());
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new ConexaoBancoExcecao("Erro ao inserir na base de dados.", exception);
         }
     }
 
     @Override
-    public List<PeriodicoEntidade> buscarTodos() {
-        List<PeriodicoEntidade> periodicoEntidades = new ArrayList<>();
+    public List<PeriodicoEntidade> buscar() {
+        List<PeriodicoEntidade> periodicos = new ArrayList<>();
         try {
-            PeriodicoConsultaInterface periodicoConsultaInterface = new PeriodicoConsulta();
-            ResultSet resultSet = ComandosDMLBanco.executarConsultaBuscandoTudo(periodicoConsultaInterface);
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.BUSCAR
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                periodicoEntidades.add(
+                periodicos.add(
                     ConversorEntidade.resultSetParaPeriodico(resultSet)
                 );
             }
-            return periodicoEntidades;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return periodicoEntidades;
+            return periodicos;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 
     @Override
     public Optional<PeriodicoEntidade> buscarPorId(Integer id) {
         try {
-            PeriodicoConsultaInterface periodicoConsultaInterface = new PeriodicoConsulta();
-            ResultSet resultSet = ComandosDMLBanco.executarConsultaPorId(periodicoConsultaInterface, id);
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.BUSCAR_POR_ID
+            );
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return Optional.of(ConversorEntidade.resultSetParaPeriodico(resultSet));
+                return Optional.of(
+                    ConversorEntidade.resultSetParaPeriodico(resultSet)
+                );
             }
             return Optional.empty();
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Optional.empty();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 
     @Override
-    public Boolean deletarTodos() {
+    public Boolean deletar() {
         try {
-            PeriodicoConsultaInterface periodicoConsultaInterface = new PeriodicoConsulta();
-            ComandosDMLBanco.executarExclusao(periodicoConsultaInterface);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.DELETAR
+            );
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 
     @Override
     public Boolean deletarPorId(Integer id) {
         try {
-            PeriodicoConsultaInterface periodicoConsultaInterface = new PeriodicoConsulta();
-            ComandosDMLBanco.executarExclusaoPorId(periodicoConsultaInterface, id);
-            return Boolean.TRUE;
-        } catch (Exception exception) {
-            exception.printStackTrace();//todo: Colocar um JAlert aqui para avisar.
-            return Boolean.FALSE;
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.DELETAR_POR_ID
+            );
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
     }
 }

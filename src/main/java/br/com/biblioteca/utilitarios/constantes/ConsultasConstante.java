@@ -26,7 +26,7 @@ public class ConsultasConstante {
 
         public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.autor WHERE id = ?;";
 
-        public static final String ACERVO_VINCULADO = "SELECT COUNT(*) FROM biblioteca.autor_acervo vinculo "
+        public static final String ACERVO_VINCULADO = "SELECT * FROM biblioteca.autor_acervo vinculo "
             + "WHERE vinculo.autor_id = ?;";
     }
 
@@ -89,7 +89,7 @@ public class ConsultasConstante {
 
         public static final String DELETAR = "DELETE FROM biblioteca.compra;";
 
-        public static final String DELETE_POR_ID = "DELETE FROM biblioteca.compra compra "
+        public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.compra compra "
             + "WHERE compra.id = ?;";
     }
 
@@ -113,7 +113,7 @@ public class ConsultasConstante {
 
         public static final String DELETAR = "DELETE FROM biblioteca.item_compra;";
 
-        public static final String DELETE_POR_ID = "DELETE FROM biblioteca.item_compra item_compra "
+        public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.item_compra item_compra "
             + "WHERE item_compra.id = ?;";
     }
 
@@ -122,8 +122,8 @@ public class ConsultasConstante {
         public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
             + "(acervo.nome, acervo.descricao, acervo.valor, "
             + "acervo.data_lancamento, acervo.paginas, acervo.editora, "
-            + "acervo.capa_dura, acervo.genero)"
-            + " VALUES "
+            + "acervo.capa_dura, acervo.genero) "
+            + "VALUES "
             + "(?, ?, ?, ?, ?, ?, ?, ?);";
 
         public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
