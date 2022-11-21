@@ -1,50 +1,49 @@
 package main.java.br.com.biblioteca.entidades;
 
 import java.util.Date;
-import java.util.List;
 
 import main.java.br.com.biblioteca.enums.GeneroEnum;
 
 public class LivroEntidade extends AcervoEntidade {
 
-	private String descricao;
+    private String descricao;
 
-	private Boolean capaDura;
+    private Boolean capaDura;
 
-	private GeneroEnum genero;
+    private GeneroEnum genero;
 
-	public LivroEntidade() {
-	}
+    public LivroEntidade() {
+    }
 
-	public LivroEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
-						 byte[] foto, List<AutorEntidade> autores, String descricao, Boolean capaDura, GeneroEnum genero) {
-		super(id, nome, valor, dataLancamento, paginas, editora, foto, autores);
-		this.descricao = descricao;
-		this.capaDura = capaDura;
-		this.genero = genero;
-	}
+    public LivroEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
+        byte[] foto, String descricao, Boolean capaDura, GeneroEnum genero) {
+        super(id, nome, valor, dataLancamento, paginas, editora, foto);
+        this.descricao = descricao;
+        this.capaDura = capaDura;
+        this.genero = genero;
+    }
 
-	public String getDescricao() {
-		return this.descricao;
-	}
+    public String getDescricao() {
+        return this.descricao;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public boolean getCapaDura() {
-		return this.capaDura;
-	}
+    public boolean getCapaDura() {
+        return this.capaDura;
+    }
 
-	public void setCapaDura(Boolean capaDura) {
-		this.capaDura = capaDura;
-	}
+    public void setCapaDura(Boolean capaDura) {
+        this.capaDura = capaDura;
+    }
 
-	public GeneroEnum getGenero() {
-		return this.genero;
-	}
+    public GeneroEnum getGenero() {
+        return this.genero;
+    }
 
-	public void setGenero(GeneroEnum genero) {
-		this.genero = genero;
-	}
+    public void setGenero(GeneroEnum genero) {
+        this.genero = genero;
+    }
 }

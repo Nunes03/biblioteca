@@ -82,8 +82,7 @@ public class TabelaGeral {
 
         return new AutorEntidade(
             id,
-            nome,
-            null
+            nome
         );
     }
 

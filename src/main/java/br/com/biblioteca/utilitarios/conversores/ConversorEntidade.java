@@ -2,7 +2,6 @@ package main.java.br.com.biblioteca.utilitarios.conversores;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import main.java.br.com.biblioteca.entidades.*;
 import main.java.br.com.biblioteca.enums.GeneroEnum;
@@ -16,8 +15,7 @@ public class ConversorEntidade {
         try {//
             return new AutorEntidade(//
                 resultSet.getInt("id"),//
-                resultSet.getString("nome"),//
-                new ArrayList<>()//
+                resultSet.getString("nome")//
             );//
         } catch (SQLException exception) {//
             throw new RuntimeException(exception);//
@@ -46,7 +44,6 @@ public class ConversorEntidade {
                 resultSet.getInt("id"),//
                 resultSet.getDate("data"),//
                 resultSet.getDouble("total"),//
-                new ArrayList<>(),//
                 new ClienteEntidade(resultSet.getInt("cliente_id"))//
             );//
         } catch (SQLException exception) {//
@@ -80,7 +77,6 @@ public class ConversorEntidade {
                 resultSet.getInt("paginas"),//
                 resultSet.getString("editora"),//
                 resultSet.getBytes("foto"),//
-                new ArrayList<>(),//
                 resultSet.getString("descriao"),//
                 resultSet.getBoolean("capa_dura"),//
                 GeneroEnum.valueOf(resultSet.getString("genero"))//
@@ -100,7 +96,6 @@ public class ConversorEntidade {
                 resultSet.getInt("paginas"),//
                 resultSet.getString("editora"),//
                 resultSet.getBytes("foto"),//
-                new ArrayList<>(),//
                 resultSet.getString("regiao")//
             );//
         } catch (SQLException exception) {//
@@ -118,7 +113,6 @@ public class ConversorEntidade {
                 resultSet.getInt("paginas"),//
                 resultSet.getString("editora"),//
                 resultSet.getBytes("foto"),//
-                new ArrayList<>(),//
                 resultSet.getInt("edicao")//
             );//
         } catch (SQLException exception) {//

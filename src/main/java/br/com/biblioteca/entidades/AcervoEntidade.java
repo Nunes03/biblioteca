@@ -20,8 +20,6 @@ public class AcervoEntidade {
 
     private byte[] foto;
 
-    private List<AutorEntidade> autores = new ArrayList<>();
-
     public AcervoEntidade() {
     }
 
@@ -29,7 +27,7 @@ public class AcervoEntidade {
         this.id = id;
     }
 
-    public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto, List<AutorEntidade> autores) {
+    public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
@@ -37,7 +35,6 @@ public class AcervoEntidade {
         this.paginas = paginas;
         this.editora = editora;
         this.foto = foto;
-        this.autores = autores;
     }
 
     public Integer getId() {
@@ -94,13 +91,5 @@ public class AcervoEntidade {
 
     public void setFoto(byte[] foto) {
         this.foto = foto;
-    }
-
-    public List<AutorEntidade> getAutores() {
-        return autores;
-    }
-
-    public void setAutores(List<AutorEntidade> autores) {
-        this.autores = autores;
     }
 }

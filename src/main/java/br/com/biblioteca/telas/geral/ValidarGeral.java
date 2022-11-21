@@ -21,10 +21,10 @@ public class ValidarGeral {
         if (nomeTextField.getText().isEmpty()) {
             valorPadraoValidacao(Boolean.TRUE, statusLabel);
             return Boolean.FALSE;
-        } else {
-            valorPadraoValidacao(Boolean.FALSE, statusLabel);
-            return Boolean.TRUE;
         }
+        valorPadraoValidacao(Boolean.FALSE, statusLabel);
+        return Boolean.TRUE;
+
     }
 
     public static Boolean clienteValido(JTextField nomeCompletoTextField, JFormattedTextField cpfTextField,
@@ -39,10 +39,28 @@ public class ValidarGeral {
         if (nome.isEmpty() || cpf.isEmpty() || cpf.isEmpty() || dataNascimento.isEmpty() || telefone.isEmpty() || foto == null) {
             valorPadraoValidacao(Boolean.TRUE, statusLabel);
             return Boolean.FALSE;
-        } else {
-            valorPadraoValidacao(Boolean.FALSE, statusLabel);
-            return Boolean.TRUE;
         }
+        valorPadraoValidacao(Boolean.FALSE, statusLabel);
+        return Boolean.TRUE;
+
+    }
+
+    public static final Boolean revistaValida(JTextField nomeJTextField, JTextField valorJTextField,
+        JFormattedTextField dataLancamentoFormattedTextField, JTextField paginasJTextField, JTextField editoraJTextField,
+        JTextField edicaoJTextField, JLabel fotoJLabel, JLabel statusLabel) {
+        String nome = nomeJTextField.getText();
+        String valor = valorJTextField.getText();
+        String dataLancamento = dataLancamentoFormattedTextField.getText();
+        String paginas = paginasJTextField.getText();
+        String editora = editoraJTextField.getText();
+        String edicao = edicaoJTextField.getText();
+
+        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas.isEmpty() || editora.isEmpty() || edicao.isEmpty()) {
+            valorPadraoValidacao(Boolean.TRUE, statusLabel);
+            return Boolean.FALSE;
+        }
+        valorPadraoValidacao(Boolean.FALSE, statusLabel);
+        return Boolean.TRUE;
     }
 
     private static void valorPadraoValidacao(Boolean erro, JLabel statusLabel) {

@@ -25,8 +25,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="barraLateralPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="paiPanel" pref="1135" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="paiPanel" pref="1141" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -198,7 +198,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="statusAutorLbl" pref="797" max="32767" attributes="0"/>
+                                  <Component id="statusAutorLbl" pref="803" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="cadastrarAutorBtn" min="-2" pref="80" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -326,7 +326,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="1083" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="1089" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -403,8 +403,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cadastroClientePanel" max="32767" attributes="0"/>
-                          <Component id="listagemClientePanel" pref="1115" max="32767" attributes="0"/>
+                          <Component id="cadastroClientePanel" pref="1121" max="32767" attributes="0"/>
+                          <Component id="listagemClientePanel" pref="1121" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -463,7 +463,7 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="501" max="32767" attributes="0"/>
+                                  <EmptySpace pref="507" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="fotoClienteLbl" pref="150" max="32767" attributes="0"/>
                                       <Component id="selecionarFotoClienteBtn" max="32767" attributes="0"/>
@@ -476,7 +476,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="telefoneClienteTxt" min="-2" pref="200" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="statusClienteLbl" pref="486" max="32767" attributes="0"/>
+                                  <Component id="statusClienteLbl" pref="492" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="mostrarClienteInativoRadio" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -847,7 +847,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1135" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1141" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -867,15 +867,430 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1135" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="listagemRevistaPanel" max="32767" attributes="0"/>
+                          <Component id="cadastroRevistaPanel" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="715" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cadastroRevistaPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="listagemRevistaPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="cadastroRevistaPanel">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Cadastro">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true" thickness="2"/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="cadastrarRevistaBtn" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="atualizarRevistaBtn" min="-2" pref="80" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="paginasRevistaTxt" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="dataLancamentoRevistaTxt" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="nomeRevistaTxt" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="editoraRevistaTxt" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="valorRevistaTxt" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                              <Component id="edicaoRevistaTxt" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="521" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="fotoRevistaLbl" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="selecionarFotoRevistaBtn" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="nomeRevistaTxt" pref="35" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="editoraRevistaTxt" pref="35" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="valorRevistaTxt" alignment="3" pref="35" max="32767" attributes="0"/>
+                                      <Component id="edicaoRevistaTxt" alignment="3" pref="35" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="dataLancamentoRevistaTxt" min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="fotoRevistaLbl" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="selecionarFotoRevistaBtn" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="paginasRevistaTxt" pref="35" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="atualizarRevistaBtn" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="cadastrarRevistaBtn" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Nome"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="nomeRevistaTxt">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Valor"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="cadastrarRevistaBtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cadastrar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarRevistaBtnActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="atualizarRevistaBtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Atualizar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atualizarRevistaBtnActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="valorRevistaTxt">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Data de Lan&#xe7;amento"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="dataLancamentoRevistaTxt">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                      <Format format="##/##/####" subtype="-1" type="5"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel10">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Paginas"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="paginasRevistaTxt">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel11">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Editora"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="editoraRevistaTxt">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="edicaoRevistaTxt">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Verdana" size="12" style="0"/>
+                    </Property>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel12">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Edi&#xe7;&#xe3;o"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="fotoRevistaLbl">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="selecionarFotoRevistaBtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Selecionar"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true"/>
+                      </Border>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selecionarFotoRevistaBtnActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="listagemRevistaPanel">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Listagem">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder roundedCorners="true" thickness="2"/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" min="-2" pref="302" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="jTable1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="7" rowCount="0">
+                            <Column editable="false" title="Id" type="java.lang.Integer"/>
+                            <Column editable="true" title="Nome" type="java.lang.String"/>
+                            <Column editable="false" title="Valor" type="java.lang.String"/>
+                            <Column editable="false" title="Data de Lan&#xe7;amento" type="java.lang.String"/>
+                            <Column editable="false" title="Paginas" type="java.lang.String"/>
+                            <Column editable="false" title="Editora" type="java.lang.String"/>
+                            <Column editable="false" title="Edi&#xe7;&#xe3;o" type="java.lang.Integer"/>
+                          </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
+                        </Property>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="periodicoPanel">
           <Constraints>
@@ -887,7 +1302,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1135" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1141" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -907,7 +1322,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1135" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="1141" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
