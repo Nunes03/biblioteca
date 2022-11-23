@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.entidades.ClienteEntidade;
+import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
 
 /**
@@ -63,6 +64,36 @@ public class TabelaGeral {
                     dataNascimento,
                     cliente.getCpf(),
                     cliente.getTelefone(),
+                    ativo
+                };
+
+                defaultTableModel.addRow(dados);
+            }
+        );
+    }
+    
+    public static void atualizarTabelaRevista(JTable jTable, List<RevistaEntidade> revistas) {
+        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
+        limparTabela(defaultTableModel);
+
+        revistas.forEach(
+            revista -> {
+                String dataLancamento = ConversorTipos.dateParaString(
+                    revista.getDataLancamento()
+                );
+
+                String ativo = revista.getAtivo().equals(Boolean.TRUE)
+                ? "Sim"
+                : "Não";
+
+                Object[] dados = {
+                    revista.getId(),
+                    revista.getNome(),
+                    revista.getValor(),
+                    dataLancamento,
+                    revista.getPaginas(),
+                    revista.getEditora(),
+                    revista.getEdicao(),
                     ativo
                 };
 

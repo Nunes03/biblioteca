@@ -5,6 +5,15 @@ public class ConsultasConstante {
     private ConsultasConstante() {
     }
 
+    public class Tipo {
+        
+        public static final int LIVRO = 1;
+        
+        public static final int REVISTA = 2;
+        
+        public static final int PERIODICO = 3;
+    }
+    
     public class Autor {
 
         public static final String CRIAR = "INSERT INTO biblioteca.autor"
@@ -181,9 +190,9 @@ public class ConsultasConstante {
     public class Revista {
 
         public static final String CRIAR = "INSERT INTO biblioteca.acervo "
-            + "(nome, valor, data_lancamento, paginas, editora, foto, edicao) "
+            + "(nome, valor, data_lancamento, paginas, editora, foto, edicao, ativo, tipo) "
             + "VALUES "
-            + "(?, ?, ?, ?, ?, ?, ?);";
+            + "(?, ?, ?, ?, ?, ?, ?, ?, 2);";
 
         public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
             + "SET "
@@ -192,15 +201,21 @@ public class ConsultasConstante {
             + "acervo.data_lancamento = ?, "
             + "acervo.paginas = ?, "
             + "acervo.editora = ?, "
-            + "acervo.edicao = ? "
+            + "acervo.edicao = ?, "
+            + "acervo.ativo = ? "
             + "WHERE acervo.id = ?;";
 
-        public static final String BUSCAR = "SELECT * FROM biblioteca.acervo;";
+        public static final String BUSCAR = "SELECT * FROM biblioteca.acervo WHERE acervo.tipo = 2;";
+        
+        public static final String BUSCAR_ATIVOS = "SELECT * FROM biblioteca.acervo "
+            + "WHERE "
+            + "acervo.ativo = true AND acervo.tipo = 2;";
 
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
             + "WHERE acervo.id = ?;";
 
-        public static final String DELETAR = "DELETE FROM biblioteca.acervo;";
+        public static final String DELETAR = "DELETE FROM biblioteca.acervo "
+            + "WHERE acervo.tipo = 2;";
 
         public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.acervo acervo "
             + "WHERE acervo.id = ?;";

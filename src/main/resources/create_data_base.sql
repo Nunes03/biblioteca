@@ -33,7 +33,9 @@ CREATE TABLE IF NOT EXISTS biblioteca.acervo (
     capa_dura BOOLEAN,
     genero VARCHAR(50),
     regiao VARCHAR(100),
-    edicao INT
+    edicao INT,
+    ativo BOOLEAN NOT NULL,
+    tipo VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS biblioteca.item_compra (

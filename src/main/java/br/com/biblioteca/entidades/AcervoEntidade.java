@@ -19,6 +19,8 @@ public class AcervoEntidade {
     private String editora;
 
     private byte[] foto;
+    
+    private Boolean ativo;
 
     public AcervoEntidade() {
     }
@@ -27,7 +29,7 @@ public class AcervoEntidade {
         this.id = id;
     }
 
-    public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto) {
+    public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto, Boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
@@ -35,15 +37,17 @@ public class AcervoEntidade {
         this.paginas = paginas;
         this.editora = editora;
         this.foto = foto;
+        this.ativo = ativo;
     }
     
-    public AcervoEntidade(String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto) {
+    public AcervoEntidade(String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto, Boolean ativo) {
         this.nome = nome;
         this.valor = valor;
         this.dataLancamento = dataLancamento;
         this.paginas = paginas;
         this.editora = editora;
         this.foto = foto;
+        this.ativo = ativo;
     }
     
     public Integer getId() {
@@ -100,5 +104,13 @@ public class AcervoEntidade {
 
     public void setFoto(byte[] foto) {
         this.foto = foto;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }
