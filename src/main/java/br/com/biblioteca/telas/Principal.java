@@ -18,10 +18,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.entidades.ClienteEntidade;
+import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.repositorios.AutorRepositorio;
 import main.java.br.com.biblioteca.repositorios.ClienteRepositorio;
+import main.java.br.com.biblioteca.repositorios.RevistaRepositorio;
 import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
+import main.java.br.com.biblioteca.repositorios.interfaces.RevistaRepositorioInterface;
 import main.java.br.com.biblioteca.telas.geral.TabelaGeral;
 import main.java.br.com.biblioteca.telas.geral.TelasGeral;
 import main.java.br.com.biblioteca.telas.geral.ValidarGeral;
@@ -38,7 +41,8 @@ public class Principal extends javax.swing.JFrame {
 
     private final AutorRepositorioInterface AUTOR_REPOSITORIO_INTERFACE = new AutorRepositorio();
     private final ClienteRepositorioInterface CLIENTE_REPOSITORIO_INTERFACE = new ClienteRepositorio();
-
+    private final RevistaRepositorioInterface REVISTA_REPOSITORIO_INTERFACE = new RevistaRepositorio();
+    
     private static final Logger LOGGER = Logger.getLogger(Principal.class.getName());
 
     private File arquivoAtual = null;
@@ -116,13 +120,17 @@ public class Principal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         dataLancamentoRevistaTxt = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
-        paginasRevistaTxt = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         editoraRevistaTxt = new javax.swing.JTextField();
-        edicaoRevistaTxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         fotoRevistaLbl = new javax.swing.JLabel();
         selecionarFotoRevistaBtn = new javax.swing.JButton();
+        statusRevistaLbl = new javax.swing.JLabel();
+        paginasRevistaSpinner = new javax.swing.JSpinner();
+        edicaoRevistaSpinner = new javax.swing.JSpinner();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        autorListaJList = new javax.swing.JList<>();
+        jLabel13 = new javax.swing.JLabel();
         listagemRevistaPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -682,19 +690,11 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel10.setText("Paginas");
 
-        paginasRevistaTxt.setBackground(new java.awt.Color(240, 240, 240));
-        paginasRevistaTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        paginasRevistaTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
         jLabel11.setText("Editora");
 
         editoraRevistaTxt.setBackground(new java.awt.Color(240, 240, 240));
         editoraRevistaTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         editoraRevistaTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        edicaoRevistaTxt.setBackground(new java.awt.Color(240, 240, 240));
-        edicaoRevistaTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        edicaoRevistaTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel12.setText("Edição");
 
@@ -709,6 +709,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        paginasRevistaSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        edicaoRevistaSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jScrollPane5.setViewportView(autorListaJList);
+
+        jLabel13.setText("Autores");
+
         javax.swing.GroupLayout cadastroRevistaPanelLayout = new javax.swing.GroupLayout(cadastroRevistaPanel);
         cadastroRevistaPanel.setLayout(cadastroRevistaPanelLayout);
         cadastroRevistaPanelLayout.setHorizontalGroup(
@@ -717,15 +725,12 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroRevistaPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(218, 218, 218)
+                        .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(cadastrarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(atualizarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
-                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(paginasRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -736,8 +741,12 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(nomeRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))
+                                .addGap(18, 18, 18)
+                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
                                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(valorRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -745,11 +754,16 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
-                                    .addComponent(edicaoRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 521, Short.MAX_VALUE)
+                                    .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 303, Short.MAX_VALUE)
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fotoRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selecionarFotoRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(selecionarFotoRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
+                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(paginasRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         cadastroRevistaPanelLayout.setVerticalGroup(
@@ -757,15 +771,9 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
-                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                            .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -773,7 +781,7 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(valorRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                            .addComponent(edicaoRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                            .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -782,15 +790,29 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(fotoRevistaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(selecionarFotoRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
+                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
+                                .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE))
+                            .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paginasRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addComponent(paginasRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(atualizarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cadastrarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(atualizarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cadastrarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -801,7 +823,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Valor", "Data de Lançamento", "Paginas", "Editora", "Edição"
+                "Id", "Nome", "Valor (R$)", "Data de Lançamento", "Paginas", "Editora", "Edição"
             }
         ) {
             Class[] types = new Class [] {
@@ -1112,7 +1134,7 @@ public class Principal extends javax.swing.JFrame {
                 byte[] foto = ConversorTipos.iconParaByteArray(
                     fotoClienteLbl.getIcon()
                 );
-                
+
                 ClienteEntidade clienteEntidade = TabelaGeral.convertParaClienteEntidade(clienteListagemTbl);
                 clienteEntidade.setNomeCompleto(nome);
                 clienteEntidade.setCpf(cpf);
@@ -1161,7 +1183,42 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_clienteListagemTblMouseClicked
 
     private void cadastrarRevistaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarRevistaBtnActionPerformed
-        System.out.println(valorRevistaTxt.getText());
+        Boolean revistaValida = ValidarGeral.revistaValida(
+            nomeRevistaTxt,
+            valorRevistaTxt,
+            dataLancamentoRevistaTxt,
+            paginasRevistaSpinner,
+            editoraRevistaTxt,
+            edicaoRevistaSpinner,
+            fotoRevistaLbl,
+            statusRevistaLbl
+        );
+
+        if (revistaValida) {
+            String nome = nomeRevistaTxt.getText();
+            Double valor = Double.valueOf(
+                valorRevistaTxt.getText()
+            );
+            Date dataLancamento = ConversorTipos.stringParaDate(
+                dataLancamentoRevistaTxt.getText()
+            );
+            Integer paginas = (Integer) paginasRevistaSpinner.getValue();
+            String editora = editoraRevistaTxt.getText();
+            Integer edicao = (Integer) edicaoRevistaSpinner.getValue();
+            byte[] foto = ConversorTipos.fileParaByteArray(arquivoAtual);
+
+            RevistaEntidade revista = new RevistaEntidade(
+                nome,
+                valor,
+                dataLancamento,
+                paginas,
+                editora,
+                foto,
+                edicao
+            );
+            
+            REVISTA_REPOSITORIO_INTERFACE.criar(revista);
+        }
     }//GEN-LAST:event_cadastrarRevistaBtnActionPerformed
 
     private void atualizarRevistaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarRevistaBtnActionPerformed
@@ -1199,7 +1256,7 @@ public class Principal extends javax.swing.JFrame {
             );
         }
     }
-    
+
     private void limparCamposCliente() {
         nomeClienteTxt.setText(null);
         cpfClienteTxt.setText(null);
@@ -1238,6 +1295,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton atualizarClienteBtn;
     private javax.swing.JButton atualizarRevistaBtn;
     private javax.swing.JButton autorBarraLateralBtn;
+    private javax.swing.JList<String> autorListaJList;
     private javax.swing.JTable autorListagemTbl;
     private javax.swing.JPanel autorPanel;
     private javax.swing.JPanel barraLateralPanel;
@@ -1256,7 +1314,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField dataLancamentoRevistaTxt;
     private javax.swing.JFormattedTextField dataNascimentoClienteTxt;
     private javax.swing.JButton deletarAutorBtn;
-    private javax.swing.JTextField edicaoRevistaTxt;
+    private javax.swing.JSpinner edicaoRevistaSpinner;
     private javax.swing.JTextField editoraRevistaTxt;
     private javax.swing.JLabel fotoClienteLbl;
     private javax.swing.JLabel fotoRevistaLbl;
@@ -1265,6 +1323,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1276,6 +1335,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel listagemAutorPanel;
     private javax.swing.JPanel listagemClientePanel;
@@ -1286,7 +1346,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField nomeAutorTxt;
     private javax.swing.JTextField nomeClienteTxt;
     private javax.swing.JTextField nomeRevistaTxt;
-    private javax.swing.JTextField paginasRevistaTxt;
+    private javax.swing.JSpinner paginasRevistaSpinner;
     private javax.swing.JPanel paiPanel;
     private javax.swing.JButton periodicoBarraLateralBtn;
     private javax.swing.JPanel periodicoPanel;
@@ -1296,6 +1356,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton selecionarFotoRevistaBtn;
     private javax.swing.JLabel statusAutorLbl;
     private javax.swing.JLabel statusClienteLbl;
+    private javax.swing.JLabel statusRevistaLbl;
     private javax.swing.JFormattedTextField telefoneClienteTxt;
     private javax.swing.JTextField valorRevistaTxt;
     // End of variables declaration//GEN-END:variables

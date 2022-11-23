@@ -14,7 +14,13 @@ public class RevistaEntidade extends AcervoEntidade {
         super(id, nome, valor, dataLancamento, paginas, editora, foto);
         this.edicao = edicao;
     }
-
+    
+    public RevistaEntidade(String nome, Double valor, Date dataLancamento, Integer paginas,
+        String editora, byte[] foto, Integer edicao) {
+        super(nome, valor, dataLancamento, paginas, editora, foto);
+        this.edicao = edicao;
+    }
+    
     public Integer getEdicao() {
         return edicao;
     }

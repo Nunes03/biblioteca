@@ -31,7 +31,8 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
             preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
             preparedStatement.setInt(4, entidade.getPaginas());
             preparedStatement.setString(5, entidade.getEditora());
-            preparedStatement.setInt(6, entidade.getEdicao());
+            preparedStatement.setBytes(6, entidade.getFoto());
+            preparedStatement.setInt(7, entidade.getEdicao());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {

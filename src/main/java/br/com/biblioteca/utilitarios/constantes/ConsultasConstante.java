@@ -180,12 +180,10 @@ public class ConsultasConstante {
 
     public class Revista {
 
-        public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
-            + "(acervo.nome, acervo.valor, "
-            + "acervo.data_lancamento, acervo.paginas, "
-            + "acervo.editora, acervo.edicao) "
+        public static final String CRIAR = "INSERT INTO biblioteca.acervo "
+            + "(nome, valor, data_lancamento, paginas, editora, foto, edicao) "
             + "VALUES "
-            + "(?, ?, ?, ?, ?, ?);";
+            + "(?, ?, ?, ?, ?, ?, ?);";
 
         public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
             + "SET "

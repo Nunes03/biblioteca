@@ -9,6 +9,7 @@ import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 /**
@@ -46,16 +47,17 @@ public class ValidarGeral {
     }
 
     public static final Boolean revistaValida(JTextField nomeJTextField, JTextField valorJTextField,
-        JFormattedTextField dataLancamentoFormattedTextField, JTextField paginasJTextField, JTextField editoraJTextField,
-        JTextField edicaoJTextField, JLabel fotoJLabel, JLabel statusLabel) {
+        JFormattedTextField dataLancamentoFormattedTextField, JSpinner paginasJSpinner, JTextField editoraJTextField,
+        JSpinner edicaoJSpinnerd, JLabel fotoJLabel, JLabel statusLabel) {
         String nome = nomeJTextField.getText();
         String valor = valorJTextField.getText();
         String dataLancamento = dataLancamentoFormattedTextField.getText();
-        String paginas = paginasJTextField.getText();
+        Integer paginas = (Integer) paginasJSpinner.getValue();
         String editora = editoraJTextField.getText();
-        String edicao = edicaoJTextField.getText();
+        Integer edicao = (Integer) edicaoJSpinnerd.getValue();
+        Icon foto = fotoJLabel.getIcon();
 
-        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas.isEmpty() || editora.isEmpty() || edicao.isEmpty()) {
+        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas == 0 || editora.isEmpty() || edicao == 0 || foto == null) {
             valorPadraoValidacao(Boolean.TRUE, statusLabel);
             return Boolean.FALSE;
         }

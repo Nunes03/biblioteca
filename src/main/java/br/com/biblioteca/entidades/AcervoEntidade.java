@@ -36,7 +36,16 @@ public class AcervoEntidade {
         this.editora = editora;
         this.foto = foto;
     }
-
+    
+    public AcervoEntidade(String nome, Double valor, Date dataLancamento, Integer paginas, String editora, byte[] foto) {
+        this.nome = nome;
+        this.valor = valor;
+        this.dataLancamento = dataLancamento;
+        this.paginas = paginas;
+        this.editora = editora;
+        this.foto = foto;
+    }
+    
     public Integer getId() {
         return id;
     }
