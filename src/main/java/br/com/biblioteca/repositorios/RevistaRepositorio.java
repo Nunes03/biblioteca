@@ -56,8 +56,10 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
             preparedStatement.setInt(4, entidade.getPaginas());
             preparedStatement.setString(5, entidade.getEditora());
             preparedStatement.setString(6, entidade.getAutor());
-            preparedStatement.setInt(7, entidade.getEdicao());
-            preparedStatement.setInt(8, entidade.getId());
+            preparedStatement.setBytes(7, entidade.getFoto());
+            preparedStatement.setInt(8, entidade.getEdicao());
+            preparedStatement.setBoolean(9, entidade.getAtivo());
+            preparedStatement.setInt(10, entidade.getId());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -174,6 +176,22 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return ConversorEntidade.resultSetParaRevista(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public Boolean inativar(Integer id) {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Revista.INATIVAR
+            );
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.execute();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

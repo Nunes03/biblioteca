@@ -150,6 +150,11 @@ public class ConsultasConstante {
             + "VALUES "
             + "(?, ?, ?, ?, ?, ?, ?, ?, ?, 2);";
 
+        public static final String INATIVAR = "UPDATE biblioteca.acervo acervo "
+            + "SET "
+            + "acervo.ativo = false "
+            + "WHERE acervo.id = ?;";
+
         public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
             + "SET "
             + "acervo.nome = ?, "
@@ -158,6 +163,7 @@ public class ConsultasConstante {
             + "acervo.paginas = ?, "
             + "acervo.editora = ?, "
             + "acervo.autor = ?, "
+            + "acervo.foto = ?, "
             + "acervo.edicao = ?, "
             + "acervo.ativo = ? "
             + "WHERE acervo.id = ?;";
@@ -170,11 +176,11 @@ public class ConsultasConstante {
 
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
             + "WHERE acervo.id = ?;";
-        
+
         public static final String BUSCAR_ULTIMO = "SELECT * FROM biblioteca.acervo acervo "
             + "WHERE acervo.tipo = 2 "
             + "GROUP BY acervo.id DESC LIMIT 1;";
-        
+
         public static final String DELETAR = "DELETE FROM biblioteca.acervo "
             + "WHERE acervo.tipo = 2;";
 

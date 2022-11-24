@@ -88,8 +88,8 @@ public class ConversorEntidade {
                 resultSet.getString("editora"),
                 resultSet.getString("autor"),
                 resultSet.getBytes("foto"),
-                resultSet.getString("regiao"),
-                resultSet.getBoolean("ativo")
+                resultSet.getBoolean("ativo"),
+                resultSet.getString("regiao")
             );
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
