@@ -48,16 +48,18 @@ public class ValidarGeral {
 
     public static final Boolean revistaValida(JTextField nomeJTextField, JTextField valorJTextField,
         JFormattedTextField dataLancamentoFormattedTextField, JSpinner paginasJSpinner, JTextField editoraJTextField,
-        JSpinner edicaoJSpinnerd, JLabel fotoJLabel, JLabel statusLabel) {
+        JTextField autorJTextField, JSpinner edicaoJSpinnerd, JLabel fotoJLabel, JLabel statusLabel) {
         String nome = nomeJTextField.getText();
         String valor = valorJTextField.getText();
         String dataLancamento = dataLancamentoFormattedTextField.getText();
         Integer paginas = (Integer) paginasJSpinner.getValue();
         String editora = editoraJTextField.getText();
+        String autor = autorJTextField.getText();
         Integer edicao = (Integer) edicaoJSpinnerd.getValue();
         Icon foto = fotoJLabel.getIcon();
 
-        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas == 0 || editora.isEmpty() || edicao == 0 || foto == null) {
+        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas == 0 || editora.isEmpty() || autor.isEmpty()
+            || edicao == 0 || foto == null) {
             valorPadraoValidacao(Boolean.TRUE, statusLabel);
             return Boolean.FALSE;
         }

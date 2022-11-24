@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS biblioteca.acervo (
     data_lancamento DATE NOT NULL,
     paginas INT NOT NULL,
     editora VARCHAR(100) NOT NULL,
+    autor VARCHAR(300) NOT NULL,
     foto MEDIUMBLOB NOT NULL,
     capa_dura BOOLEAN,
     genero VARCHAR(50),
@@ -46,21 +47,4 @@ CREATE TABLE IF NOT EXISTS biblioteca.item_compra (
         REFERENCES biblioteca.compra(id),
     FOREIGN KEY (acervo_id) 
         REFERENCES biblioteca.acervo(id)
-);
-
-CREATE TABLE IF NOT EXISTS biblioteca.autor (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nome VARCHAR(150) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS biblioteca.autor_acervo (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    autor_id INT NOT NULL,
-    acervo_id INT NOT NULL,
-    FOREIGN KEY (autor_id) 
-        REFERENCES biblioteca.autor(id),
-    FOREIGN KEY (acervo_id) 
-        REFERENCES biblioteca.acervo(id),
-    CONSTRAINT unique_autor_acervo
-        UNIQUE (autor_id, acervo_id)
 );

@@ -32,6 +32,7 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
             preparedStatement.setInt(4, entidade.getPaginas());
             preparedStatement.setString(5, entidade.getRegiao());
             preparedStatement.setString(6, entidade.getEditora());
+            preparedStatement.setString(7, entidade.getAutor());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -53,7 +54,8 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
             preparedStatement.setInt(4, entidade.getPaginas());
             preparedStatement.setString(5, entidade.getRegiao());
             preparedStatement.setString(6, entidade.getEditora());
-            preparedStatement.setInt(7, entidade.getId());
+            preparedStatement.setString(7, entidade.getAutor());
+            preparedStatement.setInt(8, entidade.getId());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -131,6 +133,23 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
             preparedStatement.setInt(1, id);
 
             return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public PeriodicoEntidade buscarUltimo() {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.BUSCAR_ULTIMO
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return ConversorEntidade.resultSetParaPeriodico(resultSet);
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

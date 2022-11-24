@@ -191,4 +191,21 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             throw new ConexaoBancoExcecao("Erro ao inserir na base de dados.", exception);
         }
     }
+
+    @Override
+    public ClienteEntidade buscarUltimo() {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Cliente.BUSCAR_ULTIMO
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return ConversorEntidade.resultSetParaCliente(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 }

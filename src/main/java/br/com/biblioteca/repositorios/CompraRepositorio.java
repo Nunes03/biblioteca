@@ -129,4 +129,21 @@ public class CompraRepositorio implements CompraRepositorioInterface {
             throw new RuntimeException(exception);
         }
     }
+
+    @Override
+    public CompraEntidade buscarUltimo() {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Compra.BUSCAR_ULTIMO
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return ConversorEntidade.resultSetParaCompra(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 }

@@ -12,6 +12,8 @@ public interface RepositorioInterface<E> {
     List<E> buscar();
 
     Optional<E> buscarPorId(Integer id);
+    
+    E buscarUltimo();
 
     Boolean deletar();
 

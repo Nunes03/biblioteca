@@ -6,47 +6,12 @@ public class ConsultasConstante {
     }
 
     public class Tipo {
-        
+
         public static final int LIVRO = 1;
-        
+
         public static final int REVISTA = 2;
-        
+
         public static final int PERIODICO = 3;
-    }
-    
-    public class AcervoAutor {
-    
-        public static final String CRIAR = "INSERT INTO biblioteca.autor_acervo "
-            + "(autor_id, acervo_id) "
-            + "VALUES "
-            + "(?, ?);";
-        
-    }
-
-    
-    public class Autor {
-
-        public static final String CRIAR = "INSERT INTO biblioteca.autor"
-            + "(nome)"
-            + " VALUES "
-            + "(?);";
-
-        public static final String ATUALIZAR = "UPDATE biblioteca.autor autor "
-            + "SET "
-            + "autor.nome = ? "
-            + "WHERE autor.id = ?";
-
-        public static final String BUSCAR = "SELECT * FROM biblioteca.autor;";
-
-        public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.autor autor "
-            + "WHERE autor.id = ?;";
-
-        public static final String DELETAR = "DELETE FROM biblioteca.autor;";
-
-        public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.autor WHERE id = ?;";
-
-        public static final String ACERVO_VINCULADO = "SELECT * FROM biblioteca.autor_acervo vinculo "
-            + "WHERE vinculo.autor_id = ?;";
     }
 
     public class Cliente {
@@ -65,7 +30,7 @@ public class ConsultasConstante {
             + "cliente.ativo = ?,"
             + "cliente.foto = ? "
             + "WHERE cliente.id = ?;";
-        
+
         public static final String INATIVAR = "UPDATE biblioteca.cliente cliente "
             + "SET "
             + "cliente.ativo = false "
@@ -75,6 +40,8 @@ public class ConsultasConstante {
 
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.cliente cliente "
             + "WHERE cliente.id = ?;";
+
+        public static final String BUSCAR_ULTIMO = "SELECT * FROM biblioteca.cliente cliente GROUP BY cliente.id DESC LIMIT 1;";
 
         public static final String BUSCAR_ATIVOS = "SELECT * FROM biblioteca.cliente cliente WHERE cliente.ativo = true;";
 
@@ -106,6 +73,8 @@ public class ConsultasConstante {
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.compra compra "
             + "WHERE compra.id = ?;";
 
+        public static final String BUSCAR_ULTIMO = "SELECT * FROM biblioteca.compra compra GROUP BY compra.id DESC LIMIT 1;";
+
         public static final String DELETAR = "DELETE FROM biblioteca.compra;";
 
         public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.compra compra "
@@ -130,6 +99,8 @@ public class ConsultasConstante {
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.item_compra item_compra "
             + "WHERE item_compra.id = ?;";
 
+        public static final String BUSCAR_ULTIMO = "SELECT * FROM biblioteca.item_compra item_compra GROUP BY item_compra.id DESC LIMIT 1;";
+
         public static final String DELETAR = "DELETE FROM biblioteca.item_compra;";
 
         public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.item_compra item_compra "
@@ -138,12 +109,11 @@ public class ConsultasConstante {
 
     public class Livro {
 
-        public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
-            + "(acervo.nome, acervo.descricao, acervo.valor, "
-            + "acervo.data_lancamento, acervo.paginas, acervo.editora, "
-            + "acervo.capa_dura, acervo.genero) "
+        public static final String CRIAR = "INSERT INTO biblioteca.acervo "
+            + "(nome, descricao, valor, data_lancamento, paginas, editora, "
+            + "autor, capa_dura, genero, tipo) "
             + "VALUES "
-            + "(?, ?, ?, ?, ?, ?, ?, ?);";
+            + "(?, ?, ?, ?, ?, ?, ?, ?, ?, 1);";
 
         public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
             + "SET "
@@ -153,6 +123,7 @@ public class ConsultasConstante {
             + "acervo.data_lancamento = ?, "
             + "acervo.paginas = ?, "
             + "acervo.editora = ?, "
+            + "acervo.autor = ?, "
             + "acervo.capa_dura = ?, "
             + "acervo.genero = ? "
             + "WHERE acervo.id = ?;";
@@ -162,34 +133,9 @@ public class ConsultasConstante {
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
             + "WHERE acervo.id = ?;";
 
-        public static final String DELETAR = "DELETE FROM biblioteca.acervo;";
-
-        public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.acervo acervo "
-            + "WHERE acervo.id = ?;";
-    }
-
-    public class Periodico {
-
-        public static final String CRIAR = "INSERT INTO biblioteca.acervo acervo "
-            + "(acervo.nome, acervo.valor, "
-            + "acervo.data_lancamento, acervo.paginas, acervo.regiao, acervo.editora) "
-            + "VALUES "
-            + "(?, ?, ?, ?, ?, ?);";
-
-        public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
-            + "SET "
-            + "acervo.nome = ?, "
-            + "acervo.valor = ?, "
-            + "acervo.data_lancamento = ?, "
-            + "acervo.paginas = ?, "
-            + "acervo.editora = ?, "
-            + "acervo.regiao = ? "
-            + "WHERE acervo.id = ?;";
-
-        public static final String BUSCAR = "SELECT * FROM biblioteca.acervo;";
-
-        public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
-            + "WHERE acervo.id = ?;";
+        public static final String BUSCAR_ULTIMO = "SELECT * FROM biblioteca.acervo acervo "
+            + "WHERE acervo.tipo = 1 "
+            + "GROUP BY acervo.id DESC LIMIT 1;";
 
         public static final String DELETAR = "DELETE FROM biblioteca.acervo;";
 
@@ -200,9 +146,9 @@ public class ConsultasConstante {
     public class Revista {
 
         public static final String CRIAR = "INSERT INTO biblioteca.acervo "
-            + "(nome, valor, data_lancamento, paginas, editora, foto, edicao, ativo, tipo) "
+            + "(nome, valor, data_lancamento, paginas, editora, autor, foto, edicao, ativo, tipo) "
             + "VALUES "
-            + "(?, ?, ?, ?, ?, ?, ?, ?, 2);";
+            + "(?, ?, ?, ?, ?, ?, ?, ?, ?, 2);";
 
         public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
             + "SET "
@@ -211,21 +157,59 @@ public class ConsultasConstante {
             + "acervo.data_lancamento = ?, "
             + "acervo.paginas = ?, "
             + "acervo.editora = ?, "
+            + "acervo.autor = ?, "
             + "acervo.edicao = ?, "
             + "acervo.ativo = ? "
             + "WHERE acervo.id = ?;";
 
         public static final String BUSCAR = "SELECT * FROM biblioteca.acervo WHERE acervo.tipo = 2;";
-        
+
         public static final String BUSCAR_ATIVOS = "SELECT * FROM biblioteca.acervo "
             + "WHERE "
             + "acervo.ativo = true AND acervo.tipo = 2;";
 
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
             + "WHERE acervo.id = ?;";
-
+        
+        public static final String BUSCAR_ULTIMO = "SELECT * FROM biblioteca.acervo acervo "
+            + "WHERE acervo.tipo = 2 "
+            + "GROUP BY acervo.id DESC LIMIT 1;";
+        
         public static final String DELETAR = "DELETE FROM biblioteca.acervo "
             + "WHERE acervo.tipo = 2;";
+
+        public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.acervo acervo "
+            + "WHERE acervo.id = ?;";
+    }
+
+    public class Periodico {
+
+        public static final String CRIAR = "INSERT INTO biblioteca.acervo "
+            + "(nome, valor, data_lancamento, paginas, regiao, editora, autor, tipo) "
+            + "VALUES "
+            + "(?, ?, ?, ?, ?, ?, ?, 3);";
+
+        public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
+            + "SET "
+            + "acervo.nome = ?, "
+            + "acervo.valor = ?, "
+            + "acervo.data_lancamento = ?, "
+            + "acervo.paginas = ?, "
+            + "acervo.editora = ?, "
+            + "acervo.autor = ?, "
+            + "acervo.regiao = ? "
+            + "WHERE acervo.id = ?;";
+
+        public static final String BUSCAR = "SELECT * FROM biblioteca.acervo;";
+
+        public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
+            + "WHERE acervo.id = ? AND acervo.tipo = 3;";
+
+        public static final String BUSCAR_ULTIMO = "SELECT * FROM biblioteca.acervo acervo "
+            + "WHERE acervo.tipo = 3 "
+            + "GROUP BY acervo.id DESC LIMIT 1;";
+
+        public static final String DELETAR = "DELETE FROM biblioteca.acervo;";
 
         public static final String DELETAR_POR_ID = "DELETE FROM biblioteca.acervo acervo "
             + "WHERE acervo.id = ?;";

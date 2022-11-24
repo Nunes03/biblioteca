@@ -32,8 +32,9 @@ public class LivroRepositorio implements LivroRepositorioInterface {
             preparedStatement.setDate(4, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
             preparedStatement.setInt(5, entidade.getPaginas());
             preparedStatement.setString(6, entidade.getEditora());
-            preparedStatement.setBoolean(7, entidade.getCapaDura());
-            preparedStatement.setString(8, entidade.getGenero().name());
+            preparedStatement.setString(7, entidade.getAutor());
+            preparedStatement.setBoolean(8, entidade.getCapaDura());
+            preparedStatement.setString(9, entidade.getGenero().name());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -135,6 +136,23 @@ public class LivroRepositorio implements LivroRepositorioInterface {
             preparedStatement.setInt(1, id);
 
             return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public LivroEntidade buscarUltimo() {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Livro.BUSCAR_ULTIMO
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return ConversorEntidade.resultSetParaLivro(resultSet);
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

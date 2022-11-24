@@ -31,9 +31,10 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
             preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
             preparedStatement.setInt(4, entidade.getPaginas());
             preparedStatement.setString(5, entidade.getEditora());
-            preparedStatement.setBytes(6, entidade.getFoto());
-            preparedStatement.setInt(7, entidade.getEdicao());
-            preparedStatement.setBoolean(8, entidade.getAtivo());
+            preparedStatement.setString(6, entidade.getAutor());
+            preparedStatement.setBytes(7, entidade.getFoto());
+            preparedStatement.setInt(8, entidade.getEdicao());
+            preparedStatement.setBoolean(9, entidade.getAtivo());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -54,8 +55,9 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
             preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
             preparedStatement.setInt(4, entidade.getPaginas());
             preparedStatement.setString(5, entidade.getEditora());
-            preparedStatement.setInt(6, entidade.getEdicao());
-            preparedStatement.setInt(7, entidade.getId());
+            preparedStatement.setString(6, entidade.getAutor());
+            preparedStatement.setInt(7, entidade.getEdicao());
+            preparedStatement.setInt(8, entidade.getId());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -155,6 +157,23 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
                 );
             }
             return revistas;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public RevistaEntidade buscarUltimo() {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Revista.BUSCAR_ULTIMO
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return ConversorEntidade.resultSetParaRevista(resultSet);
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

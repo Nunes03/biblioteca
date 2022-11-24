@@ -31,19 +31,6 @@ public class TabelaGeral {
         return !pegarLinhaSelecionada(jTable).equals(-1);
     }
 
-    public static void atualizarTabelaAutor(JTable jTable, List<AutorEntidade> autorEntidades) {
-        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();           
-        limparTabela(defaultTableModel);
-
-        autorEntidades.forEach(
-            autor -> {
-                Object[] dados = {autor.getId(), autor.getNome()};
-
-                defaultTableModel.addRow(dados);
-            }
-        );
-    }
-
     public static void atualizarTabelaCliente(JTable jTable, List<ClienteEntidade> clienteEntidades) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);

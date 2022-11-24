@@ -11,17 +11,6 @@ public class ConversorEntidade {
     private ConversorEntidade() {
     }
 
-    public static AutorEntidade resultSetParaAutor(ResultSet resultSet) {
-        try {
-            return new AutorEntidade(
-                resultSet.getInt("id"),
-                resultSet.getString("nome")
-            );
-        } catch (SQLException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
-
     public static ClienteEntidade resultSetParaCliente(ResultSet resultSet) {
         try {
             return new ClienteEntidade(
@@ -76,6 +65,7 @@ public class ConversorEntidade {
                 resultSet.getDate("data_lancamento"),
                 resultSet.getInt("paginas"),
                 resultSet.getString("editora"),
+                resultSet.getString("autor"),
                 resultSet.getBytes("foto"),
                 resultSet.getString("descriao"),
                 resultSet.getBoolean("capa_dura"),
@@ -96,6 +86,7 @@ public class ConversorEntidade {
                 resultSet.getDate("data_lancamento"),
                 resultSet.getInt("paginas"),
                 resultSet.getString("editora"),
+                resultSet.getString("autor"),
                 resultSet.getBytes("foto"),
                 resultSet.getString("regiao"),
                 resultSet.getBoolean("ativo")
@@ -114,6 +105,7 @@ public class ConversorEntidade {
                 resultSet.getDate("data_lancamento"),
                 resultSet.getInt("paginas"),
                 resultSet.getString("editora"),
+                resultSet.getString("autor"),
                 resultSet.getBytes("foto"),
                 resultSet.getInt("edicao"),
                 resultSet.getBoolean("ativo")

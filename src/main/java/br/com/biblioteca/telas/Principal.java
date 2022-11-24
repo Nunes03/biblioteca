@@ -11,23 +11,16 @@ import java.io.File;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JList;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.table.DefaultTableModel;
-import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.entidades.ClienteEntidade;
 import main.java.br.com.biblioteca.entidades.RevistaEntidade;
-import main.java.br.com.biblioteca.repositorios.AutorRepositorio;
 import main.java.br.com.biblioteca.repositorios.ClienteRepositorio;
 import main.java.br.com.biblioteca.repositorios.RevistaRepositorio;
-import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.RevistaRepositorioInterface;
-import main.java.br.com.biblioteca.telas.geral.ListaGeral;
 import main.java.br.com.biblioteca.telas.geral.TabelaGeral;
 import main.java.br.com.biblioteca.telas.geral.TelasGeral;
 import main.java.br.com.biblioteca.telas.geral.ValidarGeral;
@@ -42,7 +35,6 @@ public class Principal extends javax.swing.JFrame {
     public static final Integer LARGURA_IMAGEM = 150;
     public static final Integer ALTURA_IMAGEM = 150;
 
-    private final AutorRepositorioInterface AUTOR_REPOSITORIO_INTERFACE = new AutorRepositorio();
     private final ClienteRepositorioInterface CLIENTE_REPOSITORIO_INTERFACE = new ClienteRepositorio();
     private final RevistaRepositorioInterface REVISTA_REPOSITORIO_INTERFACE = new RevistaRepositorio();
 
@@ -55,10 +47,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        TabelaGeral.atualizarTabelaAutor(
-            autorListagemTbl,
-            AUTOR_REPOSITORIO_INTERFACE.buscar()
-        );
+        atualizarTabelaCliente();
     }
 
     /**
@@ -72,23 +61,11 @@ public class Principal extends javax.swing.JFrame {
 
         barraLateralPanel = new javax.swing.JPanel();
         livroBarraLateralBtn = new javax.swing.JButton();
-        autorBarraLateralBtn = new javax.swing.JButton();
         clienteBarraLateralBtn = new javax.swing.JButton();
         compraBarraLateralBtn = new javax.swing.JButton();
         revistaBarraLateralBtn = new javax.swing.JButton();
         periodicoBarraLateralBtn = new javax.swing.JButton();
         paiPanel = new javax.swing.JPanel();
-        autorPanel = new javax.swing.JPanel();
-        cadastroAutorPanel = new javax.swing.JPanel();
-        nomeAutorTxt = new javax.swing.JTextField();
-        cadastrarAutorBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        statusAutorLbl = new javax.swing.JLabel();
-        atualizarAutorBtn = new javax.swing.JButton();
-        deletarAutorBtn = new javax.swing.JButton();
-        listagemAutorPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        autorListagemTbl = new javax.swing.JTable();
         clientePanel = new javax.swing.JPanel();
         cadastroClientePanel = new javax.swing.JPanel();
         atualizarClienteBtn = new javax.swing.JButton();
@@ -131,13 +108,12 @@ public class Principal extends javax.swing.JFrame {
         statusRevistaLbl = new javax.swing.JLabel();
         paginasRevistaSpinner = new javax.swing.JSpinner();
         edicaoRevistaSpinner = new javax.swing.JSpinner();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        autorListaJList = new javax.swing.JList<>();
         jLabel13 = new javax.swing.JLabel();
         inativarRevistaBtn = new javax.swing.JButton();
         mostrarRevistaInativoRadio = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
         ativoRevistaComboBox = new javax.swing.JComboBox<>();
+        autorRevistaTxt = new javax.swing.JTextField();
         listagemRevistaPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         revistaListagemTbl = new javax.swing.JTable();
@@ -152,13 +128,6 @@ public class Principal extends javax.swing.JFrame {
         livroBarraLateralBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 livroBarraLateralBtnActionPerformed(evt);
-            }
-        });
-
-        autorBarraLateralBtn.setText("Autor");
-        autorBarraLateralBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                autorBarraLateralBtnActionPerformed(evt);
             }
         });
 
@@ -199,7 +168,6 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(barraLateralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(revistaBarraLateralBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(livroBarraLateralBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(autorBarraLateralBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clienteBarraLateralBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(compraBarraLateralBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraLateralPanelLayout.createSequentialGroup()
@@ -211,8 +179,6 @@ public class Principal extends javax.swing.JFrame {
             barraLateralPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(barraLateralPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(autorBarraLateralBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clienteBarraLateralBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(compraBarraLateralBtn)
@@ -227,156 +193,6 @@ public class Principal extends javax.swing.JFrame {
 
         paiPanel.setPreferredSize(new java.awt.Dimension(1125, 0));
         paiPanel.setLayout(new java.awt.CardLayout());
-
-        cadastroAutorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Cadastro"));
-
-        nomeAutorTxt.setBackground(new java.awt.Color(240, 240, 240));
-        nomeAutorTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        nomeAutorTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        cadastrarAutorBtn.setText("Cadastrar");
-        cadastrarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        cadastrarAutorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cadastrarAutorBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Nome");
-
-        statusAutorLbl.setBackground(new java.awt.Color(255, 255, 255));
-
-        atualizarAutorBtn.setText("Atualizar");
-        atualizarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        atualizarAutorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atualizarAutorBtnActionPerformed(evt);
-            }
-        });
-
-        deletarAutorBtn.setText("Deletar");
-        deletarAutorBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        deletarAutorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deletarAutorBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout cadastroAutorPanelLayout = new javax.swing.GroupLayout(cadastroAutorPanel);
-        cadastroAutorPanel.setLayout(cadastroAutorPanelLayout);
-        cadastroAutorPanelLayout.setHorizontalGroup(
-            cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                        .addComponent(statusAutorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(deletarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                        .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        cadastroAutorPanelLayout.setVerticalGroup(
-            cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cadastroAutorPanelLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nomeAutorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
-                .addGroup(cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(atualizarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cadastrarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(deletarAutorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(statusAutorLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        listagemAutorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Listagem"));
-
-        autorListagemTbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Nome"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        autorListagemTbl.getTableHeader().setReorderingAllowed(false);
-        autorListagemTbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                autorListagemTblMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(autorListagemTbl);
-        if (autorListagemTbl.getColumnModel().getColumnCount() > 0) {
-            autorListagemTbl.getColumnModel().getColumn(0).setResizable(false);
-            autorListagemTbl.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        javax.swing.GroupLayout listagemAutorPanelLayout = new javax.swing.GroupLayout(listagemAutorPanel);
-        listagemAutorPanel.setLayout(listagemAutorPanelLayout);
-        listagemAutorPanelLayout.setHorizontalGroup(
-            listagemAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listagemAutorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1089, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        listagemAutorPanelLayout.setVerticalGroup(
-            listagemAutorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listagemAutorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout autorPanelLayout = new javax.swing.GroupLayout(autorPanel);
-        autorPanel.setLayout(autorPanelLayout);
-        autorPanelLayout.setHorizontalGroup(
-            autorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(autorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(autorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cadastroAutorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(listagemAutorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        autorPanelLayout.setVerticalGroup(
-            autorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(autorPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cadastroAutorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listagemAutorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
-        );
-
-        paiPanel.add(autorPanel, "autorCartao");
 
         clientePanel.setPreferredSize(new java.awt.Dimension(1135, 710));
 
@@ -720,9 +536,6 @@ public class Principal extends javax.swing.JFrame {
 
         edicaoRevistaSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        autorListaJList.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jScrollPane5.setViewportView(autorListaJList);
-
         jLabel13.setText("Autores");
 
         inativarRevistaBtn.setText("Inativar");
@@ -744,6 +557,8 @@ public class Principal extends javax.swing.JFrame {
 
         ativoRevistaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
 
+        autorRevistaTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
         javax.swing.GroupLayout cadastroRevistaPanelLayout = new javax.swing.GroupLayout(cadastroRevistaPanel);
         cadastroRevistaPanel.setLayout(cadastroRevistaPanelLayout);
         cadastroRevistaPanelLayout.setHorizontalGroup(
@@ -752,9 +567,6 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroRevistaPanelLayout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mostrarRevistaInativoRadio)
                         .addGap(18, 18, 18)
                         .addComponent(cadastrarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -766,41 +578,50 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
                                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(nomeRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))
-                                .addGap(18, 18, 18)
-                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
-                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(valorRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))
                                 .addGap(18, 18, 18)
                                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
-                                    .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
+                                        .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                             .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
                                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dataLancamentoRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(ativoRevistaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 303, Short.MAX_VALUE)
+                                    .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
+                                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(nomeRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel11)))
+                                    .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cadastroRevistaPanelLayout.createSequentialGroup()
+                                            .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(dataLancamentoRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel9))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel14)
+                                                .addComponent(ativoRevistaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cadastroRevistaPanelLayout.createSequentialGroup()
+                                            .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
+                                                    .addComponent(paginasRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroRevistaPanelLayout.createSequentialGroup()
+                                                    .addComponent(jLabel10)
+                                                    .addGap(181, 181, 181)))
+                                            .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel13)
+                                                .addComponent(autorRevistaTxt)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(fotoRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selecionarFotoRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
-                        .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(paginasRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(selecionarFotoRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         cadastroRevistaPanelLayout.setVerticalGroup(
@@ -815,15 +636,10 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroRevistaPanelLayout.createSequentialGroup()
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cadastroRevistaPanelLayout.createSequentialGroup()
-                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel13))
+                                .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
-                                        .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                .addComponent(editoraRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE))
                             .addGroup(cadastroRevistaPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -835,7 +651,8 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(valorRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                                    .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
@@ -845,17 +662,19 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(dataLancamentoRevistaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ativoRevistaComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel10)
+                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paginasRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(paginasRevistaSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(autorRevistaTxt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(atualizarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cadastrarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inativarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(mostrarRevistaInativoRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(atualizarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cadastrarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inativarRevistaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mostrarRevistaInativoRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -985,15 +804,6 @@ public class Principal extends javax.swing.JFrame {
         principalCardLayout.show(paiPanel, "livroCartao");
     }//GEN-LAST:event_livroBarraLateralBtnActionPerformed
 
-    private void autorBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorBarraLateralBtnActionPerformed
-        CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
-        principalCardLayout.show(paiPanel, "autorCartao");
-        TabelaGeral.atualizarTabelaAutor(
-            autorListagemTbl,
-            AUTOR_REPOSITORIO_INTERFACE.buscar()
-        );
-    }//GEN-LAST:event_autorBarraLateralBtnActionPerformed
-
     private void clienteBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteBarraLateralBtnActionPerformed
         CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
         principalCardLayout.show(paiPanel, "clienteCartao");
@@ -1015,22 +825,6 @@ public class Principal extends javax.swing.JFrame {
         CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
         principalCardLayout.show(paiPanel, "periodicoCartao");
     }//GEN-LAST:event_periodicoBarraLateralBtnActionPerformed
-
-    private void cadastrarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarAutorBtnActionPerformed
-        if (ValidarGeral.autorValido(nomeAutorTxt, statusAutorLbl)) {
-            AutorEntidade autorEntidade = new AutorEntidade(
-                nomeAutorTxt.getText()
-            );
-
-            AUTOR_REPOSITORIO_INTERFACE.criar(autorEntidade);
-            TabelaGeral.atualizarTabelaAutor(
-                autorListagemTbl,
-                AUTOR_REPOSITORIO_INTERFACE.buscar()
-            );
-            
-            limparCamposAutor();
-        }
-    }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
 
     private void cadastrarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteBtnActionPerformed
         Boolean valido = ValidarGeral.clienteValido(
@@ -1097,53 +891,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_selecionarFotoClienteBtnActionPerformed
 
-    private void deletarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletarAutorBtnActionPerformed
-        if (TabelaGeral.linhaValida(autorListagemTbl)) {
-            AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
-            Boolean acervoCinculado = AUTOR_REPOSITORIO_INTERFACE.acervoVinculado(autorEntidade.getId());
-
-            if (!acervoCinculado) {
-                AUTOR_REPOSITORIO_INTERFACE.deletarPorId(autorEntidade.getId());
-                DefaultTableModel defaultTableModel = (DefaultTableModel) autorListagemTbl.getModel();
-                defaultTableModel.removeRow(TabelaGeral.pegarLinhaSelecionada(autorListagemTbl));
-
-                statusAutorLbl.setForeground(Color.BLACK);
-                statusAutorLbl.setText("Autor excluido com sucesso");
-            } else {
-                statusAutorLbl.setText(
-                    "Não foi possível excluir, pois existem Livros, "
-                    + "Revista ou Periódicos vinculados a esse autor!"
-                );
-            }
-        }
-    }//GEN-LAST:event_deletarAutorBtnActionPerformed
-
-    private void autorListagemTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_autorListagemTblMouseClicked
-        if (TabelaGeral.linhaValida(autorListagemTbl)) {
-            AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
-            nomeAutorTxt.setText(autorEntidade.getNome());
-        }
-    }//GEN-LAST:event_autorListagemTblMouseClicked
-
-    private void atualizarAutorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarAutorBtnActionPerformed
-        if (TabelaGeral.linhaValida(autorListagemTbl)) {
-            if (ValidarGeral.autorValido(nomeAutorTxt, statusAutorLbl)) {
-                AutorEntidade autorEntidade = TabelaGeral.convertParaAutorEntidade(autorListagemTbl);
-                autorEntidade.setNome(nomeAutorTxt.getText());
-                AUTOR_REPOSITORIO_INTERFACE.atualizar(autorEntidade);
-
-                TabelaGeral.atualizarTabelaAutor(
-                    autorListagemTbl,
-                    AUTOR_REPOSITORIO_INTERFACE.buscar()
-                );
-                limparCamposAutor();
-            }
-        } else {
-            statusAutorLbl.setForeground(Color.red);
-            statusAutorLbl.setText("Um registro deve estar selecionado para autalizar.");
-        }
-    }//GEN-LAST:event_atualizarAutorBtnActionPerformed
-
     private void inativarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inativarClienteBtnActionPerformed
         if (TabelaGeral.linhaValida(clienteListagemTbl)) {
             ClienteEntidade clienteEntidade = TabelaGeral.convertParaClienteEntidade(
@@ -1200,8 +947,8 @@ public class Principal extends javax.swing.JFrame {
                 limparCamposCliente();
             }
         } else {
-            statusAutorLbl.setForeground(Color.red);
-            statusAutorLbl.setText("Um registro deve estar selecionado para autalizar.");
+            statusClienteLbl.setForeground(Color.red);
+            statusClienteLbl.setText("Um registro deve estar selecionado para autalizar.");
         }
     }//GEN-LAST:event_atualizarClienteBtnActionPerformed
 
@@ -1240,6 +987,7 @@ public class Principal extends javax.swing.JFrame {
             dataLancamentoRevistaTxt,
             paginasRevistaSpinner,
             editoraRevistaTxt,
+            autorRevistaTxt,
             edicaoRevistaSpinner,
             fotoRevistaLbl,
             statusRevistaLbl
@@ -1255,6 +1003,7 @@ public class Principal extends javax.swing.JFrame {
             );
             Integer paginas = (Integer) paginasRevistaSpinner.getValue();
             String editora = editoraRevistaTxt.getText();
+            String autor = autorRevistaTxt.getText();
             Integer edicao = (Integer) edicaoRevistaSpinner.getValue();
             byte[] foto = ConversorTipos.fileParaByteArray(arquivoAtual);
             Boolean ativo = ativoRevistaComboBox.getSelectedIndex() == 0;
@@ -1265,20 +1014,21 @@ public class Principal extends javax.swing.JFrame {
                 dataLancamento,
                 paginas,
                 editora,
+                autor,
                 foto,
                 edicao,
                 ativo
             );
 
             REVISTA_REPOSITORIO_INTERFACE.criar(revista);
-            vincularRevistaAoAutor();
+            revista = REVISTA_REPOSITORIO_INTERFACE.buscarUltimo();
             
             atualizarTabelaRevista();
         }
     }//GEN-LAST:event_cadastrarRevistaBtnActionPerformed
 
     private void atualizarRevistaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarRevistaBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_atualizarRevistaBtnActionPerformed
 
     private void selecionarFotoRevistaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarFotoRevistaBtnActionPerformed
@@ -1333,11 +1083,6 @@ public class Principal extends javax.swing.JFrame {
                 REVISTA_REPOSITORIO_INTERFACE.buscarAtivos()
             );
         }
-        
-        ListaGeral.atualizarListaAutor(
-            autorListaJList,
-            AUTOR_REPOSITORIO_INTERFACE.buscar()
-        );
     }
 
     private void limparCamposCliente() {
@@ -1347,14 +1092,6 @@ public class Principal extends javax.swing.JFrame {
         telefoneClienteTxt.setText(null);
         ativoClienteComboBox.setSelectedIndex(0);
         fotoClienteLbl.setIcon(null);
-    }
-
-    private void limparCamposAutor() {
-        nomeAutorTxt.setText(null);
-    }
-    
-    private void vincularRevistaAoAutor(RevistaEntidade revista){
-        
     }
     
     public static void main(String args[]) {
@@ -1383,18 +1120,12 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ativoClienteComboBox;
     private javax.swing.JComboBox<String> ativoRevistaComboBox;
-    private javax.swing.JButton atualizarAutorBtn;
     private javax.swing.JButton atualizarClienteBtn;
     private javax.swing.JButton atualizarRevistaBtn;
-    private javax.swing.JButton autorBarraLateralBtn;
-    private javax.swing.JList<String> autorListaJList;
-    private javax.swing.JTable autorListagemTbl;
-    private javax.swing.JPanel autorPanel;
+    private javax.swing.JTextField autorRevistaTxt;
     private javax.swing.JPanel barraLateralPanel;
-    private javax.swing.JButton cadastrarAutorBtn;
     private javax.swing.JButton cadastrarClienteBtn;
     private javax.swing.JButton cadastrarRevistaBtn;
-    private javax.swing.JPanel cadastroAutorPanel;
     private javax.swing.JPanel cadastroClientePanel;
     private javax.swing.JPanel cadastroRevistaPanel;
     private javax.swing.JButton clienteBarraLateralBtn;
@@ -1405,14 +1136,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField cpfClienteTxt;
     private javax.swing.JFormattedTextField dataLancamentoRevistaTxt;
     private javax.swing.JFormattedTextField dataNascimentoClienteTxt;
-    private javax.swing.JButton deletarAutorBtn;
     private javax.swing.JSpinner edicaoRevistaSpinner;
     private javax.swing.JTextField editoraRevistaTxt;
     private javax.swing.JLabel fotoClienteLbl;
     private javax.swing.JLabel fotoRevistaLbl;
     private javax.swing.JButton inativarClienteBtn;
     private javax.swing.JButton inativarRevistaBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1426,18 +1155,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JPanel listagemAutorPanel;
     private javax.swing.JPanel listagemClientePanel;
     private javax.swing.JPanel listagemRevistaPanel;
     private javax.swing.JButton livroBarraLateralBtn;
     private javax.swing.JPanel livroPanel;
     private javax.swing.JRadioButton mostrarClienteInativoRadio;
     private javax.swing.JRadioButton mostrarRevistaInativoRadio;
-    private javax.swing.JTextField nomeAutorTxt;
     private javax.swing.JTextField nomeClienteTxt;
     private javax.swing.JTextField nomeRevistaTxt;
     private javax.swing.JSpinner paginasRevistaSpinner;
@@ -1449,7 +1174,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel revistaPanel;
     private javax.swing.JButton selecionarFotoClienteBtn;
     private javax.swing.JButton selecionarFotoRevistaBtn;
-    private javax.swing.JLabel statusAutorLbl;
     private javax.swing.JLabel statusClienteLbl;
     private javax.swing.JLabel statusRevistaLbl;
     private javax.swing.JFormattedTextField telefoneClienteTxt;

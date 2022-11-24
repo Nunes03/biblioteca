@@ -126,4 +126,21 @@ public class ItensCompraRepositorio implements ItensCompraRepositorioInterface {
             throw new RuntimeException(exception);
         }
     }
+
+    @Override
+    public ItemCompraEntidade buscarUltimo() {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.BUSCAR_ULTIMO
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return ConversorEntidade.resultSetParaItemCompra(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 }
