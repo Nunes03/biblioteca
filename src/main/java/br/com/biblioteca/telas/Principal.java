@@ -11,9 +11,11 @@ import java.io.File;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JList;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.AutorEntidade;
@@ -25,6 +27,7 @@ import main.java.br.com.biblioteca.repositorios.RevistaRepositorio;
 import main.java.br.com.biblioteca.repositorios.interfaces.AutorRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.RevistaRepositorioInterface;
+import main.java.br.com.biblioteca.telas.geral.ListaGeral;
 import main.java.br.com.biblioteca.telas.geral.TabelaGeral;
 import main.java.br.com.biblioteca.telas.geral.TelasGeral;
 import main.java.br.com.biblioteca.telas.geral.ValidarGeral;
@@ -904,9 +907,9 @@ public class Principal extends javax.swing.JFrame {
         );
         listagemRevistaPanelLayout.setVerticalGroup(
             listagemRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listagemRevistaPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(listagemRevistaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1024,6 +1027,8 @@ public class Principal extends javax.swing.JFrame {
                 autorListagemTbl,
                 AUTOR_REPOSITORIO_INTERFACE.buscar()
             );
+            
+            limparCamposAutor();
         }
     }//GEN-LAST:event_cadastrarAutorBtnActionPerformed
 
@@ -1127,7 +1132,11 @@ public class Principal extends javax.swing.JFrame {
                 autorEntidade.setNome(nomeAutorTxt.getText());
                 AUTOR_REPOSITORIO_INTERFACE.atualizar(autorEntidade);
 
-                //TabelaGeral.atualizarTabelaAutor(autorListagemTbl);
+                TabelaGeral.atualizarTabelaAutor(
+                    autorListagemTbl,
+                    AUTOR_REPOSITORIO_INTERFACE.buscar()
+                );
+                limparCamposAutor();
             }
         } else {
             statusAutorLbl.setForeground(Color.red);
@@ -1262,6 +1271,7 @@ public class Principal extends javax.swing.JFrame {
             );
 
             REVISTA_REPOSITORIO_INTERFACE.criar(revista);
+            vincularRevistaAoAutor();
             
             atualizarTabelaRevista();
         }
@@ -1294,7 +1304,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_inativarRevistaBtnActionPerformed
 
     private void mostrarRevistaInativoRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarRevistaInativoRadioActionPerformed
-        // TODO add your handling code here:
+        atualizarTabelaRevista();
     }//GEN-LAST:event_mostrarRevistaInativoRadioActionPerformed
 
     private void atualizarTabelaCliente() {
@@ -1319,10 +1329,15 @@ public class Principal extends javax.swing.JFrame {
             );
         } else {
             TabelaGeral.atualizarTabelaRevista(
-                clienteListagemTbl,
+                revistaListagemTbl,
                 REVISTA_REPOSITORIO_INTERFACE.buscarAtivos()
             );
         }
+        
+        ListaGeral.atualizarListaAutor(
+            autorListaJList,
+            AUTOR_REPOSITORIO_INTERFACE.buscar()
+        );
     }
 
     private void limparCamposCliente() {
@@ -1334,6 +1349,14 @@ public class Principal extends javax.swing.JFrame {
         fotoClienteLbl.setIcon(null);
     }
 
+    private void limparCamposAutor() {
+        nomeAutorTxt.setText(null);
+    }
+    
+    private void vincularRevistaAoAutor(RevistaEntidade revista){
+        
+    }
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

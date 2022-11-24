@@ -14,6 +14,16 @@ public class ConsultasConstante {
         public static final int PERIODICO = 3;
     }
     
+    public class AcervoAutor {
+    
+        public static final String CRIAR = "INSERT INTO biblioteca.autor_acervo "
+            + "(autor_id, acervo_id) "
+            + "VALUES "
+            + "(?, ?);";
+        
+    }
+
+    
     public class Autor {
 
         public static final String CRIAR = "INSERT INTO biblioteca.autor"
