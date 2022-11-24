@@ -99,7 +99,7 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                Optional.of(
+                return Optional.of(
                     ConversorEntidade.resultSetParaRevista(resultSet)
                 );
             }

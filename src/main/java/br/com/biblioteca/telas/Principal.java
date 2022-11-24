@@ -649,10 +649,11 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel12))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(valorRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                                    .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(statusRevistaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(valorRevistaTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                        .addComponent(edicaoRevistaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(18, 18, 18)
                         .addGroup(cadastroRevistaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
@@ -685,14 +686,14 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Valor (R$)", "Data de Lançamento", "Paginas", "Editora", "Edição", "Ativo"
+                "Id", "Nome", "Valor (R$)", "Data de Lançamento", "Paginas", "Editora", "Edição", "Autor", "Ativo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false, false, false
+                false, true, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -701,6 +702,11 @@ public class Principal extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        revistaListagemTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                revistaListagemTblMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(revistaListagemTbl);
@@ -713,6 +719,7 @@ public class Principal extends javax.swing.JFrame {
             revistaListagemTbl.getColumnModel().getColumn(5).setResizable(false);
             revistaListagemTbl.getColumnModel().getColumn(6).setResizable(false);
             revistaListagemTbl.getColumnModel().getColumn(7).setResizable(false);
+            revistaListagemTbl.getColumnModel().getColumn(8).setResizable(false);
         }
 
         javax.swing.GroupLayout listagemRevistaPanelLayout = new javax.swing.GroupLayout(listagemRevistaPanel);
@@ -1022,13 +1029,13 @@ public class Principal extends javax.swing.JFrame {
 
             REVISTA_REPOSITORIO_INTERFACE.criar(revista);
             revista = REVISTA_REPOSITORIO_INTERFACE.buscarUltimo();
-            
+
             atualizarTabelaRevista();
         }
     }//GEN-LAST:event_cadastrarRevistaBtnActionPerformed
 
     private void atualizarRevistaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarRevistaBtnActionPerformed
-        
+
     }//GEN-LAST:event_atualizarRevistaBtnActionPerformed
 
     private void selecionarFotoRevistaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarFotoRevistaBtnActionPerformed
@@ -1056,6 +1063,35 @@ public class Principal extends javax.swing.JFrame {
     private void mostrarRevistaInativoRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarRevistaInativoRadioActionPerformed
         atualizarTabelaRevista();
     }//GEN-LAST:event_mostrarRevistaInativoRadioActionPerformed
+
+    private void revistaListagemTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_revistaListagemTblMouseClicked
+        if (TabelaGeral.linhaValida(revistaListagemTbl)) {
+            RevistaEntidade revista = TabelaGeral.convertParaRevistaEntidade(revistaListagemTbl);
+            Optional<RevistaEntidade> revistaOptional = REVISTA_REPOSITORIO_INTERFACE.buscarPorId(revista.getId());
+            
+            revista = revistaOptional.get();
+            
+            Integer ativoIndex = revista.getAtivo().equals(Boolean.TRUE)
+                ? 0
+                : 1;
+            
+            nomeRevistaTxt.setText(revista.getNome());
+            valorRevistaTxt.setText(revista.getValor().toString());
+            dataLancamentoRevistaTxt.setText(
+                ConversorTipos.dateParaString(
+                    revista.getDataLancamento()
+                )
+            );
+            paginasRevistaSpinner.setValue(revista.getPaginas());
+            editoraRevistaTxt.setText(revista.getEditora());
+            edicaoRevistaSpinner.setValue(revista.getEdicao());
+            ativoRevistaComboBox.setSelectedIndex(ativoIndex);
+            autorRevistaTxt.setText(revista.getAutor());
+            
+            Icon icone = ConversorTipos.byteArrayParaIcon(revista.getFoto());
+            fotoRevistaLbl.setIcon(icone);
+        }
+    }//GEN-LAST:event_revistaListagemTblMouseClicked
 
     private void atualizarTabelaCliente() {
         if (mostrarClienteInativoRadio.isSelected()) {
@@ -1093,7 +1129,7 @@ public class Principal extends javax.swing.JFrame {
         ativoClienteComboBox.setSelectedIndex(0);
         fotoClienteLbl.setIcon(null);
     }
-    
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

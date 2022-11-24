@@ -5,6 +5,7 @@
  */
 package main.java.br.com.biblioteca.telas.geral;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -58,7 +59,7 @@ public class TabelaGeral {
             }
         );
     }
-    
+
     public static void atualizarTabelaRevista(JTable jTable, List<RevistaEntidade> revistas) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);
@@ -81,6 +82,7 @@ public class TabelaGeral {
                     revista.getPaginas(),
                     revista.getEditora(),
                     revista.getEdicao(),
+                    revista.getAutor(),
                     ativo
                 };
 
@@ -106,7 +108,7 @@ public class TabelaGeral {
 
     public static ClienteEntidade convertParaClienteEntidade(JTable jTable) {
         int linhaSelecionada = jTable.getSelectedRow();
-                
+
         Integer id = Integer.parseInt(
             jTable.getValueAt(linhaSelecionada, 0).toString()
         );
@@ -127,6 +129,40 @@ public class TabelaGeral {
             telefone,
             ativo,
             null
+        );
+    }
+
+    public static RevistaEntidade convertParaRevistaEntidade(JTable jTable) {
+        int linhaSelecionada = jTable.getSelectedRow();
+
+        Integer id = Integer.parseInt(
+            jTable.getValueAt(linhaSelecionada, 0).toString()
+        );
+
+        String nome = jTable.getValueAt(linhaSelecionada, 1).toString();
+        Double valor = Double.valueOf(jTable.getValueAt(linhaSelecionada, 2).toString());
+        Date dataLancamento = ConversorTipos.stringParaDate(
+            jTable.getValueAt(linhaSelecionada, 3).toString()
+        );
+        Integer paginas = Integer.valueOf(jTable.getValueAt(linhaSelecionada, 4).toString());
+        String editora = jTable.getValueAt(linhaSelecionada, 5).toString();
+        Integer edicao = Integer.valueOf(jTable.getValueAt(linhaSelecionada, 6).toString());
+        String autor = jTable.getValueAt(linhaSelecionada, 7).toString();
+        Boolean ativo = jTable.getValueAt(linhaSelecionada, 8)
+            .toString()
+            .equals("Sim");
+
+        return new RevistaEntidade(
+            id,
+            nome,
+            valor,
+            dataLancamento,
+            paginas,
+            editora,
+            autor,
+            null,
+            edicao,
+            ativo
         );
     }
 }
