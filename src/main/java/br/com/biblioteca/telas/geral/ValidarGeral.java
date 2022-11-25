@@ -32,12 +32,15 @@ public class ValidarGeral {
         JFormattedTextField dataNascimentoTextField, JFormattedTextField telefoneTextField, JLabel fotoJLabel,
         JLabel statusLabel) {
         String nome = nomeCompletoTextField.getText();
-        String cpf = cpfTextField.getText();
-        String dataNascimento = dataNascimentoTextField.getText();
-        String telefone = telefoneTextField.getText();
+        Integer cpf =  cpfTextField.getText().replace(" ", "").length();
+        Integer dataNascimento = dataNascimentoTextField.getText().replace(" ", "").length();
+        Integer telefone = telefoneTextField
+            .getText()
+            .replace(" ", "")
+            .length();
         Icon foto = fotoJLabel.getIcon();
 
-        if (nome.isEmpty() || cpf.isEmpty() || cpf.isEmpty() || dataNascimento.isEmpty() || telefone.isEmpty() || foto == null) {
+        if (nome.isEmpty() || cpf != 14 || dataNascimento != 10 || telefone != 14 || foto == null) {
             valorPadraoValidacao(Boolean.TRUE, statusLabel);
             return Boolean.FALSE;
         }
@@ -51,14 +54,16 @@ public class ValidarGeral {
         JTextField autorJTextField, JSpinner edicaoJSpinnerd, JLabel fotoJLabel, JLabel statusLabel) {
         String nome = nomeJTextField.getText();
         String valor = valorJTextField.getText();
-        String dataLancamento = dataLancamentoFormattedTextField.getText();
+        Integer dataLancamento = dataLancamentoFormattedTextField.getText()
+            .replace(" ", "")
+            .length();
         Integer paginas = (Integer) paginasJSpinner.getValue();
         String editora = editoraJTextField.getText();
         String autor = autorJTextField.getText();
         Integer edicao = (Integer) edicaoJSpinnerd.getValue();
         Icon foto = fotoJLabel.getIcon();
 
-        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas == 0 || editora.isEmpty() || autor.isEmpty()
+        if (nome.isEmpty() || valor.isEmpty() || dataLancamento != 10 || paginas == 0 || editora.isEmpty() || autor.isEmpty()
             || edicao == 0 || foto == null) {
             valorPadraoValidacao(Boolean.TRUE, statusLabel);
             return Boolean.FALSE;
@@ -72,14 +77,16 @@ public class ValidarGeral {
         JTextField autorJTextField, JTextField regiaoJTextField, JLabel fotoJLabel, JLabel statusLabel) {
         String nome = nomeJTextField.getText();
         String valor = valorJTextField.getText();
-        String dataLancamento = dataLancamentoFormattedTextField.getText();
+        Integer dataLancamento = dataLancamentoFormattedTextField.getText()
+                .replace(" ", "")
+                .length();
         Integer paginas = (Integer) paginasJSpinner.getValue();
         String editora = editoraJTextField.getText();
         String autor = autorJTextField.getText();
         String regiao = regiaoJTextField.getText();
         Icon foto = fotoJLabel.getIcon();
 
-        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas == 0 || editora.isEmpty() || autor.isEmpty()
+        if (nome.isEmpty() || valor.isEmpty() || dataLancamento != 10 || paginas == 0 || editora.isEmpty() || autor.isEmpty()
             || regiao.isEmpty() || foto == null) {
             valorPadraoValidacao(Boolean.TRUE, statusLabel);
             return Boolean.FALSE;
@@ -87,7 +94,30 @@ public class ValidarGeral {
         valorPadraoValidacao(Boolean.FALSE, statusLabel);
         return Boolean.TRUE;
     }
+    
+    public static final Boolean livroValida(JTextField nomeJTextField, JTextField valorJTextField,
+        JFormattedTextField dataLancamentoFormattedTextField, JSpinner paginasJSpinner, JTextField editoraJTextField,
+        JTextField autorJTextField, JTextField descricaooJTextField, JLabel fotoJLabel, JLabel statusLabel) {
+        String nome = nomeJTextField.getText();
+        String valor = valorJTextField.getText();
+        Integer dataLancamento = dataLancamentoFormattedTextField.getText()
+                .replace(" ", "")
+                .length();
+        Integer paginas = (Integer) paginasJSpinner.getValue();
+        String editora = editoraJTextField.getText();
+        String autor = autorJTextField.getText();
+        String descricao = descricaooJTextField.getText();
+        Icon foto = fotoJLabel.getIcon();
 
+        if (nome.isEmpty() || valor.isEmpty() || dataLancamento != 10 || paginas == 0 || editora.isEmpty() || autor.isEmpty()
+            || descricao.isEmpty() || foto == null) {
+            valorPadraoValidacao(Boolean.TRUE, statusLabel);
+            return Boolean.FALSE;
+        }
+        valorPadraoValidacao(Boolean.FALSE, statusLabel);
+        return Boolean.TRUE;
+    }
+    
     private static void valorPadraoValidacao(Boolean erro, JLabel statusLabel) {
         if (erro) {
             statusLabel.setForeground(Color.RED);

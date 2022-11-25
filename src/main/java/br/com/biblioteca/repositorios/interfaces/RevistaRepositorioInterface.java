@@ -8,5 +8,7 @@ public interface RevistaRepositorioInterface extends RepositorioInterface<Revist
 
     List<RevistaEntidade> buscarAtivos();
     
+    List<RevistaEntidade> buscarPorNomeLike(String nome);
+    
     Boolean inativar(Integer id);
 }

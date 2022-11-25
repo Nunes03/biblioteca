@@ -196,4 +196,27 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
             throw new RuntimeException(exception);
         }
     }
+    
+    @Override
+    public List<PeriodicoEntidade> buscarPorNomeLike(String nome) {
+        List<PeriodicoEntidade> periodicos = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.BUSCAR_POR_NOME_E_ATIVOS_LIKE
+            );
+            preparedStatement.setString(1, "%".concat(nome).concat("%"));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                periodicos.add(
+                    ConversorEntidade.resultSetParaPeriodico(resultSet)
+                );
+            }
+            return periodicos;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 }

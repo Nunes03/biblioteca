@@ -8,5 +8,7 @@ public interface PeriodicoRepositorioInterface extends RepositorioInterface<Peri
     
     List<PeriodicoEntidade> buscarAtivos();
     
+    List<PeriodicoEntidade> buscarPorNomeLike(String nome);
+    
     Boolean inativar(Integer id);
 }

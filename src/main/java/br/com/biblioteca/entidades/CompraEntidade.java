@@ -25,6 +25,12 @@ public class CompraEntidade {
         this.total = total;
         this.cliente = cliente;
     }
+    
+    public CompraEntidade(Date data, Double total, ClienteEntidade cliente) {
+        this.data = data;
+        this.total = total;
+        this.cliente = cliente;
+    }
 
     public Integer getId() {
         return id;

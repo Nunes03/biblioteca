@@ -13,7 +13,7 @@ public enum GeneroEnum {
         this.indice = indice;
     }
 
-    public Integer getOrdem() {
+    public Integer getIndice() {
         return indice;
     }
 }

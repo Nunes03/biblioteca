@@ -21,6 +21,7 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import main.java.br.com.biblioteca.enums.GeneroEnum;
 import main.java.br.com.biblioteca.telas.Principal;
 
 /**
@@ -87,7 +88,7 @@ public class ConversorTipos {
                 icon.getIconWidth(),
                 icon.getIconHeight()
             );
-            
+
             Graphics2D graphics2D = image.createGraphics();
             icon.paintIcon(null, graphics2D, 0, 0);
             graphics2D.dispose();
@@ -107,5 +108,38 @@ public class ConversorTipos {
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    public static GeneroEnum stringParaGeneroEnum(String genero) {
+        if ("Romance".equals(genero)) {
+            return GeneroEnum.ROMANCE;
+        } else if ("Terror".equals(genero)) {
+            return GeneroEnum.TERROR;
+        } else if ("Ação".equals(genero)) {
+            return GeneroEnum.ACAO;
+        }
+        return GeneroEnum.SUSPENSE;
+    }
+
+    public static String generoEnumParaString(GeneroEnum generoEnum) {
+        switch (generoEnum) {
+            case ROMANCE:
+                return "Romance";
+            case TERROR:
+                return "Romance";
+            case ACAO:
+                return "Ação";
+            default:
+                return "Suspense";
+        }
+    }
+
+    public static Integer tipoStringParaInteger(String tipo) {
+        if (tipo.equals("Livro")) {
+            return 1;
+        } else if (tipo.equals("Revista")) {
+            return 2;
+        }
+        return 3;
     }
 }

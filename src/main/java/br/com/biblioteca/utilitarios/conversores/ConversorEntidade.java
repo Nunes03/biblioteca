@@ -68,7 +68,7 @@ public class ConversorEntidade {
                 resultSet.getString("autor"),
                 resultSet.getBytes("foto"),
                 resultSet.getBoolean("ativo"),
-                resultSet.getString("descriao"),
+                resultSet.getString("descricao"),
                 resultSet.getBoolean("capa_dura"),
                 GeneroEnum.valueOf(resultSet.getString("genero"))
             );

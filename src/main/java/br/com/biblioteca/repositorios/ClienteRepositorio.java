@@ -208,4 +208,27 @@ public class ClienteRepositorio implements ClienteRepositorioInterface {
             throw new RuntimeException(exception);
         }
     }
+
+    @Override
+    public List<ClienteEntidade> buscarPorNomeLike(String nome) {
+        List<ClienteEntidade> clientes = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Cliente.BUSCAR_POR_NOME_LIKE
+            );
+            preparedStatement.setString(1, "%".concat(nome).concat("%"));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                clientes.add(
+                    ConversorEntidade.resultSetParaCliente(resultSet)
+                );
+            }
+            return clientes;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 }

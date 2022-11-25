@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import main.java.br.com.biblioteca.banco.ConexaoBanco;
+import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
 import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
@@ -192,6 +193,29 @@ public class RevistaRepositorio implements RevistaRepositorioInterface {
             preparedStatement.setInt(1, id);
 
             return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public List<RevistaEntidade> buscarPorNomeLike(String nome) {
+        List<RevistaEntidade> revistas = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Revista.BUSCAR_POR_NOME_E_ATIVOS_LIKE
+            );
+            preparedStatement.setString(1, "%".concat(nome).concat("%"));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                revistas.add(
+                    ConversorEntidade.resultSetParaRevista(resultSet)
+                );
+            }
+            return revistas;
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

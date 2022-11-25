@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import main.java.br.com.biblioteca.banco.ConexaoBanco;
+import main.java.br.com.biblioteca.entidades.ClienteEntidade;
 import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
@@ -142,6 +143,29 @@ public class CompraRepositorio implements CompraRepositorioInterface {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return ConversorEntidade.resultSetParaCompra(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public List<CompraEntidade> buscarPorCliente(ClienteEntidade cliente) {
+        List<CompraEntidade> compras = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Compra.BUSCAR_POR_CLIENTE_ID
+            );
+            preparedStatement.setInt(1, cliente.getId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                compras.add(
+                    ConversorEntidade.resultSetParaCompra(resultSet)
+                );
+            }
+            return compras;
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

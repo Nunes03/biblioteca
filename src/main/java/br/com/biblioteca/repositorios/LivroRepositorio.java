@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import main.java.br.com.biblioteca.banco.ConexaoBanco;
+import main.java.br.com.biblioteca.entidades.ClienteEntidade;
+import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
 import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
@@ -27,14 +29,16 @@ public class LivroRepositorio implements LivroRepositorioInterface {
                 ConsultasConstante.Livro.CRIAR
             );
             preparedStatement.setString(1, entidade.getNome());
-            preparedStatement.setString(2, entidade.getDescricao());
-            preparedStatement.setDouble(3, entidade.getValor());
-            preparedStatement.setDate(4, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
-            preparedStatement.setInt(5, entidade.getPaginas());
-            preparedStatement.setString(6, entidade.getEditora());
-            preparedStatement.setString(7, entidade.getAutor());
-            preparedStatement.setBoolean(8, entidade.getCapaDura());
-            preparedStatement.setString(9, entidade.getGenero().name());
+            preparedStatement.setDouble(2, entidade.getValor());
+            preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
+            preparedStatement.setInt(4, entidade.getPaginas());
+            preparedStatement.setString(5, entidade.getEditora());
+            preparedStatement.setString(6, entidade.getAutor());
+            preparedStatement.setBytes(7, entidade.getFoto());
+            preparedStatement.setBoolean(8, entidade.getAtivo());
+            preparedStatement.setString(9, entidade.getDescricao());
+            preparedStatement.setBoolean(10, entidade.getCapaDura());
+            preparedStatement.setString(11, entidade.getGenero().name());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -51,15 +55,18 @@ public class LivroRepositorio implements LivroRepositorioInterface {
                 ConsultasConstante.Livro.ATUALIZAR
             );
             preparedStatement.setString(1, entidade.getNome());
-            preparedStatement.setString(2, entidade.getDescricao());
-            preparedStatement.setDouble(3, entidade.getValor());
-            preparedStatement.setDate(4, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
-            preparedStatement.setInt(5, entidade.getPaginas());
-            preparedStatement.setString(6, entidade.getEditora());
-            preparedStatement.setBoolean(7, entidade.getCapaDura());
-            preparedStatement.setString(8, entidade.getGenero().name());
-            preparedStatement.setInt(9, entidade.getId());
-
+            preparedStatement.setDouble(2, entidade.getValor());
+            preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
+            preparedStatement.setInt(4, entidade.getPaginas());
+            preparedStatement.setString(5, entidade.getEditora());
+            preparedStatement.setString(6, entidade.getAutor());
+            preparedStatement.setBytes(7, entidade.getFoto());
+            preparedStatement.setBoolean(8, entidade.getAtivo());
+            preparedStatement.setString(9, entidade.getDescricao());
+            preparedStatement.setBoolean(10, entidade.getCapaDura());
+            preparedStatement.setString(11, entidade.getGenero().name());
+            preparedStatement.setInt(12, entidade.getId());
+            
             return preparedStatement.execute();
         } catch (SQLException exception) {
             throw new ConexaoBancoExcecao("Erro ao inserir na base de dados.", exception);
@@ -153,6 +160,67 @@ public class LivroRepositorio implements LivroRepositorioInterface {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return ConversorEntidade.resultSetParaLivro(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+    
+    @Override
+    public List<LivroEntidade> buscarAtivos() {
+        List<LivroEntidade> livros = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Livro.BUSCAR_ATIVOS
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                livros.add(
+                    ConversorEntidade.resultSetParaLivro(resultSet)
+                );
+            }
+            return livros;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public Boolean inativar(Integer id) {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Livro.INATIVAR
+            );
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+    
+    @Override
+    public List<LivroEntidade> buscarPorNomeLike(String nome) {
+        List<LivroEntidade> livros = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Livro.BUSCAR_POR_NOME_E_ATIVOS_LIKE
+            );
+            preparedStatement.setString(1, "%".concat(nome).concat("%"));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                livros.add(
+                    ConversorEntidade.resultSetParaLivro(resultSet)
+                );
+            }
+            return livros;
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

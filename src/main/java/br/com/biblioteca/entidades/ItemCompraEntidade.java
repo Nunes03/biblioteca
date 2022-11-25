@@ -2,43 +2,47 @@ package main.java.br.com.biblioteca.entidades;
 
 public class ItemCompraEntidade {
 
-	private Integer id;
+    private Integer id;
 
-	private CompraEntidade compra;
+    private CompraEntidade compra;
 
-	private AcervoEntidade acervo;
+    private AcervoEntidade acervo;
 
-	public ItemCompraEntidade() {
-	}
+    public ItemCompraEntidade() {
+    }
 
-	public ItemCompraEntidade(Integer id, CompraEntidade compra, AcervoEntidade acervo) {
-		super();
-		this.id = id;
-		this.compra = compra;
-		this.acervo = acervo;
-	}
+    public ItemCompraEntidade(Integer id, CompraEntidade compra, AcervoEntidade acervo) {
+        this.id = id;
+        this.compra = compra;
+        this.acervo = acervo;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public ItemCompraEntidade(CompraEntidade compra, AcervoEntidade acervo) {
+        this.compra = compra;
+        this.acervo = acervo;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public CompraEntidade getCompra() {
-		return compra;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setCompra(CompraEntidade compra) {
-		this.compra = compra;
-	}
+    public CompraEntidade getCompra() {
+        return compra;
+    }
 
-	public AcervoEntidade getAcervo() {
-		return acervo;
-	}
+    public void setCompra(CompraEntidade compra) {
+        this.compra = compra;
+    }
 
-	public void setAcervo(AcervoEntidade acervo) {
-		this.acervo = acervo;
-	}
+    public AcervoEntidade getAcervo() {
+        return acervo;
+    }
+
+    public void setAcervo(AcervoEntidade acervo) {
+        this.acervo = acervo;
+    }
 }

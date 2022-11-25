@@ -11,5 +11,7 @@ public interface ClienteRepositorioInterface extends RepositorioInterface<Client
 
     List<ClienteEntidade> buscarAtivos();
     
+    List<ClienteEntidade> buscarPorNomeLike(String nome);
+    
     Boolean inativar(Integer id);
 }

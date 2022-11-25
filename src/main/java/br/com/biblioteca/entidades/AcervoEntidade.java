@@ -15,12 +15,14 @@ public class AcervoEntidade {
     private Integer paginas;
 
     private String editora;
-    
+
     private String autor;
 
     private byte[] foto;
-    
+
     private Boolean ativo;
+
+    private Integer tipo;
 
     public AcervoEntidade() {
     }
@@ -29,7 +31,7 @@ public class AcervoEntidade {
         this.id = id;
     }
 
-    public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, String autor, byte[] foto, Boolean ativo) {
+    public AcervoEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora, String autor, byte[] foto, Boolean ativo, Integer tipo) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
@@ -39,9 +41,10 @@ public class AcervoEntidade {
         this.autor = autor;
         this.foto = foto;
         this.ativo = ativo;
+        this.tipo = tipo;
     }
-    
-    public AcervoEntidade(String nome, Double valor, Date dataLancamento, Integer paginas, String editora, String autor, byte[] foto, Boolean ativo) {
+
+    public AcervoEntidade(String nome, Double valor, Date dataLancamento, Integer paginas, String editora, String autor, byte[] foto, Boolean ativo, Integer tipo) {
         this.nome = nome;
         this.valor = valor;
         this.dataLancamento = dataLancamento;
@@ -50,8 +53,9 @@ public class AcervoEntidade {
         this.autor = autor;
         this.foto = foto;
         this.ativo = ativo;
+        this.tipo = tipo;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -107,7 +111,7 @@ public class AcervoEntidade {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    
+
     public byte[] getFoto() {
         return foto;
     }
@@ -122,5 +126,24 @@ public class AcervoEntidade {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Integer getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipoNome() {
+        switch (tipo) {
+            case 1:
+                return "Livro";
+            case 2:
+                return "Revista";
+            default:
+                return "Periódico";
+        }
     }
 }

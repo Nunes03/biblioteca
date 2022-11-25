@@ -17,7 +17,15 @@ public class LivroEntidade extends AcervoEntidade {
 
     public LivroEntidade(Integer id, String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
         String autor, byte[] foto, Boolean ativo, String descricao, Boolean capaDura, GeneroEnum genero) {
-        super(id, nome, valor, dataLancamento, paginas, editora, autor, foto, ativo);
+        super(id, nome, valor, dataLancamento, paginas, editora, autor, foto, ativo, 1);
+        this.descricao = descricao;
+        this.capaDura = capaDura;
+        this.genero = genero;
+    }
+    
+    public LivroEntidade(String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
+        String autor, byte[] foto, Boolean ativo, String descricao, Boolean capaDura, GeneroEnum genero) {
+        super(nome, valor, dataLancamento, paginas, editora, autor, foto, ativo, 1);
         this.descricao = descricao;
         this.capaDura = capaDura;
         this.genero = genero;
@@ -31,7 +39,7 @@ public class LivroEntidade extends AcervoEntidade {
         this.descricao = descricao;
     }
 
-    public boolean getCapaDura() {
+    public Boolean getCapaDura() {
         return this.capaDura;
     }
 

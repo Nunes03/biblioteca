@@ -3,7 +3,6 @@ package main.java.br.com.biblioteca.repositorios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import main.java.br.com.biblioteca.entidades.ItemCompraEntidade;
-import main.java.br.com.biblioteca.repositorios.interfaces.ItensCompraRepositorioInterface;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorEntidade;
 
 import java.sql.ResultSet;
@@ -14,8 +13,9 @@ import java.util.Optional;
 import main.java.br.com.biblioteca.banco.ConexaoBanco;
 import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
+import main.java.br.com.biblioteca.repositorios.interfaces.ItemCompraRepositorioInterface;
 
-public class ItensCompraRepositorio implements ItensCompraRepositorioInterface {
+public class ItemCompraRepositorio implements ItemCompraRepositorioInterface {
 
     @Override
     public Boolean criar(ItemCompraEntidade entidade) {
