@@ -30,9 +30,11 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
             preparedStatement.setDouble(2, entidade.getValor());
             preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
             preparedStatement.setInt(4, entidade.getPaginas());
-            preparedStatement.setString(5, entidade.getRegiao());
-            preparedStatement.setString(6, entidade.getEditora());
-            preparedStatement.setString(7, entidade.getAutor());
+            preparedStatement.setString(5, entidade.getEditora());
+            preparedStatement.setString(6, entidade.getAutor());
+            preparedStatement.setBytes(7, entidade.getFoto());
+            preparedStatement.setString(8, entidade.getRegiao());
+            preparedStatement.setBoolean(9, entidade.getAtivo());
 
             return preparedStatement.execute();
         } catch (SQLException exception) {
@@ -52,11 +54,13 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
             preparedStatement.setDouble(2, entidade.getValor());
             preparedStatement.setDate(3, ConversorTipos.dateParaDateSql(entidade.getDataLancamento()));
             preparedStatement.setInt(4, entidade.getPaginas());
-            preparedStatement.setString(5, entidade.getRegiao());
-            preparedStatement.setString(6, entidade.getEditora());
-            preparedStatement.setString(7, entidade.getAutor());
-            preparedStatement.setInt(8, entidade.getId());
-
+            preparedStatement.setString(5, entidade.getEditora());
+            preparedStatement.setString(6, entidade.getAutor());
+            preparedStatement.setBytes(7, entidade.getFoto());
+            preparedStatement.setString(8, entidade.getRegiao());
+            preparedStatement.setBoolean(9, entidade.getAtivo());
+            preparedStatement.setInt(10, entidade.getId());
+            
             return preparedStatement.execute();
         } catch (SQLException exception) {
             throw new ConexaoBancoExcecao("Erro ao inserir na base de dados.", exception);
@@ -150,6 +154,44 @@ public class PeriodicoRepositorio implements PeriodicoRepositorioInterface {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return ConversorEntidade.resultSetParaPeriodico(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+    
+    @Override
+    public List<PeriodicoEntidade> buscarAtivos() {
+        List<PeriodicoEntidade> periodicos = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.BUSCAR_ATIVOS
+            );
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                periodicos.add(
+                    ConversorEntidade.resultSetParaPeriodico(resultSet)
+                );
+            }
+            return periodicos;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public Boolean inativar(Integer id) {
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Periodico.INATIVAR
+            );
+            preparedStatement.setInt(1, id);
+
+            return preparedStatement.execute();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

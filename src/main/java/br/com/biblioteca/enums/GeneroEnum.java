@@ -2,18 +2,18 @@ package main.java.br.com.biblioteca.enums;
 
 public enum GeneroEnum {
 
-    ROMANCE(1),
-    TERROR(2),
-    ACAO(3),
-    SUSPENSE(4);
+    ROMANCE(0),
+    TERROR(1),
+    ACAO(2),
+    SUSPENSE(3);
 
-    private Integer ordem;
+    private Integer indice;
 
-    GeneroEnum(Integer ordem) {
-        this.ordem = ordem;
+    GeneroEnum(Integer indice) {
+        this.indice = indice;
     }
 
     public Integer getOrdem() {
-        return ordem;
+        return indice;
     }
 }

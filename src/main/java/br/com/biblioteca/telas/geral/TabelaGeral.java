@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import main.java.br.com.biblioteca.entidades.ClienteEntidade;
+import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
 import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
 
@@ -89,6 +90,37 @@ public class TabelaGeral {
             }
         );
     }
+    
+    public static void atualizarTabelaPeriodico(JTable jTable, List<PeriodicoEntidade> periodicos) {
+        DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
+        limparTabela(defaultTableModel);
+
+        periodicos.forEach(
+            periodico -> {
+                String dataLancamento = ConversorTipos.dateParaString(
+                    periodico.getDataLancamento()
+                );
+
+                String ativo = periodico.getAtivo().equals(Boolean.TRUE)
+                ? "Sim"
+                : "Não";
+
+                Object[] dados = {
+                    periodico.getId(),
+                    periodico.getNome(),
+                    periodico.getValor(),
+                    dataLancamento,
+                    periodico.getPaginas(),
+                    periodico.getEditora(),
+                    periodico.getRegiao(),
+                    periodico.getAutor(),
+                    ativo
+                };
+
+                defaultTableModel.addRow(dados);
+            }
+        );
+    }
 
     public static ClienteEntidade convertParaClienteEntidade(JTable jTable) {
         int linhaSelecionada = jTable.getSelectedRow();
@@ -147,6 +179,40 @@ public class TabelaGeral {
             null,
             edicao,
             ativo
+        );
+    }
+    
+    public static PeriodicoEntidade convertParaPeriodicoEntidade(JTable jTable) {
+        int linhaSelecionada = jTable.getSelectedRow();
+
+        Integer id = Integer.parseInt(
+            jTable.getValueAt(linhaSelecionada, 0).toString()
+        );
+
+        String nome = jTable.getValueAt(linhaSelecionada, 1).toString();
+        Double valor = Double.valueOf(jTable.getValueAt(linhaSelecionada, 2).toString());
+        Date dataLancamento = ConversorTipos.stringParaDate(
+            jTable.getValueAt(linhaSelecionada, 3).toString()
+        );
+        Integer paginas = Integer.valueOf(jTable.getValueAt(linhaSelecionada, 4).toString());
+        String editora = jTable.getValueAt(linhaSelecionada, 5).toString();
+        String regiao = jTable.getValueAt(linhaSelecionada, 6).toString();
+        String autor = jTable.getValueAt(linhaSelecionada, 7).toString();
+        Boolean ativo = jTable.getValueAt(linhaSelecionada, 8)
+            .toString()
+            .equals("Sim");
+
+        return new PeriodicoEntidade(
+            id,
+            nome,
+            valor,
+            dataLancamento,
+            paginas,
+            editora,
+            autor,
+            null,
+            ativo,
+            regiao
         );
     }
 }

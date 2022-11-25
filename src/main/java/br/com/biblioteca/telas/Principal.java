@@ -16,10 +16,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.UnsupportedLookAndFeelException;
 import main.java.br.com.biblioteca.entidades.ClienteEntidade;
+import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
 import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.repositorios.ClienteRepositorio;
+import main.java.br.com.biblioteca.repositorios.PeriodicoRepositorio;
 import main.java.br.com.biblioteca.repositorios.RevistaRepositorio;
 import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
+import main.java.br.com.biblioteca.repositorios.interfaces.PeriodicoRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.RevistaRepositorioInterface;
 import main.java.br.com.biblioteca.telas.geral.TabelaGeral;
 import main.java.br.com.biblioteca.telas.geral.TelasGeral;
@@ -37,6 +40,7 @@ public class Principal extends javax.swing.JFrame {
 
     private final ClienteRepositorioInterface CLIENTE_REPOSITORIO_INTERFACE = new ClienteRepositorio();
     private final RevistaRepositorioInterface REVISTA_REPOSITORIO_INTERFACE = new RevistaRepositorio();
+    private final PeriodicoRepositorioInterface PERIODICO_REPOSITORIO_INTERFACE = new PeriodicoRepositorio();
 
     private static final Logger LOGGER = Logger.getLogger(Principal.class.getName());
 
@@ -141,11 +145,41 @@ public class Principal extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         ativoPeriodicoComboBox = new javax.swing.JComboBox<>();
         autorPeriodicoTxt = new javax.swing.JTextField();
-        regiaoPeriodiTxt = new javax.swing.JTextField();
-        listagemRevistaPanel1 = new javax.swing.JPanel();
+        regiaoPeriodicoTxt = new javax.swing.JTextField();
+        listagemPeriodicoPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         periodicoListagemTbl = new javax.swing.JTable();
         livroPanel = new javax.swing.JPanel();
+        cadastroPeriodicoPanel1 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        nomeLivroTxt = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        cadastrarLivroBtn = new javax.swing.JButton();
+        atualizarLivroBtn = new javax.swing.JButton();
+        valorLivroTxt = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        dataLancamentoLivroTxt = new javax.swing.JFormattedTextField();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        editoraLivroTxt = new javax.swing.JTextField();
+        fotoLivroLbl = new javax.swing.JLabel();
+        selecionarFotoPeriodicoBtn1 = new javax.swing.JButton();
+        statusLivroLbl = new javax.swing.JLabel();
+        paginasLivroSpinner = new javax.swing.JSpinner();
+        jLabel29 = new javax.swing.JLabel();
+        inativarLivroBtn = new javax.swing.JButton();
+        mostrarLivroInativoRadio = new javax.swing.JRadioButton();
+        jLabel30 = new javax.swing.JLabel();
+        ativoLivroComboBox = new javax.swing.JComboBox<>();
+        autorLivroTxt = new javax.swing.JTextField();
+        descricaoLivroTxt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel28 = new javax.swing.JLabel();
+        capaDuraLivroRadio = new javax.swing.JRadioButton();
+        listagemPeriodicoPanel1 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        livroListagemTbl = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -876,9 +910,9 @@ public class Principal extends javax.swing.JFrame {
 
         autorPeriodicoTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        regiaoPeriodiTxt.setBackground(new java.awt.Color(240, 240, 240));
-        regiaoPeriodiTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        regiaoPeriodiTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        regiaoPeriodicoTxt.setBackground(new java.awt.Color(240, 240, 240));
+        regiaoPeriodicoTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        regiaoPeriodicoTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         javax.swing.GroupLayout cadastroPeriodicoPanelLayout = new javax.swing.GroupLayout(cadastroPeriodicoPanel);
         cadastroPeriodicoPanel.setLayout(cadastroPeriodicoPanelLayout);
@@ -905,7 +939,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel20)
                                     .addGroup(cadastroPeriodicoPanelLayout.createSequentialGroup()
-                                        .addComponent(regiaoPeriodiTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(regiaoPeriodicoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(statusPeriodicoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
@@ -971,7 +1005,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(statusPeriodicoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(valorPeriodicoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regiaoPeriodiTxt, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(regiaoPeriodicoTxt, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
@@ -997,7 +1031,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        listagemRevistaPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Listagem"));
+        listagemPeriodicoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Listagem"));
 
         periodicoListagemTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1040,18 +1074,18 @@ public class Principal extends javax.swing.JFrame {
             periodicoListagemTbl.getColumnModel().getColumn(8).setResizable(false);
         }
 
-        javax.swing.GroupLayout listagemRevistaPanel1Layout = new javax.swing.GroupLayout(listagemRevistaPanel1);
-        listagemRevistaPanel1.setLayout(listagemRevistaPanel1Layout);
-        listagemRevistaPanel1Layout.setHorizontalGroup(
-            listagemRevistaPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listagemRevistaPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout listagemPeriodicoPanelLayout = new javax.swing.GroupLayout(listagemPeriodicoPanel);
+        listagemPeriodicoPanel.setLayout(listagemPeriodicoPanelLayout);
+        listagemPeriodicoPanelLayout.setHorizontalGroup(
+            listagemPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listagemPeriodicoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4)
                 .addContainerGap())
         );
-        listagemRevistaPanel1Layout.setVerticalGroup(
-            listagemRevistaPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(listagemRevistaPanel1Layout.createSequentialGroup()
+        listagemPeriodicoPanelLayout.setVerticalGroup(
+            listagemPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listagemPeriodicoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1065,7 +1099,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(periodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cadastroPeriodicoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(listagemRevistaPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(listagemPeriodicoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         periodicoPanelLayout.setVerticalGroup(
@@ -1074,21 +1108,326 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(cadastroPeriodicoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(listagemRevistaPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(listagemPeriodicoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         paiPanel.add(periodicoPanel, "periodicoCartao");
 
+        cadastroPeriodicoPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Cadastro"));
+
+        jLabel23.setText("Nome");
+
+        nomeLivroTxt.setBackground(new java.awt.Color(240, 240, 240));
+        nomeLivroTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nomeLivroTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel24.setText("Valor");
+
+        cadastrarLivroBtn.setText("Cadastrar");
+        cadastrarLivroBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        cadastrarLivroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarLivroBtnActionPerformed(evt);
+            }
+        });
+
+        atualizarLivroBtn.setText("Atualizar");
+        atualizarLivroBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        atualizarLivroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarLivroBtnActionPerformed(evt);
+            }
+        });
+
+        valorLivroTxt.setBackground(new java.awt.Color(240, 240, 240));
+        valorLivroTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        valorLivroTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel25.setText("Data de Lançamento");
+
+        dataLancamentoLivroTxt.setBackground(new java.awt.Color(240, 240, 240));
+        dataLancamentoLivroTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        try {
+            dataLancamentoLivroTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        dataLancamentoLivroTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        jLabel26.setText("Paginas");
+
+        jLabel27.setText("Editora");
+
+        editoraLivroTxt.setBackground(new java.awt.Color(240, 240, 240));
+        editoraLivroTxt.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        editoraLivroTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        fotoLivroLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fotoLivroLbl.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        selecionarFotoPeriodicoBtn1.setText("Selecionar");
+        selecionarFotoPeriodicoBtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        selecionarFotoPeriodicoBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecionarFotoPeriodicoBtn1ActionPerformed(evt);
+            }
+        });
+
+        paginasLivroSpinner.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel29.setText("Autores");
+
+        inativarLivroBtn.setText("Inativar");
+        inativarLivroBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        inativarLivroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inativarLivroBtnActionPerformed(evt);
+            }
+        });
+
+        mostrarLivroInativoRadio.setText("Mostrar Inativos");
+        mostrarLivroInativoRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarLivroInativoRadioActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setText("Ativo");
+
+        ativoLivroComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
+
+        autorLivroTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        autorLivroTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autorLivroTxtActionPerformed(evt);
+            }
+        });
+
+        descricaoLivroTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel1.setText("Descrição");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Romance", "Terror", "Ação", "Suspense" }));
+
+        jLabel28.setText("Gênero");
+
+        capaDuraLivroRadio.setText("Capa dura");
+        capaDuraLivroRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capaDuraLivroRadioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout cadastroPeriodicoPanel1Layout = new javax.swing.GroupLayout(cadastroPeriodicoPanel1);
+        cadastroPeriodicoPanel1.setLayout(cadastroPeriodicoPanel1Layout);
+        cadastroPeriodicoPanel1Layout.setHorizontalGroup(
+            cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                        .addComponent(mostrarLivroInativoRadio)
+                        .addGap(18, 18, 18)
+                        .addComponent(cadastrarLivroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(atualizarLivroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(inativarLivroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(valorLivroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel24))
+                                .addGap(18, 18, 18)
+                                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel30)
+                                    .addComponent(ativoLivroComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(capaDuraLivroRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel23)
+                                            .addComponent(nomeLivroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(editoraLivroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel27)))
+                                    .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                                .addComponent(paginasLivroSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel26)
+                                                .addGap(181, 181, 181)))
+                                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(descricaoLivroTxt)
+                                            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dataLancamentoLivroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel25))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel29)
+                                            .addComponent(autorLivroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel28)
+                                    .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                        .addComponent(statusLivroLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fotoLivroLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selecionarFotoPeriodicoBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        cadastroPeriodicoPanel1Layout.setVerticalGroup(
+            cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                        .addComponent(fotoLivroLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(selecionarFotoPeriodicoBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomeLivroTxt))
+                            .addGroup(cadastroPeriodicoPanel1Layout.createSequentialGroup()
+                                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel27)
+                                    .addComponent(jLabel28))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(editoraLivroTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1))))
+                        .addGap(18, 18, 18)
+                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel30))
+                        .addGap(7, 7, 7)
+                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(valorLivroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ativoLivroComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                            .addComponent(capaDuraLivroRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel29))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dataLancamentoLivroTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(autorLivroTxt)
+                            .addComponent(statusLivroLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(paginasLivroSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descricaoLivroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(cadastroPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(atualizarLivroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cadastrarLivroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inativarLivroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mostrarLivroInativoRadio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        listagemPeriodicoPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Listagem"));
+
+        livroListagemTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nome", "Valor (R$)", "Data de Lançamento", "Paginas", "Editora", "Região", "Autor", "Ativo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        livroListagemTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                livroListagemTblMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(livroListagemTbl);
+        if (livroListagemTbl.getColumnModel().getColumnCount() > 0) {
+            livroListagemTbl.getColumnModel().getColumn(0).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(1).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(2).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(3).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(4).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(5).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(6).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(7).setResizable(false);
+            livroListagemTbl.getColumnModel().getColumn(8).setResizable(false);
+        }
+
+        javax.swing.GroupLayout listagemPeriodicoPanel1Layout = new javax.swing.GroupLayout(listagemPeriodicoPanel1);
+        listagemPeriodicoPanel1.setLayout(listagemPeriodicoPanel1Layout);
+        listagemPeriodicoPanel1Layout.setHorizontalGroup(
+            listagemPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listagemPeriodicoPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
+        listagemPeriodicoPanel1Layout.setVerticalGroup(
+            listagemPeriodicoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listagemPeriodicoPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout livroPanelLayout = new javax.swing.GroupLayout(livroPanel);
         livroPanel.setLayout(livroPanelLayout);
         livroPanelLayout.setHorizontalGroup(
             livroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1141, Short.MAX_VALUE)
+            .addGroup(livroPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(livroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cadastroPeriodicoPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listagemPeriodicoPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         livroPanelLayout.setVerticalGroup(
             livroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 715, Short.MAX_VALUE)
+            .addGroup(livroPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cadastroPeriodicoPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(listagemPeriodicoPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         paiPanel.add(livroPanel, "livroCartao");
@@ -1462,15 +1801,119 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_revistaListagemTblMouseClicked
 
     private void cadastrarPeriodicoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPeriodicoBtnActionPerformed
-        // TODO add your handling code here:
+        Boolean periodicoValido = ValidarGeral.periodicoValida(
+            nomePeriodicoTxt,
+            valorPeriodicoTxt,
+            dataLancamentoPeriodicoTxt,
+            paginasPeriodicoSpinner,
+            editoraPeriodicoTxt,
+            autorPeriodicoTxt,
+            regiaoPeriodicoTxt,
+            fotoPeriodicoLbl,
+            statusPeriodicoLbl
+        );
+
+        if (periodicoValido) {
+            String nome = nomePeriodicoTxt.getText();
+            Double valor = Double.valueOf(
+                valorPeriodicoTxt.getText()
+            );
+            Date dataLancamento = ConversorTipos.stringParaDate(
+                dataLancamentoPeriodicoTxt.getText()
+            );
+            Integer paginas = (Integer) paginasPeriodicoSpinner.getValue();
+            String editora = editoraPeriodicoTxt.getText();
+            String autor = autorPeriodicoTxt.getText();
+            String regiao = regiaoPeriodicoTxt.getText();
+            byte[] foto = ConversorTipos.fileParaByteArray(arquivoAtual);
+            Boolean ativo = ativoPeriodicoComboBox.getSelectedIndex() == 0;
+
+            PeriodicoEntidade periodico = new PeriodicoEntidade(
+                nome,
+                valor,
+                dataLancamento,
+                paginas,
+                editora,
+                autor,
+                foto,
+                ativo,
+                regiao
+            );
+
+            PERIODICO_REPOSITORIO_INTERFACE.criar(periodico);
+
+            atualizarTabelaPeriodico();
+            limparCamposPeriodico();
+        }
     }//GEN-LAST:event_cadastrarPeriodicoBtnActionPerformed
 
     private void atualizarPeriodicoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarPeriodicoBtnActionPerformed
-        // TODO add your handling code here:
+        if (TabelaGeral.linhaValida(periodicoListagemTbl)) {
+            Boolean periodicoValido = ValidarGeral.periodicoValida(
+            nomePeriodicoTxt,
+            valorPeriodicoTxt,
+            dataLancamentoPeriodicoTxt,
+            paginasPeriodicoSpinner,
+            editoraPeriodicoTxt,
+            autorPeriodicoTxt,
+            regiaoPeriodicoTxt,
+            fotoPeriodicoLbl,
+            statusPeriodicoLbl
+        );
+
+            if (periodicoValido) {
+                String nome = nomePeriodicoTxt.getText();
+                Double valor = Double.valueOf(
+                    valorPeriodicoTxt.getText()
+                );
+                Date dataLancamento = ConversorTipos.stringParaDate(
+                    dataLancamentoPeriodicoTxt.getText()
+                );
+                Integer paginas = (Integer) paginasPeriodicoSpinner.getValue();
+                String editora = editoraPeriodicoTxt.getText();
+                String autor = autorPeriodicoTxt.getText();
+                String regiao = regiaoPeriodicoTxt.getText();
+                byte[] foto = ConversorTipos.fileParaByteArray(arquivoAtual);
+                Boolean ativo = ativoPeriodicoComboBox.getSelectedIndex() == 0;
+
+                PeriodicoEntidade periodico = TabelaGeral.convertParaPeriodicoEntidade(periodicoListagemTbl);
+                periodico.setNome(nome);
+                periodico.setValor(valor);
+                periodico.setDataLancamento(dataLancamento);
+                periodico.setPaginas(paginas);
+                periodico.setEditora(editora);
+                periodico.setAutor(autor);
+                periodico.setFoto(foto);
+                periodico.setRegiao(regiao);
+                periodico.setAtivo(ativo);
+
+                PERIODICO_REPOSITORIO_INTERFACE.atualizar(periodico);
+
+                atualizarTabelaPeriodico();
+                limparCamposPeriodico();
+            }
+        } else {
+            statusClienteLbl.setForeground(Color.red);
+            statusClienteLbl.setText("Um registro deve estar selecionado para autalizar.");
+        }
     }//GEN-LAST:event_atualizarPeriodicoBtnActionPerformed
 
     private void selecionarFotoPeriodicoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarFotoPeriodicoBtnActionPerformed
-        // TODO add your handling code here:
+        JFileChooser jFileChooser = TelasGeral.seletorDeImagem();
+
+        Integer abriu = jFileChooser.showOpenDialog(this);
+
+        if (abriu.equals(JFileChooser.APPROVE_OPTION)) {
+            File file = jFileChooser.getSelectedFile();
+            arquivoAtual = file;
+            ImageIcon imageIcon = TelasGeral.redimensionarImagem(
+                file,
+                LARGURA_IMAGEM,
+                LARGURA_IMAGEM
+            );
+
+            fotoPeriodicoLbl.setIcon(imageIcon);
+        }
     }//GEN-LAST:event_selecionarFotoPeriodicoBtnActionPerformed
 
     private void inativarPeriodicoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inativarPeriodicoBtnActionPerformed
@@ -1482,8 +1925,65 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarPeriodicoInativoRadioActionPerformed
 
     private void periodicoListagemTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_periodicoListagemTblMouseClicked
-        // TODO add your handling code here:
+        if (TabelaGeral.linhaValida(periodicoListagemTbl)) {
+            PeriodicoEntidade periodico = TabelaGeral.convertParaPeriodicoEntidade(periodicoListagemTbl);
+            Optional<PeriodicoEntidade> periodicoOptional = PERIODICO_REPOSITORIO_INTERFACE.buscarPorId(periodico.getId());
+
+            periodico = periodicoOptional.get();
+
+            Integer ativoIndex = periodico.getAtivo().equals(Boolean.TRUE)
+                ? 0
+                : 1;
+
+            nomePeriodicoTxt.setText(periodico.getNome());
+            valorPeriodicoTxt.setText(periodico.getValor().toString());
+            dataLancamentoPeriodicoTxt.setText(
+                ConversorTipos.dateParaString(
+                    periodico.getDataLancamento()
+                )
+            );
+            paginasPeriodicoSpinner.setValue(periodico.getPaginas());
+            editoraPeriodicoTxt.setText(periodico.getEditora());
+            regiaoPeriodicoTxt.setText(periodico.getRegiao());
+            ativoPeriodicoComboBox.setSelectedIndex(ativoIndex);
+            autorPeriodicoTxt.setText(periodico.getAutor());
+
+            Icon icone = ConversorTipos.byteArrayParaIcon(periodico.getFoto());
+            fotoPeriodicoLbl.setIcon(icone);
+        }
     }//GEN-LAST:event_periodicoListagemTblMouseClicked
+
+    private void cadastrarLivroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarLivroBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastrarLivroBtnActionPerformed
+
+    private void atualizarLivroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarLivroBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_atualizarLivroBtnActionPerformed
+
+    private void selecionarFotoPeriodicoBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarFotoPeriodicoBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selecionarFotoPeriodicoBtn1ActionPerformed
+
+    private void inativarLivroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inativarLivroBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inativarLivroBtnActionPerformed
+
+    private void mostrarLivroInativoRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarLivroInativoRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mostrarLivroInativoRadioActionPerformed
+
+    private void livroListagemTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_livroListagemTblMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_livroListagemTblMouseClicked
+
+    private void autorLivroTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorLivroTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_autorLivroTxtActionPerformed
+
+    private void capaDuraLivroRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capaDuraLivroRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_capaDuraLivroRadioActionPerformed
 
     private void atualizarTabelaCliente() {
         if (mostrarClienteInativoRadio.isSelected()) {
@@ -1515,18 +2015,18 @@ public class Principal extends javax.swing.JFrame {
 
     private void atualizarTabelaPeriodico() {
         if (mostrarPeriodicoInativoRadio.isSelected()) {
-            TabelaGeral.atualizarTabelaRevista(
-                revistaListagemTbl,
-                REVISTA_REPOSITORIO_INTERFACE.buscar()
+            TabelaGeral.atualizarTabelaPeriodico(
+                periodicoListagemTbl,
+                PERIODICO_REPOSITORIO_INTERFACE.buscar()
             );
         } else {
-            TabelaGeral.atualizarTabelaRevista(
-                revistaListagemTbl,
-                REVISTA_REPOSITORIO_INTERFACE.buscarAtivos()
+            TabelaGeral.atualizarTabelaPeriodico(
+                periodicoListagemTbl,
+                PERIODICO_REPOSITORIO_INTERFACE.buscarAtivos()
             );
         }
     }
-    
+
     private void limparCamposCliente() {
         nomeClienteTxt.setText(null);
         cpfClienteTxt.setText(null);
@@ -1546,6 +2046,18 @@ public class Principal extends javax.swing.JFrame {
         ativoRevistaComboBox.setSelectedIndex(0);
         autorRevistaTxt.setText(null);
         fotoRevistaLbl.setIcon(null);
+    }
+
+    private void limparCamposPeriodico() {
+        nomePeriodicoTxt.setText(null);
+        valorPeriodicoTxt.setText(null);
+        dataLancamentoPeriodicoTxt.setText(null);
+        paginasPeriodicoSpinner.setValue(0);
+        editoraPeriodicoTxt.setText(null);
+        regiaoPeriodicoTxt.setText(null);
+        ativoPeriodicoComboBox.setSelectedIndex(0);
+        autorPeriodicoTxt.setText(null);
+        fotoPeriodicoLbl.setIcon(null);
     }
 
     public static void main(String args[]) {
@@ -1573,38 +2085,51 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ativoClienteComboBox;
+    private javax.swing.JComboBox<String> ativoLivroComboBox;
     private javax.swing.JComboBox<String> ativoPeriodicoComboBox;
     private javax.swing.JComboBox<String> ativoRevistaComboBox;
     private javax.swing.JButton atualizarClienteBtn;
+    private javax.swing.JButton atualizarLivroBtn;
     private javax.swing.JButton atualizarPeriodicoBtn;
     private javax.swing.JButton atualizarRevistaBtn;
+    private javax.swing.JTextField autorLivroTxt;
     private javax.swing.JTextField autorPeriodicoTxt;
     private javax.swing.JTextField autorRevistaTxt;
     private javax.swing.JPanel barraLateralPanel;
     private javax.swing.JButton cadastrarClienteBtn;
+    private javax.swing.JButton cadastrarLivroBtn;
     private javax.swing.JButton cadastrarPeriodicoBtn;
     private javax.swing.JButton cadastrarRevistaBtn;
     private javax.swing.JPanel cadastroClientePanel;
     private javax.swing.JPanel cadastroPeriodicoPanel;
+    private javax.swing.JPanel cadastroPeriodicoPanel1;
     private javax.swing.JPanel cadastroRevistaPanel;
+    private javax.swing.JRadioButton capaDuraLivroRadio;
     private javax.swing.JButton clienteBarraLateralBtn;
     private javax.swing.JTable clienteListagemTbl;
     private javax.swing.JPanel clientePanel;
     private javax.swing.JButton compraBarraLateralBtn;
     private javax.swing.JPanel compraPanel;
     private javax.swing.JFormattedTextField cpfClienteTxt;
+    private javax.swing.JFormattedTextField dataLancamentoLivroTxt;
     private javax.swing.JFormattedTextField dataLancamentoPeriodicoTxt;
     private javax.swing.JFormattedTextField dataLancamentoRevistaTxt;
     private javax.swing.JFormattedTextField dataNascimentoClienteTxt;
+    private javax.swing.JTextField descricaoLivroTxt;
     private javax.swing.JSpinner edicaoRevistaSpinner;
+    private javax.swing.JTextField editoraLivroTxt;
     private javax.swing.JTextField editoraPeriodicoTxt;
     private javax.swing.JTextField editoraRevistaTxt;
     private javax.swing.JLabel fotoClienteLbl;
+    private javax.swing.JLabel fotoLivroLbl;
     private javax.swing.JLabel fotoPeriodicoLbl;
     private javax.swing.JLabel fotoRevistaLbl;
     private javax.swing.JButton inativarClienteBtn;
+    private javax.swing.JButton inativarLivroBtn;
     private javax.swing.JButton inativarPeriodicoBtn;
     private javax.swing.JButton inativarRevistaBtn;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1619,7 +2144,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1629,34 +2162,43 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel listagemClientePanel;
+    private javax.swing.JPanel listagemPeriodicoPanel;
+    private javax.swing.JPanel listagemPeriodicoPanel1;
     private javax.swing.JPanel listagemRevistaPanel;
-    private javax.swing.JPanel listagemRevistaPanel1;
     private javax.swing.JButton livroBarraLateralBtn;
+    private javax.swing.JTable livroListagemTbl;
     private javax.swing.JPanel livroPanel;
     private javax.swing.JRadioButton mostrarClienteInativoRadio;
+    private javax.swing.JRadioButton mostrarLivroInativoRadio;
     private javax.swing.JRadioButton mostrarPeriodicoInativoRadio;
     private javax.swing.JRadioButton mostrarRevistaInativoRadio;
     private javax.swing.JTextField nomeClienteTxt;
+    private javax.swing.JTextField nomeLivroTxt;
     private javax.swing.JTextField nomePeriodicoTxt;
     private javax.swing.JTextField nomeRevistaTxt;
+    private javax.swing.JSpinner paginasLivroSpinner;
     private javax.swing.JSpinner paginasPeriodicoSpinner;
     private javax.swing.JSpinner paginasRevistaSpinner;
     private javax.swing.JPanel paiPanel;
     private javax.swing.JButton periodicoBarraLateralBtn;
     private javax.swing.JTable periodicoListagemTbl;
     private javax.swing.JPanel periodicoPanel;
-    private javax.swing.JTextField regiaoPeriodiTxt;
+    private javax.swing.JTextField regiaoPeriodicoTxt;
     private javax.swing.JButton revistaBarraLateralBtn;
     private javax.swing.JTable revistaListagemTbl;
     private javax.swing.JPanel revistaPanel;
     private javax.swing.JButton selecionarFotoClienteBtn;
     private javax.swing.JButton selecionarFotoPeriodicoBtn;
+    private javax.swing.JButton selecionarFotoPeriodicoBtn1;
     private javax.swing.JButton selecionarFotoRevistaBtn;
     private javax.swing.JLabel statusClienteLbl;
+    private javax.swing.JLabel statusLivroLbl;
     private javax.swing.JLabel statusPeriodicoLbl;
     private javax.swing.JLabel statusRevistaLbl;
     private javax.swing.JFormattedTextField telefoneClienteTxt;
+    private javax.swing.JTextField valorLivroTxt;
     private javax.swing.JTextField valorPeriodicoTxt;
     private javax.swing.JTextField valorRevistaTxt;
     // End of variables declaration//GEN-END:variables

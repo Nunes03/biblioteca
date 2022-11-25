@@ -66,6 +66,27 @@ public class ValidarGeral {
         valorPadraoValidacao(Boolean.FALSE, statusLabel);
         return Boolean.TRUE;
     }
+    
+    public static final Boolean periodicoValida(JTextField nomeJTextField, JTextField valorJTextField,
+        JFormattedTextField dataLancamentoFormattedTextField, JSpinner paginasJSpinner, JTextField editoraJTextField,
+        JTextField autorJTextField, JTextField regiaoJTextField, JLabel fotoJLabel, JLabel statusLabel) {
+        String nome = nomeJTextField.getText();
+        String valor = valorJTextField.getText();
+        String dataLancamento = dataLancamentoFormattedTextField.getText();
+        Integer paginas = (Integer) paginasJSpinner.getValue();
+        String editora = editoraJTextField.getText();
+        String autor = autorJTextField.getText();
+        String regiao = regiaoJTextField.getText();
+        Icon foto = fotoJLabel.getIcon();
+
+        if (nome.isEmpty() || valor.isEmpty() || dataLancamento.isEmpty() || paginas == 0 || editora.isEmpty() || autor.isEmpty()
+            || regiao.isEmpty() || foto == null) {
+            valorPadraoValidacao(Boolean.TRUE, statusLabel);
+            return Boolean.FALSE;
+        }
+        valorPadraoValidacao(Boolean.FALSE, statusLabel);
+        return Boolean.TRUE;
+    }
 
     private static void valorPadraoValidacao(Boolean erro, JLabel statusLabel) {
         if (erro) {

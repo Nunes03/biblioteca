@@ -191,10 +191,10 @@ public class ConsultasConstante {
     public class Periodico {
 
         public static final String CRIAR = "INSERT INTO biblioteca.acervo "
-            + "(nome, valor, data_lancamento, paginas, regiao, editora, autor, tipo) "
+            + "(nome, valor, data_lancamento, paginas, editora, autor, foto, regiao, ativo, tipo) "
             + "VALUES "
-            + "(?, ?, ?, ?, ?, ?, ?, 3);";
-
+            + "(?, ?, ?, ?, ?, ?, ?, ?, ?, 3);";
+        
         public static final String ATUALIZAR = "UPDATE biblioteca.acervo acervo "
             + "SET "
             + "acervo.nome = ?, "
@@ -203,11 +203,23 @@ public class ConsultasConstante {
             + "acervo.paginas = ?, "
             + "acervo.editora = ?, "
             + "acervo.autor = ?, "
-            + "acervo.regiao = ? "
+            + "acervo.foto = ?, "
+            + "acervo.regiao = ?, "
+            + "acervo.ativo = ? "
             + "WHERE acervo.id = ?;";
 
-        public static final String BUSCAR = "SELECT * FROM biblioteca.acervo;";
-
+        public static final String INATIVAR = "UPDATE biblioteca.acervo acervo "
+            + "SET "
+            + "acervo.ativo = false "
+            + "WHERE acervo.id = ?;";
+        
+        public static final String BUSCAR = "SELECT * FROM biblioteca.acervo "
+            + "WHERE acervo.tipo = 3;";
+        
+        public static final String BUSCAR_ATIVOS = "SELECT * FROM biblioteca.acervo "
+            + "WHERE "
+            + "acervo.ativo = true AND acervo.tipo = 3;";
+        
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo acervo "
             + "WHERE acervo.id = ? AND acervo.tipo = 3;";
 
