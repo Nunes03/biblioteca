@@ -25,12 +25,14 @@ import main.java.br.com.biblioteca.entidades.LivroEntidade;
 import main.java.br.com.biblioteca.entidades.PeriodicoEntidade;
 import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.enums.GeneroEnum;
+import main.java.br.com.biblioteca.repositorios.AcervoRepositorio;
 import main.java.br.com.biblioteca.repositorios.ClienteRepositorio;
 import main.java.br.com.biblioteca.repositorios.CompraRepositorio;
 import main.java.br.com.biblioteca.repositorios.ItemCompraRepositorio;
 import main.java.br.com.biblioteca.repositorios.LivroRepositorio;
 import main.java.br.com.biblioteca.repositorios.PeriodicoRepositorio;
 import main.java.br.com.biblioteca.repositorios.RevistaRepositorio;
+import main.java.br.com.biblioteca.repositorios.interfaces.AcervoRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.ClienteRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.CompraRepositorioInterface;
 import main.java.br.com.biblioteca.repositorios.interfaces.ItemCompraRepositorioInterface;
@@ -51,6 +53,7 @@ public class Principal extends javax.swing.JFrame {
     public static final Integer LARGURA_IMAGEM = 150;
     public static final Integer ALTURA_IMAGEM = 150;
 
+    private final AcervoRepositorioInterface ACERVO_REPOSITORIO_INTERFACE = new AcervoRepositorio();
     private final ClienteRepositorioInterface CLIENTE_REPOSITORIO_INTERFACE = new ClienteRepositorio();
     private final RevistaRepositorioInterface REVISTA_REPOSITORIO_INTERFACE = new RevistaRepositorio();
     private final PeriodicoRepositorioInterface PERIODICO_REPOSITORIO_INTERFACE = new PeriodicoRepositorio();
@@ -2758,7 +2761,25 @@ public class Principal extends javax.swing.JFrame {
 
     private void historicoCompraTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historicoCompraTblMouseClicked
         if (TabelaGeral.linhaValida(historicoCompraTbl)) {
+            CompraEntidade compra = TabelaGeral.convertParaCompraEntidadeHistorico(
+                historicoCompraTbl
+            );
+
+            List<ItemCompraEntidade> itensCompra = ITEM_COMPRA_REPOSITORIO_INTERFACE.buscarPorCompra(compra);
+
+            itensCompra.forEach(
+                itemCompra -> {
+                    Optional<AcervoEntidade> acervoOptional = ACERVO_REPOSITORIO_INTERFACE.buscarPorId(
+                        itemCompra.getAcervo().getId()
+                    );
+
+                    AcervoEntidade acervo = acervoOptional.get();
+
+                    itemCompra.setAcervo(acervo);
+                }
+            );
             
+            atualizarTabelaItemCompraHistorico(itensCompra);
         }
     }//GEN-LAST:event_historicoCompraTblMouseClicked
 
@@ -2857,6 +2878,13 @@ public class Principal extends javax.swing.JFrame {
         TabelaGeral.atualizarTabelaCompraHistorico(
             historicoCompraTbl,
             COMPRA_REPOSITORIO_INTERFACE.buscarPorCliente(cliente)
+        );
+    }
+
+    private void atualizarTabelaItemCompraHistorico(List<ItemCompraEntidade> itensCompra) {
+        TabelaGeral.atualizarTabelaItemCompraHistorico(
+            historicoItemCompraTbl,
+            itensCompra
         );
     }
 

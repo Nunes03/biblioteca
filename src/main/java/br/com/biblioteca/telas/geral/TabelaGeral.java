@@ -202,14 +202,14 @@ public class TabelaGeral {
             }
         );
     }
-    
+
     public static void atualizarTabelaClienteHistorico(JTable jTable, List<ClienteEntidade> clienteEntidades) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);
 
         clienteEntidades.forEach(
             cliente -> {
-                
+
                 Object[] dados = {
                     cliente.getId(),
                     cliente.getNomeCompleto()
@@ -219,7 +219,7 @@ public class TabelaGeral {
             }
         );
     }
-    
+
     public static void atualizarTabelaCompraHistorico(JTable jTable, List<CompraEntidade> compras) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);
@@ -229,7 +229,7 @@ public class TabelaGeral {
                 String data = ConversorTipos.dateParaString(
                     compra.getData()
                 );
-                
+
                 Object[] dados = {
                     compra.getId(),
                     data,
@@ -240,13 +240,13 @@ public class TabelaGeral {
             }
         );
     }
-    
+
     public static void atualizarTabelaItemCompraHistorico(JTable jTable, List<ItemCompraEntidade> itensCompra) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTable.getModel();
         limparTabela(defaultTableModel);
 
         itensCompra.forEach(
-            itemCompra -> {                
+            itemCompra -> {
                 Object[] dados = {
                     itemCompra.getAcervo().getId(),
                     itemCompra.getAcervo().getNome(),
@@ -258,7 +258,7 @@ public class TabelaGeral {
             }
         );
     }
-    
+
     public static ClienteEntidade convertParaClienteEntidade(JTable jTable) {
         int linhaSelecionada = jTable.getSelectedRow();
 
@@ -421,7 +421,7 @@ public class TabelaGeral {
             tipo
         );
     }
-    
+
     public static AcervoEntidade convertParaAcervoEntidadeCompra(JTable jTable, Integer linha) {
         Integer id = Integer.parseInt(
             jTable.getValueAt(linha, 0).toString()
@@ -446,7 +446,7 @@ public class TabelaGeral {
             tipo
         );
     }
-    
+
     public static ClienteEntidade convertParaClienteEntidadeCompra(JTable jTable) {
         int linhaSelecionada = jTable.getSelectedRow();
 
@@ -467,7 +467,7 @@ public class TabelaGeral {
             null
         );
     }
-    
+
     public static ClienteEntidade convertParaClienteEntidadeHistorico(JTable jTable) {
         int linhaSelecionada = jTable.getSelectedRow();
 
@@ -483,6 +483,25 @@ public class TabelaGeral {
             null,
             null,
             null,
+            null
+        );
+    }
+
+    public static CompraEntidade convertParaCompraEntidadeHistorico(JTable jTable) {
+        int linhaSelecionada = jTable.getSelectedRow();
+
+        Integer id = Integer.parseInt(
+            jTable.getValueAt(linhaSelecionada, 0).toString()
+        );
+        Date data = ConversorTipos.stringParaDate(
+            jTable.getValueAt(linhaSelecionada, 1).toString()
+        );
+        Double total = Double.valueOf(jTable.getValueAt(linhaSelecionada, 2).toString());
+
+        return new CompraEntidade(
+            id,
+            data,
+            total,
             null
         );
     }

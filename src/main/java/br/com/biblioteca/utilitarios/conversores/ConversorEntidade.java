@@ -114,4 +114,23 @@ public class ConversorEntidade {
             throw new RuntimeException(exception);
         }
     }
+    
+    public static AcervoEntidade resultSetParaAcervo(ResultSet resultSet) {
+        try {
+            return new AcervoEntidade(
+                resultSet.getInt("id"),
+                resultSet.getString("nome"),
+                resultSet.getDouble("valor"),
+                resultSet.getDate("data_lancamento"),
+                resultSet.getInt("paginas"),
+                resultSet.getString("editora"),
+                resultSet.getString("autor"),
+                resultSet.getBytes("foto"),
+                resultSet.getBoolean("ativo"),
+                resultSet.getInt("tipo")
+            );
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 }

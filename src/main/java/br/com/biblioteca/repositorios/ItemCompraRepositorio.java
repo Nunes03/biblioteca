@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import main.java.br.com.biblioteca.banco.ConexaoBanco;
+import main.java.br.com.biblioteca.entidades.CompraEntidade;
 import main.java.br.com.biblioteca.excecoes.banco.ConexaoBancoExcecao;
 import main.java.br.com.biblioteca.utilitarios.constantes.ConsultasConstante;
 import main.java.br.com.biblioteca.repositorios.interfaces.ItemCompraRepositorioInterface;
@@ -139,6 +140,29 @@ public class ItemCompraRepositorio implements ItemCompraRepositorioInterface {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return ConversorEntidade.resultSetParaItemCompra(resultSet);
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public List<ItemCompraEntidade> buscarPorCompra(CompraEntidade compraEntidade) {
+        List<ItemCompraEntidade> itensCompra = new ArrayList<>();
+        try {
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.ItemCompra.BUSCAR_POR_COMPRA_ID
+            );
+            preparedStatement.setInt(1, compraEntidade.getId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                itensCompra.add(
+                    ConversorEntidade.resultSetParaItemCompra(resultSet)
+                );
+            }
+            return itensCompra;
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

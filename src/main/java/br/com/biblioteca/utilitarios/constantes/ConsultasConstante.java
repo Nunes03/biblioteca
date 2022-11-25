@@ -13,7 +13,13 @@ public class ConsultasConstante {
 
         public static final int PERIODICO = 3;
     }
+    
+    public class Acervo {
 
+        public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.acervo "
+            + "WHERE acervo.id = ?";
+    }
+    
     public class Cliente {
 
         public static final String CRIAR = "INSERT INTO biblioteca.cliente"
@@ -101,7 +107,10 @@ public class ConsultasConstante {
             + "WHERE item_compra.id = ?;";
 
         public static final String BUSCAR = "SELECT * FROM biblioteca.item_compra;";
-
+        
+        public static final String BUSCAR_POR_COMPRA_ID = "SELECT * FROM biblioteca.item_compra "
+            + "WHERE item_compra.compra_id = ?;";
+        
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.item_compra item_compra "
             + "WHERE item_compra.id = ?;";
 
