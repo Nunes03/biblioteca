@@ -1681,6 +1681,11 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        historicoCompraTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                historicoCompraTblMouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(historicoCompraTbl);
         if (historicoCompraTbl.getColumnModel().getColumnCount() > 0) {
             historicoCompraTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -2715,7 +2720,7 @@ public class Principal extends javax.swing.JFrame {
         if (clienteOptional.isPresent()) {
             ClienteEntidade cliente = clienteOptional.get();
             List<ClienteEntidade> clientes = new ArrayList<>();
-            
+
             TabelaGeral.atualizarTabelaClienteHistorico(
                 historicoClienteTbl,
                 clientes
@@ -2724,13 +2729,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarCpfClienteHistoricoBtnActionPerformed
 
     private void historicoClienteTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historicoClienteTblMouseClicked
-        liberarCamposHistorico();
-        
-        ClienteEntidade cliente = TabelaGeral.convertParaClienteEntidadeHistorico(
-            historicoClienteTbl
-        );
-        
-        atualizarTabelaCompraHistorico(cliente);
+        if (TabelaGeral.linhaValida(historicoClienteTbl)) {
+            liberarCamposHistorico();
+
+            ClienteEntidade cliente = TabelaGeral.convertParaClienteEntidadeHistorico(
+                historicoClienteTbl
+            );
+
+            atualizarTabelaCompraHistorico(cliente);
+        }
     }//GEN-LAST:event_historicoClienteTblMouseClicked
 
     private void nomeClienteHistoricoTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomeClienteHistoricoTxtKeyReleased
@@ -2748,6 +2755,12 @@ public class Principal extends javax.swing.JFrame {
             atualizarTabelaClienteHistorico();
         }
     }//GEN-LAST:event_nomeClienteHistoricoTxtKeyReleased
+
+    private void historicoCompraTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historicoCompraTblMouseClicked
+        if (TabelaGeral.linhaValida(historicoCompraTbl)) {
+            
+        }
+    }//GEN-LAST:event_historicoCompraTblMouseClicked
 
     private void atualizarTabelaCliente() {
         if (mostrarClienteInativoRadio.isSelected()) {
@@ -2839,14 +2852,13 @@ public class Principal extends javax.swing.JFrame {
             CLIENTE_REPOSITORIO_INTERFACE.buscarAtivos()
         );
     }
-    
+
     private void atualizarTabelaCompraHistorico(ClienteEntidade cliente) {
         TabelaGeral.atualizarTabelaCompraHistorico(
             historicoCompraTbl,
             COMPRA_REPOSITORIO_INTERFACE.buscarPorCliente(cliente)
         );
     }
-    
 
     private void limparCamposCliente() {
         nomeClienteTxt.setText(null);
