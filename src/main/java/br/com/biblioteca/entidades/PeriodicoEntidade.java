@@ -14,7 +14,13 @@ public class PeriodicoEntidade extends AcervoEntidade {
         super(id, nome, valor, dataLancamento, paginas, editora, autor, foto, ativo);
         this.regiao = regiao;
     }
-
+    
+    public PeriodicoEntidade(String nome, Double valor, Date dataLancamento, Integer paginas, String editora,
+        String autor, byte[] foto, Boolean ativo, String regiao) {
+        super(nome, valor, dataLancamento, paginas, editora, autor, foto, ativo);
+        this.regiao = regiao;
+    }
+    
     public String getRegiao() {
         return regiao;
     }

@@ -67,10 +67,10 @@ public class ConversorEntidade {
                 resultSet.getString("editora"),
                 resultSet.getString("autor"),
                 resultSet.getBytes("foto"),
+                resultSet.getBoolean("ativo"),
                 resultSet.getString("descriao"),
                 resultSet.getBoolean("capa_dura"),
-                GeneroEnum.valueOf(resultSet.getString("genero")),
-                resultSet.getBoolean("ativo")
+                GeneroEnum.valueOf(resultSet.getString("genero"))
             );
         } catch (SQLException exception) {
             throw new RuntimeException(exception);

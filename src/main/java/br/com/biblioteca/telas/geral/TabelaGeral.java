@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import main.java.br.com.biblioteca.entidades.AutorEntidade;
 import main.java.br.com.biblioteca.entidades.ClienteEntidade;
 import main.java.br.com.biblioteca.entidades.RevistaEntidade;
 import main.java.br.com.biblioteca.utilitarios.conversores.ConversorTipos;
@@ -88,21 +87,6 @@ public class TabelaGeral {
 
                 defaultTableModel.addRow(dados);
             }
-        );
-    }
-
-    public static AutorEntidade convertParaAutorEntidade(JTable jTable) {
-        int linhaSelecionada = jTable.getSelectedRow();
-
-        Integer id = Integer.parseInt(
-            jTable.getValueAt(linhaSelecionada, 0).toString()
-        );
-
-        String nome = jTable.getValueAt(linhaSelecionada, 1).toString();
-
-        return new AutorEntidade(
-            id,
-            nome
         );
     }
 

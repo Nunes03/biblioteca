@@ -959,16 +959,15 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(cadastroPeriodicoPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomePeriodicoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel20)))
+                                .addComponent(nomePeriodicoTxt))
                             .addGroup(cadastroPeriodicoPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel19)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editoraPeriodicoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                                .addGap(39, 39, 39)))
+                                .addComponent(editoraPeriodicoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
+                        .addGap(25, 25, 25)
+                        .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel20))
                         .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(statusPeriodicoLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(valorPeriodicoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -989,7 +988,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(paginasPeriodicoSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(autorPeriodicoTxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(cadastroPeriodicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(atualizarPeriodicoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cadastrarPeriodicoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1005,7 +1004,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Valor (R$)", "Data de Lançamento", "Paginas", "Editora", "Regição", "Autor", "Ativo"
+                "Id", "Nome", "Valor (R$)", "Data de Lançamento", "Paginas", "Editora", "Região", "Autor", "Ativo"
             }
         ) {
             Class[] types = new Class [] {
@@ -1137,6 +1136,7 @@ public class Principal extends javax.swing.JFrame {
     private void periodicoBarraLateralBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_periodicoBarraLateralBtnActionPerformed
         CardLayout principalCardLayout = (CardLayout) paiPanel.getLayout();
         principalCardLayout.show(paiPanel, "periodicoCartao");
+        atualizarTabelaPeriodico();
     }//GEN-LAST:event_periodicoBarraLateralBtnActionPerformed
 
     private void cadastrarClienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteBtnActionPerformed
@@ -1513,6 +1513,20 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    private void atualizarTabelaPeriodico() {
+        if (mostrarPeriodicoInativoRadio.isSelected()) {
+            TabelaGeral.atualizarTabelaRevista(
+                revistaListagemTbl,
+                REVISTA_REPOSITORIO_INTERFACE.buscar()
+            );
+        } else {
+            TabelaGeral.atualizarTabelaRevista(
+                revistaListagemTbl,
+                REVISTA_REPOSITORIO_INTERFACE.buscarAtivos()
+            );
+        }
+    }
+    
     private void limparCamposCliente() {
         nomeClienteTxt.setText(null);
         cpfClienteTxt.setText(null);

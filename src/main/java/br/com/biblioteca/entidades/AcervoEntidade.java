@@ -1,8 +1,6 @@
 package main.java.br.com.biblioteca.entidades;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class AcervoEntidade {
 
