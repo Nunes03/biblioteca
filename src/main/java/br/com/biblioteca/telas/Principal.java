@@ -1794,7 +1794,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel35.setText("Data Início");
 
         try {
-            dataInicioHistoricoText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            dataInicioHistoricoText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -1803,7 +1803,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel36.setText("Data Fim");
 
         try {
-            dataFimHistoricoText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            dataFimHistoricoText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -1812,6 +1812,11 @@ public class Principal extends javax.swing.JFrame {
         buscarCompraHistoricoBtn.setText("Buscar");
         buscarCompraHistoricoBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         buscarCompraHistoricoBtn.setEnabled(false);
+        buscarCompraHistoricoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarCompraHistoricoBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -2723,6 +2728,7 @@ public class Principal extends javax.swing.JFrame {
         if (clienteOptional.isPresent()) {
             ClienteEntidade cliente = clienteOptional.get();
             List<ClienteEntidade> clientes = new ArrayList<>();
+            clientes.add(cliente);
 
             TabelaGeral.atualizarTabelaClienteHistorico(
                 historicoClienteTbl,
@@ -2778,10 +2784,62 @@ public class Principal extends javax.swing.JFrame {
                     itemCompra.setAcervo(acervo);
                 }
             );
-            
+
             atualizarTabelaItemCompraHistorico(itensCompra);
         }
     }//GEN-LAST:event_historicoCompraTblMouseClicked
+
+    private void buscarCompraHistoricoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCompraHistoricoBtnActionPerformed
+        List<CompraEntidade> compras = new ArrayList<>();
+        Boolean dataInicioInvalido = dataInicioHistoricoText.getText().replace(" ", "").length() != 10;
+        Boolean dataFimInvalido = dataFimHistoricoText.getText().replace(" ", "").length() != 10;
+
+        if (!dataInicioInvalido && dataFimInvalido) {
+            Date data = ConversorTipos.stringParaDate(
+                dataInicioHistoricoText.getText()
+            );
+
+            compras = COMPRA_REPOSITORIO_INTERFACE.buscarPorDataMaiorIgualQue(data);
+            
+            TabelaGeral.atualizarTabelaCompraHistorico(
+                historicoCompraTbl,
+                compras
+            );
+        }
+
+        if (!dataFimInvalido && dataInicioInvalido) {
+            Date data = ConversorTipos.stringParaDate(
+                dataFimHistoricoText.getText()
+            );
+
+            compras = COMPRA_REPOSITORIO_INTERFACE.buscarPorDataMenorIgualQue(data);
+            
+            TabelaGeral.atualizarTabelaCompraHistorico(
+                historicoCompraTbl,
+                compras
+            );
+        }
+
+        if (!dataInicioInvalido && !dataFimInvalido) {
+            Date dataInicio = ConversorTipos.stringParaDate(
+                dataInicioHistoricoText.getText()
+            );
+
+            Date dataFim = ConversorTipos.stringParaDate(
+                dataFimHistoricoText.getText()
+            );
+
+            compras = COMPRA_REPOSITORIO_INTERFACE.buscarPorDataInicioFim(
+                dataInicio,
+                dataFim
+            );
+
+            TabelaGeral.atualizarTabelaCompraHistorico(
+                historicoCompraTbl,
+                compras
+            );
+        }
+    }//GEN-LAST:event_buscarCompraHistoricoBtnActionPerformed
 
     private void atualizarTabelaCliente() {
         if (mostrarClienteInativoRadio.isSelected()) {

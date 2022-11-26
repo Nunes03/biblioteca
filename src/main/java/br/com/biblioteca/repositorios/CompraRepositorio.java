@@ -9,6 +9,7 @@ import main.java.br.com.biblioteca.utilitarios.conversores.ConversorEntidade;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import main.java.br.com.biblioteca.banco.ConexaoBanco;
@@ -158,6 +159,83 @@ public class CompraRepositorio implements CompraRepositorioInterface {
                 ConsultasConstante.Compra.BUSCAR_POR_CLIENTE_ID
             );
             preparedStatement.setInt(1, cliente.getId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                compras.add(
+                    ConversorEntidade.resultSetParaCompra(resultSet)
+                );
+            }
+            return compras;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public List<CompraEntidade> buscarPorDataInicioFim(Date dataInicio, Date dataFim) {
+        List<CompraEntidade> compras = new ArrayList<>();
+        try {
+            java.sql.Date inicio = ConversorTipos.dateParaDateSql(dataInicio);
+            java.sql.Date fim = ConversorTipos.dateParaDateSql(dataFim);
+
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Compra.BUSCAR_DATA_INICIO_FIM
+            );
+            preparedStatement.setDate(1, inicio);
+            preparedStatement.setDate(2, fim);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                compras.add(
+                    ConversorEntidade.resultSetParaCompra(resultSet)
+                );
+            }
+            return compras;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public List<CompraEntidade> buscarPorDataMenorIgualQue(Date data) {
+        List<CompraEntidade> compras = new ArrayList<>();
+        try {
+            java.sql.Date dataSql = ConversorTipos.dateParaDateSql(data);
+
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Compra.BUSCAR_DATA_MENOR_IGUAL_QUE
+            );
+            preparedStatement.setDate(1, dataSql);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                compras.add(
+                    ConversorEntidade.resultSetParaCompra(resultSet)
+                );
+            }
+            return compras;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public List<CompraEntidade> buscarPorDataMaiorIgualQue(Date data) {
+        List<CompraEntidade> compras = new ArrayList<>();
+        try {
+            java.sql.Date dataSql = ConversorTipos.dateParaDateSql(data);
+
+            Connection connection = ConexaoBanco.pegarConexao();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                ConsultasConstante.Compra.BUSCAR_DATA_MAIOR_IGUAL_QUE
+            );
+            preparedStatement.setDate(1, dataSql);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

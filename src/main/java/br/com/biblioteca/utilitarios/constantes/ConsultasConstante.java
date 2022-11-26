@@ -78,7 +78,16 @@ public class ConsultasConstante {
             + "WHERE compra.id = ?;";
 
         public static final String BUSCAR = "SELECT * FROM biblioteca.compra;";
-
+        
+        public static final String BUSCAR_DATA_INICIO_FIM = "SELECT * FROM biblioteca.compra compra "
+                + "WHERE compra.data BETWEEN ? AND ?;";
+        
+        public static final String BUSCAR_DATA_MAIOR_IGUAL_QUE = "SELECT * FROM biblioteca.compra compra "
+                + "WHERE compra.data >= ?;";
+        
+        public static final String BUSCAR_DATA_MENOR_IGUAL_QUE = "SELECT * FROM biblioteca.compra compra "
+                + "WHERE compra.data <= ?;";
+        
         public static final String BUSCAR_POR_ID = "SELECT * FROM biblioteca.compra compra "
             + "WHERE compra.id = ?;";
 
